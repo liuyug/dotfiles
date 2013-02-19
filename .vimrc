@@ -288,7 +288,7 @@ set wildignore+=*/coverage/*
 " wget -O ~/.vim/ftplugin/python_editing.vim http://www.vim.org/scripts/download_script.php?src_id=5492
 " <f> to fold current function
 " <F> to fold all function
-set nofoldenable
+" set nofoldenable      " not support in  vi
 
 " printer
 " ===================================================================
