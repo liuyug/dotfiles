@@ -233,6 +233,10 @@ noremap! <F9> <ESC>:update<CR>:silent! make<CR>
 " mkdir -p ~/.vim/autoload ~/.vim/bundle; \
 " curl -Sso ~/.vim/autoload/pathogen.vim \
 "    https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim
+" cd ~/
+" git submodule add git@github.com:kien/ctrlp.vim.git .vim/bundle/ctrlp.vim
+" git add -f .vim/bundle/ctrlp.vim
+
 set noshowmode
 call pathogen#infect()
 call pathogen#helptags()
