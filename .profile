@@ -10,5 +10,6 @@ if [ -f /usr/bin/vimx ];then
 fi
 
 export TERM=xterm-256color
+export EDITOR=vim
 
 
