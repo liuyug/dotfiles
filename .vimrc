@@ -212,9 +212,11 @@ set guifont=Inconsolata\ Medium\ 12
 "
 " Make shift-insert work like in Xterm, paste
 " paste
-inoremap <S-Insert>  "+gP
+map  <S-Insert>  "+gP
+map! <S-Insert>  "+gP
 " copy
-vnoremap <C-Insert>   "+y
+map <C-Insert>   "+y
+"vnoremap <C-Insert>   "+y
 " cut
 vnoremap <S-Del>      "+x
 
