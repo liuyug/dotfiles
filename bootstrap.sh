@@ -8,7 +8,7 @@ function doIt() {
         --exclude "goagent/"        \
         --exclude "bootstrap.sh"    \
         --exclude "README.rst"      \
-        -a                          \
+        -av                         \
         . ~
 }
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
