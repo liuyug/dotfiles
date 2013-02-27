@@ -1,0 +1,3 @@
+[submodule "goagent"]
+	path = goagent
+	url = https://github.com/goagent/goagent.git
