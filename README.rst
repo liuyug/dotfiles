@@ -20,3 +20,15 @@ My DotFiles
     # add appid into goagent/local/proxy.ini
     python goagent/local/proxy.py
 
++ Other
+
+1. XFCE theme
+
+::
+
+   git clone https://github.com/shimmerproject/Greybird $HOME/.themes/
+
+2. Elementary icons
+
+   download from http://danrabbit.deviantart.com/art/elementary-Icons-65437279
+   and put in $HOME/.icons/
