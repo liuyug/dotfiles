@@ -1,0 +1,20 @@
+
+#enable vertical scrolling
+if [ -f /usr/bin/xinput ]; then
+    xinput set-int-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation" 8 1
+    xinput set-int-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Button" 8 2
+    xinput set-int-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Timeout" 8 200
+
+    #enable horizontal scrolling in addition to vertical scrolling
+    xinput set-int-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Axes" 8 6 7 4 5
+
+    #enable middle button emulation (using left- and right-click simultaneously)
+    #xinput set-int-prop "TPPS/2 IBM TrackPoint" "Evdev Middle Button Emulation" 8 1
+    #xinput set-int-prop "TPPS/2 IBM TrackPoint" "Evdev Middle Button Timeout" 8 50
+fi
+
+# To disable middle button click paste functionality, remap the middle button to something else
+if [ -f /usr/bin/xmodmap ]; then
+    xmodmap -e "pointer = 1 9 3 4 5 6 7 8 2"
+fi
+
