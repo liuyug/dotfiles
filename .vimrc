@@ -64,9 +64,9 @@ set shiftround
 
 
 set number            " show line number
-set textwidth=79
-set nowrap              " don't automatically wrap on load
-set fo-=t               " don't automatically wrap when typing
+" set textwidth=79
+" set nowrap              " don't automatically wrap on load
+" set fo-=t               " don't automatically wrap when typing
 
 
 set sidescroll=5        " horizonal scroll
