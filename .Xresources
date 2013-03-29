@@ -17,8 +17,7 @@ XTerm*sessionMgt: false
 XTerm*rightScrollBar: true
 XTerm*eightBitInput:  false
 XTerm*faceName: Inconsolata:size=12
-XTerm*faceName1: DejaVu Sans Mono:size=11
-XTerm*faceName2: PowerlineSymbols:size=12
+!XTerm*faceName: DejaVu Sans Mono:size=11
 XTerm*faceNameDoublesize: WenQuanYi Zen Hei Mono:size=11
 XTerm*loginshell: true
 XTerm*scrollTtyOutput: false
