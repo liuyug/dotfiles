@@ -264,6 +264,14 @@ call pathogen#helptags()
 " ln -s /usr/lib/python2.6/site-packages/Powerline-beta-py2.6.egg/powerline/bindings/vim powerline
 " let g:Powerline_symbols = 'fancy'
 
+" c/c++ mode
+" http://www.vim.org/scripts/script.php?script_id=213
+" download cvim.zip
+" mkdir -p ~/.vim/bundle/cvim
+" cd ~/.vim/bundle/cvim
+" unzip ~/Downloads/cvim.zip
+" filetype plugin on
+
 " python-mode
 " =============================================================================
 " https://github.com/klen/python-mode
