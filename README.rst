@@ -17,7 +17,8 @@ Install modules
     # add appid into goagent/local/proxy.ini
     python goagent/local/proxy.py
 
-+ Other
+XFCE
+====
 
 1. XFCE theme
 

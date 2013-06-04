@@ -13,7 +13,7 @@ function doIt() {
         --exclude ".gitignore"      \
         --exclude ".DS_Store"       \
         --exclude "goagent/"        \
-        --exclude "bootstrap.sh"    \
+        --exclude "modules/"        \
         --exclude "up_home.sh"      \
         --exclude "README.rst"      \
         -av                         \
