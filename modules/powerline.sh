@@ -1,7 +1,7 @@
 #!/bin/sh
 
 
-if [ -d "$((pwd))/powerline" ]; then
+if [ -d "$(pwd)/powerline" ]; then
     (cd powerline; git pull)
 else
     git clone https://github.com/Lokaltog/powerline
