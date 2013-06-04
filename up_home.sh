@@ -7,6 +7,12 @@ print ''.join([item for item in os.sys.path if 'Powerline' in item])
 
 POWERLINE_VIM="$POWERLINE_PATH/powerline/bindings/vim/plugin/powerline.vim"
 
+function mono_font() 
+{
+    if [ ! -f $HOME/.fonts/Inconsolata.otf ]; then
+        (cd $HOME/.fonts; wget http://www.levien.com/type/myfonts/Inconsolata.otf)
+    fi
+}
 
 function doIt() {
     rsync --exclude ".git/"         \
@@ -18,7 +24,8 @@ function doIt() {
         --exclude "README.rst"      \
         -av                         \
         . $HOME
-    fc-cache -vf
+    mono_font
+    fc-cache -f
     if [ -f $POWERLINE_VIM ]; then
         rsync -av $POWERLINE_VIM $HOME/.vim/plugin/powerline.vim
     fi
@@ -33,6 +40,5 @@ else
         doIt
     fi
 fi
-unset doIt
 source ~/.profile
 
