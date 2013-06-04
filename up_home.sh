@@ -18,6 +18,7 @@ function doIt() {
         --exclude "README.rst"      \
         -av                         \
         . $HOME
+    fc-cache -vf
     if [ -f $POWERLINE_VIM ]; then
         rsync -av $POWERLINE_VIM $HOME/.vim/plugin/powerline.vim
     fi
