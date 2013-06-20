@@ -13,5 +13,5 @@ Option    "YAxisMapping"    "4 5"
 EndSection
 
 EOF
-sudo mv 11-trackpoint.conf /usr/share/X11/xorg.conf.d
+sudo mv 11-trackpoint.conf /etc/X11/xorg.conf.d
 
