@@ -14,6 +14,7 @@ Install modules
 ::
 
     git clone https://github.com/goagent/goagent.git
+    mkdir -p $HOME/.pki/nssdb
     # add appid into goagent/local/proxy.ini
     python goagent/local/proxy.py
 

@@ -1,3 +1,3 @@
 #!/bin/sh
 
-python $HOME/.dotfiles/goagent/local/proxy.py
+python3 $HOME/.dotfiles/goagent/local/proxy.py
