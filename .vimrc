@@ -12,6 +12,8 @@
 " General
 " Use Vim settings, rather than Vi settings (much better!).
 set nocompatible
+filetype off
+filetype plugin indent on
 
 " Vim color
 " term color
@@ -34,13 +36,13 @@ if v:version >=730
     if has("gui_running")
         highlight colorcolumn guibg=lightgrey
     else
-        highlight colorcolumn ctermbg=236
+        highlight colorcolumn ctermbg=239
     endif
 else
     if has("gui_running")
         highlight OverLength guibg=#2a2a2a
     else
-        highlight OverLength ctermbg=233
+        highlight OverLength ctermbg=236
     endif
     match OverLength /\%>80v.\+/
 endif
@@ -113,10 +115,6 @@ set ignorecase        " search ignore casesensitive
 set smartcase 
 set wrapscan          " search from head when reach end
 
-filetype off
-filetype plugin indent on
-syntax on             " syntax highlight
-
 " move code blocks indents
 vnoremap < <gv
 vnoremap > >gv
@@ -132,6 +130,7 @@ let mapleader = ','
 "autocmd BufNewFile,BufRead *.rst setlocal filetype=ReST
 " autocmd BufNewFile,BufRead *.html setlocal filetype=html
 autocmd BufNewFile,BufRead *.txt setlocal filetype=text
+autocmd BufNewFile,BufRead *.cmake,CMakeLists.txt setlocal filetype=cmake 
 
 " file template
 autocmd BufNewFile *.rst 0read ~/.vim/templates/skeleton.rst

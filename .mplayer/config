@@ -37,5 +37,8 @@ unicode=1
 #subcp=gbk
 
 # screensaver
-heartbeat-cmd="xscreensaver-command -deactivate 2> /dev/null &"
+# for xscreensaver
+#heartbeat-cmd="xscreensaver-command -deactivate 2> /dev/null &"
+# for gnome-screensaver
+heartbeat-cmd="gnome-screensaver-command -d 2> /dev/null &"
 
