@@ -133,7 +133,9 @@ autocmd BufNewFile,BufRead *.txt setlocal filetype=text
 autocmd BufNewFile,BufRead *.cmake,CMakeLists.txt setlocal filetype=cmake 
 
 " file template
-autocmd BufNewFile *.rst 0read ~/.vim/templates/skeleton.rst
+autocmd BufNewFile *.rst  0read ~/.vim/templates/skeleton.rst
+autocmd BufNewFile *.py   0read ~/.vim/templates/skeleton.py
+autocmd BufNewFile *.html 0read ~/.vim/templates/skeleton.html
 
 " goto last position after open file
 autocmd BufReadPost *
