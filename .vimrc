@@ -7,7 +7,13 @@
 " For Linux  ~/.vimrc
 " vim config dir :
 " ~/.vim
-"
+" Echo Various and Option
+" let foo = 1
+" echo foo
+" set foo = 0
+" echo &foo
+" let &foo = &foo + 1
+" set foo?
 
 " General
 " Use Vim settings, rather than Vi settings (much better!).
