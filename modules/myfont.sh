@@ -7,4 +7,5 @@ else
     git clone git@github.com:liuyug/myfont.git
 fi
 
-(cd myfont; rsync -av . $HOME)
+(cd myfont; rsync --exclude ".git" -av . $HOME)
+fc-cache -vf
