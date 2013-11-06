@@ -10,10 +10,22 @@ channels=2
 # volume=v:[sc] control audio volume with software
 # <v> is the desired gain in dB for all channels in the stream from -200dB to +60dB, where -200dB mutes the sound completely and +60dB equals a gain of 1000 (default: 0).
 # <sc> Turns soft clipping on (1) or off (0). Soft-clipping can make the sound more smooth if very high volume levels are used. Enable this option if the dynamic range of the loudspeakers is very low. 
+af=volume=20
 
-# video driver, -vo help for a list
+# Video Output Driver, -vo help for a list
 # xv, gl_nosw, gl, gl2
 vo=xv
+
+# Video Filter
+# deinterlace method
+#vf=yadif=1
+vf=kerndeint
+# linear blend
+#vf=pp=lb
+# FFMpeg
+#vf=pp=fd
+# lowpass5
+#vf=pp=l5
 
 # miss frame
 framedrop=0
@@ -21,6 +33,9 @@ framedrop=0
 # set 1 to disable cache playing media on NFS/SMB/DVD/VCD
 # cache=8192  default unit KB
 nocache=1
+
+# double buffer
+double=1
 
 # subtitles
 # #########
@@ -32,8 +47,10 @@ slang=chs,chi,eng
 #sid=1
 # enable SSA/ASS subtitle rendering
 ass=1
-# unicode, gbk
-unicode=1
+#utf8=1
+#unicode=1
+# iconv support
+subcp=utf-8
 #subcp=gbk
 
 # screensaver
@@ -41,4 +58,6 @@ unicode=1
 #heartbeat-cmd="xscreensaver-command -deactivate 2> /dev/null &"
 # for gnome-screensaver
 heartbeat-cmd="gnome-screensaver-command -d 2> /dev/null &"
+# support XSS or XResetScreenSaver API
+#stop-xscreensaver=1
 
