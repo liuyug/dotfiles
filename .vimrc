@@ -19,6 +19,20 @@
 " Use Vim settings, rather than Vi settings (much better!).
 set nocompatible
 filetype off
+" Install vundle
+" git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+" all bundle
+" manage vundle
+Bundle 'gmarik/vundle'
+" manage other
+Bundle 'Rykka/riv.vim'
+Bundle 'scrooloose/nerdtree'
+Bundle 'klen/python-mode'
+Bundle 'kien/ctrlp.vim'
+Bundle 'kylinwowo/taglist'
+
 filetype plugin indent on
 
 " Vim color
@@ -237,25 +251,6 @@ noremap! <F9> <ESC>:update<CR>:silent! make<CR>
 "
 " VIM Plugins 
 " ==========================================================================
-" pathogen.vim
-" ==========================================================================
-" https://github.com/tpope/vim-pathogen
-" mkdir -p ~/.vim/autoload ~/.vim/bundle; \
-" curl -Sso ~/.vim/autoload/pathogen.vim \
-"    https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim
-" Add third module as submodule
-" cd ~/
-" git submodule add git@github.com:kien/ctrlp.vim.git .vim/bundle/ctrlp.vim
-" git add -f .vim/bundle/ctrlp.vim/
-" Remove third module
-" rm -rf .vim/bundle/xxx.vim
-" git rm -r .vim/bundle/xxx.vim
-" Update third module
-" git submodule foreach 'git pull'
-set noshowmode
-call pathogen#infect()
-call pathogen#helptags()
-
 " powerline
 " ==========================================================================
 " git clone https://github.com/Lokaltog/powerline
@@ -270,14 +265,6 @@ call pathogen#helptags()
 " cd ~/.vim/bundle
 " ln -s /usr/lib/python2.6/site-packages/Powerline-beta-py2.6.egg/powerline/bindings/vim powerline
 " let g:Powerline_symbols = 'fancy'
-
-" c/c++ mode
-" http://www.vim.org/scripts/script.php?script_id=213
-" download cvim.zip
-" mkdir -p ~/.vim/bundle/cvim
-" cd ~/.vim/bundle/cvim
-" unzip ~/Downloads/cvim.zip
-" filetype plugin on
 
 " python-mode
 " =============================================================================
@@ -309,13 +296,6 @@ set wildignore+=*.pyc
 set wildignore+=*.so
 set wildignore+=*_build/*
 set wildignore+=*/coverage/*
-
-" python_editing
-" ===================================================================
-" wget -O ~/.vim/ftplugin/python_editing.vim http://www.vim.org/scripts/download_script.php?src_id=5492
-" <f> to fold current function
-" <F> to fold all function
-" set nofoldenable      " not support in  vi
 
 " printer
 " ===================================================================
