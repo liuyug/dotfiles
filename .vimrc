@@ -21,17 +21,19 @@ set nocompatible
 filetype off
 " Install vundle
 " git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=$HOME/.vim/bundle/vundle/
 call vundle#rc()
 " all bundle
-" manage vundle
-Bundle 'gmarik/vundle'
-" manage other
-Bundle 'Rykka/riv.vim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'klen/python-mode'
-Bundle 'kien/ctrlp.vim'
-Bundle 'kylinwowo/taglist'
+if exists('g:bundles')
+    " manage vundle
+    Bundle 'gmarik/vundle'
+    " manage other
+    Bundle 'Rykka/riv.vim'
+    Bundle 'scrooloose/nerdtree'
+    Bundle 'klen/python-mode'
+    Bundle 'kien/ctrlp.vim'
+    Bundle 'kylinwowo/taglist'
+endif
 
 filetype plugin indent on
 
