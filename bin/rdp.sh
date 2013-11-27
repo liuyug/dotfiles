@@ -8,5 +8,5 @@ rdesktop    \
     -D \
     -x 0x80 \
     -r disk:host=$HOME  \
-    -T "eClient - $IP"  \
+    -T "rdp - $IP"  \
     $IP &
