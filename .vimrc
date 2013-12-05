@@ -33,6 +33,7 @@ if exists('g:bundles')
     Bundle 'klen/python-mode'
     Bundle 'kien/ctrlp.vim'
     Bundle 'kylinwowo/taglist'
+    Bundle 'ltercation/vim-colors-solarized'
 endif
 
 filetype plugin indent on
@@ -176,7 +177,7 @@ autocmd FileType php setlocal errorformat=%m\ in\ %f\ on\ line\ %l
 " rest
 autocmd FileType rst setlocal wrap
 autocmd FileType rst setlocal syntax=rest
-autocmd FileType rst setlocal spell spelllang=en_us
+"autocmd FileType rst setlocal spell spelllang=en_us
 autocmd FileType rst setlocal makeprg=rst2html.py\ --cloak-email-addresses\ %\ %.html;firefox\ %.html
 "autocmd FileType rst setlocal errorformat=%m\ in\ %f\ on\ line\ %l
 " txt
@@ -281,12 +282,10 @@ let g:pymode_rope_map_space=0   " conflict with scim and ibus input method
 inoremap <C-o>  <C-r>=RopeCodeAssistInsertMode()<CR>
 " let g:ropevim_autoimport_modules=["os","shutil","datetime","django"]
 let g:pymode_lint_checker="pyflakes, pep8, mccabe"  " pylint, pyflakes, pep8, mccabe
-let g:pymode_breakpoint=0
+let g:pymode_lint_ignore="E501" " ignore error E501
 let g:pymode_syntax=1
 let g:pymode_syntax_builtin_objs=0
 let g:pymode_syntax_builtin_funcs=0
-" install ipython and ipdb firstly
-map <Leader>b Oimport ipdb; ipdb.set_trace()    # BREAKPOINT<C-c>
 
 " ctrlp - a finder for VIM 
 " =============================================================================
