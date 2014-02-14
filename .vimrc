@@ -7,6 +7,7 @@
 " For Linux  ~/.vimrc
 " vim config dir :
 " ~/.vim
+"
 " Echo Various and Option
 " let foo = 1
 " echo foo
@@ -14,6 +15,38 @@
 " echo &foo
 " let &foo = &foo + 1
 " set foo?
+
+" Key tips
+" <leader> : ,
+" ,nt   show NERDTree
+" ,tl   show Taglist
+" ,,c  ->  Creates a new restructuredText table.
+" ,,f  ->  Fix table columns in a table. 
+"
+" window split
+" ctrl+w s top to bottom split
+" ctrl+w v left to right split
+" ctrl+w c close current window
+"
+" tabs
+" gt previous tab
+" gT next tab
+" tabnew create new window
+" 
+" :reg show all registers content
+" :map show current keymaps
+" :verbose map <key>    " to display map script
+" i_CTRL-V_digit| CTRL-V {number} insert three digit decimal number as a single
+"
+" git-vim
+" <Leader>gd  :GitDiff
+" <Leader>gD  :GitDiff –cached
+" <Leader>gs  :GitStatus
+" <Leader>gl  :GitLog
+" <Leader>ga  :GitAdd
+" <Leader>gA  :GitAdd <cfile>
+" <Leader>gc  :GitCommit
+" <Leader>gb  :GitBlame
 
 " General
 " Use Vim settings, rather than Vi settings (much better!).
@@ -24,6 +57,8 @@ filetype off
 set rtp+=$HOME/.vim/bundle/vundle/
 call vundle#rc()
 " all bundle
+" Install new bundles :BundleInstall
+" Update current bundles :BundleUpdate
 if exists('g:bundles')
     " manage vundle
     Bundle 'gmarik/vundle'
@@ -33,24 +68,27 @@ if exists('g:bundles')
     Bundle 'klen/python-mode'
     Bundle 'kien/ctrlp.vim'
     Bundle 'kylinwowo/taglist'
+    Bundle 'motemen/git-vim'
     Bundle 'ltercation/vim-colors-solarized'
+    Bundle 'jnurmine/Zenburn'
+    Bundle 'p8952/vim-colors-wombat'
+    Bundle 'tomasr/molokai'
+" My github
+    Bundle 'liuyug/vim-metaweblog'
 endif
 
 filetype plugin indent on
 
 " Vim color
-" term color
-" curl -Sso ~/.vim/colors/wombat256mod.vim \
-"    https://raw.github.com/mbrochh/mbrochh-dotfiles/master/.vim/colors/wombat256mod.vim
-
 if has("gui_running")
-    colorscheme molokai
-    "colorscheme desert
 else
     " To use 256 colors
     set t_Co=256
-    colorscheme wombat256mod
 endif
+colorscheme molokai
+" colorscheme wombat256mod
+" colorscheme zenburn
+" colorscheme solarized
 
 " vertical line at 81 
 " ==============================================================================
@@ -90,7 +128,6 @@ set shiftround
 
 set number            " show line number
 set wrap
-" set textwidth=79
 " set nowrap              " don't automatically wrap on load
 " set fo-=t               " don't automatically wrap when typing
 
@@ -118,8 +155,8 @@ set showmatch         " show match (,[,{
 set scrolloff=4       " scroll at 4 line
 set vb t_vb=          " disable error bell
 
-set history=100        " history last command 
-set undolevels=100
+set history=1000      " history last command 
+set undolevels=1000
 
 " status
 set laststatus=2      " always show status bar
@@ -138,12 +175,6 @@ set ignorecase        " search ignore casesensitive
 set smartcase 
 set wrapscan          " search from head when reach end
 
-" move code blocks indents
-vnoremap < <gv
-vnoremap > >gv
-
-" map leader
-let mapleader = ','
 
 " File 
 " ===================================================================
@@ -194,13 +225,6 @@ else
     set fileformats=dos,unix,mac
 endif
 
-" Move between tabs
-" gt to previous tab
-" gT to next tab
-" map <Leader>n   <esc>:tabprevious<cr>
-" map <Leader>m   <esc>:tabnext<cr>
-
-
 " Mouse
 " ===================================================================
 "set mouse=a
@@ -215,6 +239,7 @@ set guioptions-=r     " disable right scrollbar
 set guioptions-=b     " disable bottom scrollbar
 "set showtabling=0     " disable tab bar
 
+" fonts
 " 1234567890
 " abcdefghijklmnopqrstuvwxyg
 "set guifont=YaHei\ Consolas\ Hybrid:h12
@@ -226,15 +251,17 @@ set guifont=Inconsolata\ Medium\ 12
 "set guifont=Nimbus Mono L":h12
 
 " clipboard
-" :reg   " to display all registers content
 " share vim clipboard and system clipboard
 " set clipboard=unnamedplus     " for + register
 " set clipboard=unnamed         " for * register
-"
-" :map  " to display current keymaps
-" :verbose map <key>    " to display map script
-" i_CTRL-V_digit| CTRL-V {number} insert three digit decimal number as a single
-"
+
+"" map leader
+let mapleader = ','
+
+" move code blocks indents
+vnoremap < <gv
+vnoremap > >gv
+
 " Make shift-insert work like in Xterm, paste
 " paste
 map  <S-Insert>  "+gP
@@ -282,7 +309,7 @@ let g:pymode_rope_map_space=0   " conflict with scim and ibus input method
 inoremap <C-o>  <C-r>=RopeCodeAssistInsertMode()<CR>
 " let g:ropevim_autoimport_modules=["os","shutil","datetime","django"]
 let g:pymode_lint_checker="pyflakes, pep8, mccabe"  " pylint, pyflakes, pep8, mccabe
-let g:pymode_lint_ignore="E501,C0110" " ignore error E501
+let g:pymode_lint_ignore="E501,C0110,C0301" " ignore error E501
 let g:pymode_syntax=1
 let g:pymode_syntax_builtin_objs=0
 let g:pymode_syntax_builtin_funcs=0
