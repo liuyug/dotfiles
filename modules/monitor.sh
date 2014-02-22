@@ -23,5 +23,5 @@ Section "Screen"
 EndSection
 EOF
 
-sudo mv 50-monitor.conf /etc/X11/xorg.conf.d/
+sudo mv 50-monitor.conf /usr/share/X11/xorg.conf.d/
 
