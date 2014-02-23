@@ -1,57 +1,8 @@
-" Config file
-" vim run direcotry:  
-" $VIMRUNTIME
-" vim config file
-" For Window $HOME/_vimrc
-"            $VIM/_vimrc
-" For Linux  ~/.vimrc
-" vim config dir :
-" ~/.vim
-"
-" Echo Various and Option
-" let foo = 1
-" echo foo
-" set foo = 0
-" echo &foo
-" let &foo = &foo + 1
-" set foo?
-
-" Key tips
-" <leader> : ,
-" ,nt   show NERDTree
-" ,tl   show Taglist
-" ,,c  ->  Creates a new restructuredText table.
-" ,,f  ->  Fix table columns in a table. 
-"
-" window split
-" ctrl+w s top to bottom split
-" ctrl+w v left to right split
-" ctrl+w c close current window
-"
-" tabs
-" gt previous tab
-" gT next tab
-" tabnew create new window
-" 
-" :reg show all registers content
-" :map show current keymaps
-" :verbose map <key>    " to display map script
-" i_CTRL-V_digit| CTRL-V {number} insert three digit decimal number as a single
-"
-" git-vim
-" <Leader>gd  :GitDiff
-" <Leader>gD  :GitDiff –cached
-" <Leader>gs  :GitStatus
-" <Leader>gl  :GitLog
-" <Leader>ga  :GitAdd
-" <Leader>gA  :GitAdd <cfile>
-" <Leader>gc  :GitCommit
-" <Leader>gb  :GitBlame
-
 " General
 " Use Vim settings, rather than Vi settings (much better!).
 set nocompatible
 filetype off
+
 " Install vundle
 " git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 set rtp+=$HOME/.vim/bundle/vundle/
@@ -65,12 +16,12 @@ if exists('g:bundles')
     " manage other
     Bundle 'Rykka/riv.vim'
     Bundle 'scrooloose/nerdtree'
-    Bundle 'klen/python-mode'
-    Bundle 'kien/ctrlp.vim'
-    Bundle 'kylinwowo/taglist'
-    Bundle 'motemen/git-vim'
-    Bundle 'ltercation/vim-colors-solarized'
-    Bundle 'jnurmine/Zenburn'
+    Bundle 'vim-scripts/taglist.vim'
+    Bundle 'vim-scripts/rst-tables--Chao'
+    " pip install jedi  firstly
+    Bundle 'davidhalter/jedi-vim'
+    " pip install pylint pyflakes flake8
+    Bundle 'scrooloose/syntastic'
     Bundle 'p8952/vim-colors-wombat'
     Bundle 'tomasr/molokai'
 " My github
@@ -79,16 +30,19 @@ endif
 
 filetype plugin indent on
 
+" Show whitespace
+" MUST be inserted BEFORE the colorscheme command
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+
 " Vim color
 if has("gui_running")
 else
     " To use 256 colors
     set t_Co=256
 endif
-colorscheme molokai
-" colorscheme wombat256mod
-" colorscheme zenburn
-" colorscheme solarized
+" colorscheme molokai
+colorscheme wombat256mod
 
 " vertical line at 81 
 " ==============================================================================
@@ -175,6 +129,15 @@ set ignorecase        " search ignore casesensitive
 set smartcase 
 set wrapscan          " search from head when reach end
 
+" auto-complete
+set completeopt=longest,menu
+autocmd Filetype python setlocal omnifunc=pythoncomplete#Complete
+autocmd Filetype php    setlocal omnifunc=phpcomplete#CompletePHP
+autocmd Filetype c      setlocal omnifunc=ccomplete#Complete
+autocmd Filetype css    setlocal omnifunc=csscomplete#CompleteCSS
+autocmd Filetype html   setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd Filetype sql    setlocal omnifunc=sqlcomplete#Complete
+autocmd Filetype xml    setlocal omnifunc=xmlcomplete#CompleteTags
 
 " File 
 " ===================================================================
@@ -198,7 +161,6 @@ autocmd BufReadPost *
             \ endif
 "autocmd QuickFixCmdPost * :copen 5
 " Programing language
-
 " python 
 autocmd FileType python setlocal makeprg=python\ % 
 autocmd FileType python setlocal errorformat=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
@@ -264,84 +226,58 @@ vnoremap > >gv
 
 " Make shift-insert work like in Xterm, paste
 " paste
-map  <S-Insert>  "+gP
-map! <S-Insert>  "+gP
+nmap  <S-Insert>  "+gP
 " copy
-map <C-Insert>   "+y
-"vnoremap <C-Insert>   "+y
+nmap <C-Insert>   "+y
 " cut
-vnoremap <S-Del>      "+x
+nmap <S-Del>      "+x
 
 " compile
 noremap  <F9> :update<CR>:silent! make<CR>
 noremap! <F9> <ESC>:update<CR>:silent! make<CR>
 
-" run
-"map <F5> <ESC>:w<CR>:!/usr/bin/python %<CR>
-"
-" VIM Plugins 
-" ==========================================================================
-" powerline
-" ==========================================================================
-" git clone https://github.com/Lokaltog/powerline
-" cd powerline
-" sudo python setup.py install
-" for bash
-" . {path}/powerline/bindings/bash/powerline.sh
-" for tmux
-" set -g default-terminal screen-256color
-" source '{path}/powerline/bindings/tmux/powerline.conf'
-" for vim
-" cd ~/.vim/bundle
-" ln -s /usr/lib/python2.6/site-packages/Powerline-beta-py2.6.egg/powerline/bindings/vim powerline
-" let g:Powerline_symbols = 'fancy'
+" jedi-vim
+" ==============================================================================
+" Completion <C-Space>
+" Goto assignments <leader>g (typical goto function)
+" Goto definitions <leader>d (follow identifier as far as possible, includes imports and statements)
+" Show Documentation/Pydoc K (shows a popup with assignments)
+" Renaming <leader>r
+" Usages <leader>n (shows all the usages of a name)
+" Open module, e.g. :Pyimport os (opens the os module)
+let g:jedi#popup_on_dot = 0
+let g:jedi#popup_select_first = 0
+let g:jedi#auto_vim_configuration = 0
+let g:jedi#completions_command = ""
+let g:jedi#popup_select_first = 0
+map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
-" python-mode
-" =============================================================================
-" https://github.com/klen/python-mode
-" cd ~/.vim/bundle; git clone https://github.com/klen/python-mode
-" :RopeCreateProject    # create ropeproject
-map <Leader>g :call RopeGotoDefinition()
-let ropevim_enable_shortcuts=1
-let g:pymode_rope_goto_def_newwin="vnew"
-let g:pymode_rope_extended_complete=1
-let g:pymode_rope_map_space=0   " conflict with scim and ibus input method
-inoremap <C-o>  <C-r>=RopeCodeAssistInsertMode()<CR>
-" let g:ropevim_autoimport_modules=["os","shutil","datetime","django"]
-let g:pymode_lint_checker="pyflakes, pep8, mccabe"  " pylint, pyflakes, pep8, mccabe
-let g:pymode_lint_ignore="E501,C0110,C0301" " ignore error E501
-let g:pymode_syntax=1
-let g:pymode_syntax_builtin_objs=0
-let g:pymode_syntax_builtin_funcs=0
+" syntastic
+" ==============================================================================
+" :SyntasticInfo
+let g:syntastic_always_populate_loc_list=1
+nmap <leader>ln <ESC>:lnext<CR>
+nmap <leader>lp <ESC>:lprev<CR>
 
-" ctrlp - a finder for VIM 
-" =============================================================================
+" ctrlp - a finder for VIM
+" ==============================================================================
 " https://github.com/kien/ctrlp.vim
 " cd ~/.vim/bundle; git clone https://github.com/kien/ctrlp.vim.git
 " <C-p> to activate
-let g:ctrlp_max_height=30
-set wildignore+=*.pyc
-set wildignore+=*.so
-set wildignore+=*_build/*
-set wildignore+=*/coverage/*
-
-" printer
-" ===================================================================
-" prtdialog <http://www.vim.org/scripts/script.php?script_id=512>
-" <Leader>pd  to configure printer options
-set printoptions=paper:A4,portrait:y,duplex:long,wrap:y,number:y,syntax:n
-"  
-"set printmbcharset=utf-8
-"set printmbfont=WenQuanYi\ Zen\ Hei
+" let g:ctrlp_max_height=30
+" set wildignore+=*.pyc
+" set wildignore+=*.so
+" set wildignore+=*_build/*
+" set wildignore+=*/coverage/*
 
 " rst_table
 " ===================================================================
 " wget -O ~/.vim/plugin/rst_table.vim http://www.vim.org/scripts/download_script.php?src_id=12783
 " ,,c  ->  Creates a new restructuredText table.
-" ,,f  ->  Fix table columns in a table. 
+" ,,f  ->  Fix table columns in a table.
 
 " taglist
-" =================================================================== 
+" ===================================================================
 " configure Ctags
 if has("unix")
     let Tlist_Ctags_Cmd = '/usr/bin/ctags'
