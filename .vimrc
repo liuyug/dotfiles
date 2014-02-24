@@ -41,7 +41,7 @@ else
     " To use 256 colors
     set t_Co=256
 endif
-" colorscheme molokai
+"colorscheme molokai
 colorscheme wombat256mod
 
 " vertical line at 81 
@@ -141,11 +141,6 @@ autocmd Filetype xml    setlocal omnifunc=xmlcomplete#CompleteTags
 
 " File 
 " ===================================================================
-"autocmd BufNewFile,BufRead *.dbk  setlocal filetype=docbk
-"autocmd BufNewFile,BufRead *.docbook  setlocal filetype=docbk
-"autocmd BufNewFile,BufRead *.t2t setlocal filetype=txt2tags
-"autocmd BufNewFile,BufRead *.rst setlocal filetype=ReST
-" autocmd BufNewFile,BufRead *.html setlocal filetype=html
 autocmd BufNewFile,BufRead *.txt setlocal filetype=text
 autocmd BufNewFile,BufRead *.cmake,CMakeLists.txt setlocal filetype=cmake 
 
@@ -169,7 +164,6 @@ autocmd FileType php setlocal makeprg=php\ %
 autocmd FileType php setlocal errorformat=%m\ in\ %f\ on\ line\ %l
 " rest
 autocmd FileType rst setlocal wrap
-autocmd FileType rst setlocal syntax=rest
 "autocmd FileType rst setlocal spell spelllang=en_us
 autocmd FileType rst setlocal makeprg=rst2html.py\ --cloak-email-addresses\ %\ %.html;firefox\ %.html
 "autocmd FileType rst setlocal errorformat=%m\ in\ %f\ on\ line\ %l
