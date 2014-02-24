@@ -1,11 +1,5 @@
 #!/bin/bash
 
-POWERLINE_PATH=$(python -c " 
-import os
-print ''.join([item for item in os.sys.path if 'Powerline' in item])
-")
-
-POWERLINE_VIM="$POWERLINE_PATH/powerline/bindings/vim/plugin/powerline.vim"
 
 function mono_font() 
 {
