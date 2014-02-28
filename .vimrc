@@ -19,7 +19,6 @@ if exists('g:bundles')
     Bundle 'majutsushi/tagbar'
     Bundle 'vim-scripts/rst-tables--Chao'
     Bundle 'jmcantrell/vim-virtualenv'
-    Bundle 'edkolev/tmuxline.vim'
     Bundle 'nathanaelkane/vim-indent-guides'
     " pip install jedi  firstly
     Bundle 'davidhalter/jedi-vim'
@@ -241,7 +240,6 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#virtualenv#enabled = 1
-let g:airline#extensions#tmuxline#enabled = 0
 let g:airline#extensions#tagbar#enabled = 1
 " let g:airline_powerline_fonts=1
 
