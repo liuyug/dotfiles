@@ -16,14 +16,20 @@ if exists('g:bundles')
     " manage other
     Bundle 'Rykka/riv.vim'
     Bundle 'scrooloose/nerdtree'
-    Bundle 'vim-scripts/taglist.vim'
+    Bundle 'majutsushi/tagbar'
     Bundle 'vim-scripts/rst-tables--Chao'
+    Bundle 'jmcantrell/vim-virtualenv'
+    Bundle 'edkolev/tmuxline.vim'
+    Bundle 'nathanaelkane/vim-indent-guides'
     " pip install jedi  firstly
     Bundle 'davidhalter/jedi-vim'
     " pip install pylint pyflakes flake8
     Bundle 'scrooloose/syntastic'
     Bundle 'p8952/vim-colors-wombat'
     Bundle 'tomasr/molokai'
+    " status bar
+    Bundle 'bling/vim-airline'
+    Bundle 'tpope/vim-fugitive'
 " My github
     Bundle 'liuyug/vim-metaweblog'
 endif
@@ -44,7 +50,7 @@ endif
 "colorscheme molokai
 colorscheme wombat256mod
 
-" vertical line at 81 
+" vertical line at 81
 " ==============================================================================
 if v:version >=730
     set colorcolumn=80
@@ -72,11 +78,11 @@ endif
 
 " Edit
 " =============================================================================
-" <TAB> 
+" <TAB>
 set tabstop=4         " standard, below method is advised
 set softtabstop=4     " replace <tab> with 4 spaces,2 <tab> will be 1 <tab>
-set expandtab         " don't use <tab>, only spaces 
-set shiftwidth=4      " >> indent width 
+set expandtab         " don't use <tab>, only spaces
+set shiftwidth=4      " >> indent width
 set shiftround
 
 
@@ -93,7 +99,7 @@ set sidescrolloff=5
 "set smartindent       " smart indent by above line
 
 set backspace=indent,eol,start
-set whichwrap=b,s     " permit <BS> to go above, <space> to go below 
+set whichwrap=b,s     " permit <BS> to go above, <space> to go below
 
 " backup and swap
 set nobackup
@@ -109,7 +115,7 @@ set showmatch         " show match (,[,{
 set scrolloff=4       " scroll at 4 line
 set vb t_vb=          " disable error bell
 
-set history=1000      " history last command 
+set history=1000      " history last command
 set undolevels=1000
 
 " status
@@ -122,11 +128,11 @@ set showcmd           " display commands in status line
 " Use powerline
 " set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ [%{(&fenc==\"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}]\ %c:%l/%L%)
 
-" Search 
+" Search
 set hlsearch          " search pattern highlight
 set incsearch         " do incremental searching
 set ignorecase        " search ignore casesensitive
-set smartcase 
+set smartcase
 set wrapscan          " search from head when reach end
 
 " auto-complete
@@ -139,10 +145,10 @@ autocmd Filetype html   setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd Filetype sql    setlocal omnifunc=sqlcomplete#Complete
 autocmd Filetype xml    setlocal omnifunc=xmlcomplete#CompleteTags
 
-" File 
+" File
 " ===================================================================
 autocmd BufNewFile,BufRead *.txt setlocal filetype=text
-autocmd BufNewFile,BufRead *.cmake,CMakeLists.txt setlocal filetype=cmake 
+autocmd BufNewFile,BufRead *.cmake,CMakeLists.txt setlocal filetype=cmake
 
 " file template
 autocmd BufNewFile *.rst  0read ~/.vim/templates/skeleton.rst
@@ -156,11 +162,11 @@ autocmd BufReadPost *
             \ endif
 "autocmd QuickFixCmdPost * :copen 5
 " Programing language
-" python 
-autocmd FileType python setlocal makeprg=python\ % 
+" python
+autocmd FileType python setlocal makeprg=python\ %
 autocmd FileType python setlocal errorformat=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 " php
-autocmd FileType php setlocal makeprg=php\ % 
+autocmd FileType php setlocal makeprg=php\ %
 autocmd FileType php setlocal errorformat=%m\ in\ %f\ on\ line\ %l
 " rest
 autocmd FileType rst setlocal wrap
@@ -172,8 +178,8 @@ autocmd FileType rst setlocal makeprg=rst2html.py\ --cloak-email-addresses\ %\ %
 
 " Locale
 " input character is original encoding
-"let &termencoding=&encoding 
-"set encoding=utf-8    " use utf-8 internal
+"let &termencoding=&encoding
+set encoding=utf-8    " use utf-8 internal
 set fileencodings=ucs-bom,utf-8,cp936,cp950,latin1
 if has("unix")
     set fileformats=unix,dos,mac
@@ -186,7 +192,7 @@ endif
 "set mouse=a
 "behave mswin
 
-" Gui 
+" Gui
 " ===================================================================
 set guioptions-=T     " disable toolbar
 set guioptions-=m     " disable menubar
@@ -230,6 +236,44 @@ nmap <S-Del>      "+x
 noremap  <F9> :update<CR>:silent! make<CR>
 noremap! <F9> <ESC>:update<CR>:silent! make<CR>
 
+" vim-airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#virtualenv#enabled = 1
+let g:airline#extensions#tmuxline#enabled = 0
+let g:airline#extensions#tagbar#enabled = 1
+" let g:airline_powerline_fonts=1
+
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" powerline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
+
+
 " jedi-vim
 " ==============================================================================
 " Completion <C-Space>
@@ -270,48 +314,32 @@ nmap <leader>lp <ESC>:lprev<CR>
 " ,,c  ->  Creates a new restructuredText table.
 " ,,f  ->  Fix table columns in a table.
 
-" taglist
-" ===================================================================
-" configure Ctags
-if has("unix")
-    let Tlist_Ctags_Cmd = '/usr/bin/ctags'
-else
-    let Tlist_Ctags_Cmd = '"'.$VIM.'/ctags.exe"'
-endif
-" :TlistToggle<CR>  to show Tlist
-map <Leader>tl <ESC>:TlistToggle<CR>
-" show current file tag
-let Tlist_Show_One_File=1
-" exit vim when only tag window
-let Tlist_Exit_OnlyWindow=1
-" show tag list on right window
-let Tlist_Use_Right_Window=1
-let Tlist_Auto_Highlight_Tag = 1
-let Tlist_Auto_Open = 0
-let Tlist_Auto_Update = 1
-let Tlist_Close_On_Select = 0
-let Tlist_Compact_Format = 0
-let Tlist_Display_Prototype = 0
-let Tlist_Display_Tag_Scope = 1
-let Tlist_Enable_Fold_Column = 0
-let Tlist_File_Fold_Auto_Close = 0
-let Tlist_GainFocus_On_ToggleOpen = 1
-let Tlist_Hightlight_Tag_On_BufEnter = 1
-let Tlist_Inc_Winwidth = 0
-let Tlist_Max_Submenu_Items = 1
-let Tlist_Max_Tag_Length = 30
-let Tlist_Process_File_Always = 0
-let Tlist_Show_Menu = 0
-let Tlist_Sort_Type = "order"
-let Tlist_Use_Horiz_Window = 0
-let Tlist_WinWidth = 31
+" virtualenv
+let g:virtualenv_directory = '~/.virtualenvs'
+map <leader>vea <ESC>:VirtualEnvActivate<SPACE>
+map <leader>ved <ESC>:VirtualEnvDeactivate<CR>
+map <leader>vel <ESC>:VirtualEnvList<CR>
+
+" tagbar
+map <leader>tb  <ESC>:TagbarToggle<CR>
+
+" indent-guides
+" default toggle key: <leader>ig :IndentGuidesToggle
+let g:indent_guides_default_mapping = 0
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_guide_size = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'tagbar']
+let g:indent_guides_auto_colors = 0
+hi IndentGuidesOdd ctermbg=236
+hi IndentGuidesEven ctermbg=236
 
 " NERDTree
 " ===================================================================
 " :NERDTree<CR> to show
 nmap <Leader>nt <ESC>:NERDTreeToggle<CR>
 let NERDChristmasTree=1
-" focus on center 
+" focus on center
 let NERDTreeAutoCenter=1
 " mouse mode
 let NERDTreeMouseMode=2
