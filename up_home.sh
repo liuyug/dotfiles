@@ -21,9 +21,6 @@ function doIt() {
         . $HOME
     mono_font
     fc-cache -f
-    if [ -f $POWERLINE_VIM ]; then
-        rsync -av $POWERLINE_VIM $HOME/.vim/plugin/powerline.vim
-    fi
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
