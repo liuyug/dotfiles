@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ "x$1" == "x" ];then
+if [ "x$1" = "x" ];then
     #rand_str=$(tr -dc "[:digit:]" < /dev/urandom | head -c 4)
     rand_str=$(date +"%H%M%S")
     sname=4P_$rand_str

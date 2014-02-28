@@ -1,9 +1,10 @@
 #!/bin/bash
 
 
-function mono_font() 
+function mono_font()
 {
     if [ ! -f $HOME/.fonts/Inconsolata.otf ]; then
+        mkdir -p $HOME/.fonts
         (cd $HOME/.fonts; wget http://www.levien.com/type/myfonts/Inconsolata.otf)
     fi
 }
