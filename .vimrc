@@ -178,7 +178,7 @@ autocmd FileType rst setlocal makeprg=rst2html.py\ --cloak-email-addresses\ %\ %
 " Locale
 " input character is original encoding
 "let &termencoding=&encoding
-set encoding=utf-8    " use utf-8 internal
+"set encoding=utf-8    " use utf-8 internal
 set fileencodings=ucs-bom,utf-8,cp936,cp950,latin1
 if has("unix")
     set fileformats=unix,dos,mac
