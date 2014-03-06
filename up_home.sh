@@ -1,6 +1,16 @@
 #!/bin/bash
 
 
+function vim_init()
+{
+    if [ -d $HOME/.vim/bundle/vundle ]; then
+        (cd $HOME/.vim/bundle/vundle; git pull)
+    else
+        git clone https://github.com/gmarik/vundle.git $HOME/.vim/bundle/vundle
+    fi
+    vim -c "BundleInstall"
+}
+
 function mono_font()
 {
     if [ ! -f $HOME/.fonts/Inconsolata.otf ]; then
@@ -21,6 +31,7 @@ function doIt() {
         . $HOME
     mono_font
     fc-cache -f
+    vim_init
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
@@ -32,5 +43,5 @@ else
         doIt
     fi
 fi
-source ~/.profile
+source $HOME/.profile
 
