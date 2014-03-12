@@ -1,4 +1,8 @@
 
+if [ -f ~/.bashrc ];then
+    . ~/.bashrc
+fi
+
 export PATH=/sbin:/usr/sbin:$PATH:$HOME/bin:$HOME/.local/bin:
 
 export LANG=zh_CN.UTF-8
@@ -8,9 +12,6 @@ export LC_TIME=en_US.UTF-8
 
 if [ -f /usr/bin/vimx ];then
     alias vim=vimx
-fi
-if [ -f $HOME/.bashrc ];then
-    source $HOME/.bashrc
 fi
 
 
