@@ -11,25 +11,37 @@ call vundle#rc()
 " Install new bundles :BundleInstall
 " Update current bundles :BundleUpdate
 if exists('g:bundles')
-    " manage vundle
+    " vundle
     Bundle 'gmarik/vundle'
     " manage other
+    " for ReStructedText
     Bundle 'Rykka/riv.vim'
-    Bundle 'scrooloose/nerdtree'
-    Bundle 'majutsushi/tagbar'
+    " rst table
     Bundle 'vim-scripts/rst-tables--Chao'
+    " explorer filesystem
+    Bundle 'scrooloose/nerdtree'
+    " tag bar, like taglist, but more better in C/C++
+    Bundle 'majutsushi/tagbar'
+    " python virtualenv
     Bundle 'jmcantrell/vim-virtualenv'
+    " display indenting level
     Bundle 'nathanaelkane/vim-indent-guides'
+    " autocompletion
     " pip install jedi  firstly
     Bundle 'davidhalter/jedi-vim'
-    " pip install pylint pyflakes flake8
+    " syntax check
+    " python: pip install pylint pyflakes flake8
+    " c/c++: cppcheck
     Bundle 'scrooloose/syntastic'
+    " color scheme
     Bundle 'p8952/vim-colors-wombat'
     Bundle 'tomasr/molokai'
     " status bar
     Bundle 'bling/vim-airline'
+    " git wrapper
     Bundle 'tpope/vim-fugitive'
-" My github
+    " My vim script
+    " metawebblog interface
     Bundle 'liuyug/vim-metaweblog'
 endif
 
@@ -94,8 +106,9 @@ set wrap
 set sidescroll=5        " horizonal scroll
 set sidescrolloff=5
 
-"set autoindent        " always set autoindenting on
-"set smartindent       " smart indent by above line
+" set autoindent        " always set autoindenting on
+" set smartindent       " smart indent by above line
+" set cindent
 
 set backspace=indent,eol,start
 set whichwrap=b,s     " permit <BS> to go above, <space> to go below
@@ -290,10 +303,22 @@ map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
 " syntastic
 " ==============================================================================
-" :SyntasticInfo
+" wiki: https://github.com/scrooloose/syntastic/wiki/Syntax-Checkers
+" :SyntasticInfo or :SyntasticCheck 
+" debug and use :message to show result
+" let g:syntastic_debug = 1
 let g:syntastic_always_populate_loc_list=1
+" python: ['flake8', 'pyflakes', 'pylint', 'python']
+let g:syntastic_python_checkers = ['flake8', 'pyflakes', 'python']
+let g:syntastic_python_flake8_args = "--ignore=E501 --max-complexity 10"
+" c/c++
+let g:syntastic_cpp_check_header = 1
+let g:syntastic_cpp_checkers = ['cppcheck', 'gcc']
+let g:syntastic_cpp_compiler_options = system("pkg-config --cflags QtGui QtWebKit")
+" Errors window
 nmap <leader>ln <ESC>:lnext<CR>
 nmap <leader>lp <ESC>:lprev<CR>
+" :lcl or :lclose to close window
 
 " ctrlp - a finder for VIM
 " ==============================================================================
@@ -308,7 +333,7 @@ nmap <leader>lp <ESC>:lprev<CR>
 
 " rst_table
 " ===================================================================
-" wget -O ~/.vim/plugin/rst_table.vim http://www.vim.org/scripts/download_script.php?src_id=12783
+" default map:
 " ,,c  ->  Creates a new restructuredText table.
 " ,,f  ->  Fix table columns in a table.
 
@@ -319,6 +344,7 @@ map <leader>ved <ESC>:VirtualEnvDeactivate<CR>
 map <leader>vel <ESC>:VirtualEnvList<CR>
 
 " tagbar
+" tagbar do not support displaying related header information on cpp file buffer.
 map <leader>tb  <ESC>:TagbarToggle<CR>
 
 " indent-guides
