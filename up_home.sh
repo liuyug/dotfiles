@@ -25,7 +25,7 @@ function doIt() {
         --exclude ".DS_Store"       \
         --exclude "goagent/"        \
         --exclude "modules/"        \
-        --exclude "up_home.sh"      \
+        --exclude "*.sh"      \
         --exclude "README.rst"      \
         -av                         \
         . $HOME
