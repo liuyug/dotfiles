@@ -43,6 +43,8 @@ if exists('g:bundles')
     " My vim script
     " metawebblog interface
     Bundle 'liuyug/vim-metaweblog'
+    " cscope forked
+    Bundle 'liuyug/cscope.vim'
 endif
 
 filetype plugin indent on
@@ -250,6 +252,10 @@ noremap! <F9> <ESC>:update<CR>:silent! make<CR>
 
 " vim-airline
 let g:airline#extensions#tabline#enabled = 1
+" switch to next or previous buffer
+" gt or gT to switch next or previous tab
+map <leader>gn :bn<CR>
+map <leader>gp :bp<CR>
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#virtualenv#enabled = 1
@@ -310,15 +316,19 @@ map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 let g:syntastic_always_populate_loc_list=1
 " python: ['flake8', 'pyflakes', 'pylint', 'python']
 let g:syntastic_python_checkers = ['flake8', 'pyflakes', 'python']
-let g:syntastic_python_flake8_args = "--ignore=E501 --max-complexity 10"
+let g:syntastic_python_flake8_args = "--ignore=E128 --max-complexity 10"
 " c/c++
 let g:syntastic_cpp_check_header = 1
 let g:syntastic_cpp_checkers = ['cppcheck', 'gcc']
 let g:syntastic_cpp_compiler_options = system("pkg-config --cflags QtGui QtWebKit")
-" Errors window
-nmap <leader>ln <ESC>:lnext<CR>
-nmap <leader>lp <ESC>:lprev<CR>
-" :lcl or :lclose to close window
+
+" cscope
+let g:cscope_map_toggle_location_key = 0
+
+" Location window
+nmap <leader>ln :lnext<CR>
+nmap <leader>lp :lprev<CR>
+nmap <leader>lc :lclose<CR>
 
 " ctrlp - a finder for VIM
 " ==============================================================================
@@ -357,6 +367,13 @@ let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'tagbar']
 let g:indent_guides_auto_colors = 0
 hi IndentGuidesOdd ctermbg=236
 hi IndentGuidesEven ctermbg=236
+
+" riv.vim
+let g:riv_fold_auto_update = 0
+let g:riv_fold_level = 2
+" Create: Use `<C-E>tc or :RivTableCreate to create table
+" Format: Use <C-E>tf or :RivTableFormat to format table.
+
 
 " NERDTree
 " ===================================================================
