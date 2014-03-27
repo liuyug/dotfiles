@@ -37,6 +37,7 @@ if exists('g:bundles')
     Bundle 'p8952/vim-colors-wombat'
     Bundle 'tomasr/molokai'
     " status bar
+    " Bundle 'edkolev/tmuxline.vim'
     Bundle 'bling/vim-airline'
     " git wrapper
     Bundle 'tpope/vim-fugitive'
@@ -48,6 +49,7 @@ if exists('g:bundles')
 endif
 
 filetype plugin indent on
+syntax on
 
 " Show whitespace
 " MUST be inserted BEFORE the colorscheme command
@@ -65,19 +67,11 @@ colorscheme wombat256mod
 
 " vertical line at 81
 " ==============================================================================
-if v:version >=730
+if v:version > 702
     set colorcolumn=80
-    if has("gui_running")
-        highlight colorcolumn guibg=lightgrey
-    else
-        highlight colorcolumn ctermbg=239
-    endif
+    highlight colorcolumn ctermbg=239 guibg=lightgrey
 else
-    if has("gui_running")
-        highlight OverLength guibg=#2a2a2a
-    else
-        highlight OverLength ctermbg=236
-    endif
+    highlight OverLength ctermbg=236 guibg=#2a2a2a
     match OverLength /\%>80v.\+/
 endif
 
@@ -260,7 +254,8 @@ let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#virtualenv#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
-" let g:airline_powerline_fonts=1
+let g:airline#extensions#tmuxline#enabled = 0
+let g:airline_powerline_fonts = 0
 
 
 if !exists('g:airline_symbols')
