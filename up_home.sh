@@ -43,5 +43,5 @@ else
         doIt
     fi
 fi
-source $HOME/.bash_profile
+source $HOME/.bashrc
 
