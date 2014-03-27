@@ -1,9 +1,3 @@
-# NOTE
-# When bash invoked with --login options, it will read file, /etc/profile,
-# ~/.bash_profile, ~/.bash_login, and ~/.profile, in that order and read
-# ~/.bash_logout when logout.
-# If bash is not login shell, it will read ~/.bashrc
-
 
 if [ -f /etc/bashrc ];then
     . /etc/bashrc
@@ -16,8 +10,10 @@ export LANGUAGE=en_US.UTF-8
 export LC_MESSAGES=en_US.UTF-8
 export LC_TIME=en_US.UTF-8
 
-if [ -f /usr/bin/vimx ];then
-    alias vim=vimx
+# My customised VIM
+# --enable-pythoninterp --with-features=huge --prefix=$HOME/.local
+if [ -f ~/.local/bin/vim ];then
+    alias vim=~/.local/bin/vim
 fi
 
 
