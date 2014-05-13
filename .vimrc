@@ -29,6 +29,9 @@ if exists('g:bundles')
     " autocompletion
     " pip install jedi  firstly
     Bundle 'davidhalter/jedi-vim'
+    " python
+    " indent
+    Bundle 'hynek/vim-python-pep8-indent'
     " syntax check
     " python: pip install pylint pyflakes flake8
     " c/c++: cppcheck
@@ -41,6 +44,8 @@ if exists('g:bundles')
     Bundle 'bling/vim-airline'
     " git wrapper
     Bundle 'tpope/vim-fugitive'
+    " draw ascii
+    Bundle 'vim-scripts/DrawIt'
     " My vim script
     " metawebblog interface
     Bundle 'liuyug/vim-metaweblog'
@@ -48,8 +53,6 @@ if exists('g:bundles')
     Bundle 'liuyug/cscope.vim'
 endif
 
-filetype plugin indent on
-syntax on
 
 " Show whitespace
 " MUST be inserted BEFORE the colorscheme command
@@ -64,6 +67,10 @@ else
 endif
 "colorscheme molokai
 colorscheme wombat256mod
+
+filetype plugin indent on
+" turn on highlight after colorscheme
+syntax on
 
 " vertical line at 81
 " ==============================================================================
@@ -162,6 +169,7 @@ autocmd BufNewFile,BufRead *.cmake,CMakeLists.txt setlocal filetype=cmake
 autocmd BufNewFile *.rst  0read ~/.vim/templates/skeleton.rst
 autocmd BufNewFile *.py   0read ~/.vim/templates/skeleton.py
 autocmd BufNewFile *.html 0read ~/.vim/templates/skeleton.html
+autocmd BufNewFile *.sh   0read ~/.vim/templates/skeleton.sh
 
 " goto last position after open file
 autocmd BufReadPost *
