@@ -12,7 +12,7 @@ deb http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe m
 EOF
 apt-get update
 
-normal="vim git curl lynx wget ssh tmux python-pip"
+normal="vim git curl lynx wget ssh tmux python-pip rsync"
 dev="build-essential cmake"
 
 
