@@ -229,9 +229,10 @@ set guifont=Inconsolata\ Medium\ 12
 "set guifont=Nimbus Mono L":h12
 
 " clipboard
-" share vim clipboard and system clipboard
+" share vim clipboard and gui clipboard
 " set clipboard=unnamedplus     " for + register
 " set clipboard=unnamed         " for * register
+set clipboard=unnamedplus,unnamed
 
 "" map leader
 let mapleader = ','
@@ -240,15 +241,7 @@ let mapleader = ','
 vnoremap < <gv
 vnoremap > >gv
 
-" Make shift-insert work like in Xterm, paste
-" paste
-vnoremap <C-v>  "+gP
-" copy
-vnoremap <C-c>  "+y
-" cut
-vnoremap <C-x>  "+x
-
-" ompile
+" compile
 noremap  <F9> :update<CR>:silent! make<CR>
 noremap! <F9> <ESC>:update<CR>:silent! make<CR>
 
