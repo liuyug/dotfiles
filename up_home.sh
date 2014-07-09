@@ -26,6 +26,7 @@ function doIt() {
         --exclude "goagent/"        \
         --exclude "modules/"        \
         --exclude "README.rst"      \
+        --exclude "up_home.sh"      \
         -av                         \
         . $HOME
     mono_font
