@@ -4,11 +4,13 @@ echo "Need root privilege to run"
 
 
 cat <<EOF >> /etc/apt/sources.list
-deb http://mirrors.163.com/ubuntu/ trusty main restricted universe multiverse
-deb http://mirrors.163.com/ubuntu/ trusty-security main restricted universe multiverse
+deb http://mirrors.163.com/ubuntu/ trusty main restricted
+deb http://mirrors.163.com/ubuntu/ trusty-update main restricted
+deb http://mirrors.163.com/ubuntu/ trusty-security main restricted
 
-deb http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ trusty main restricted
+deb http://mirrors.aliyun.com/ubuntu/ trusty-update main restricted
+deb http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted
 EOF
 apt-get update
 
@@ -24,4 +26,3 @@ done
 
 
 # vim: ts=4 sw=4 et tw=79
-

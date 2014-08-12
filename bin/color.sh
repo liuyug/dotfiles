@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # http://en.wikipedia.org/wiki/ANSI_escape_code
 
 ESC='\033'
