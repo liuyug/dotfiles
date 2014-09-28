@@ -50,7 +50,7 @@ if exists('g:bundles')
     " metawebblog interface
     Bundle 'liuyug/vim-metaweblog'
     " cscope forked
-    Bundle 'liuyug/cscope.vim'
+    "Bundle 'liuyug/cscope.vim'
 endif
 
 
@@ -291,7 +291,7 @@ let g:syntastic_cpp_checkers = ['cppcheck', 'gcc']
 let g:syntastic_cpp_compiler_options = system("pkg-config --cflags QtGui QtWebKit")
 
 " cscope
-let g:cscope_map_toggle_location_key = 0
+"let g:cscope_map_toggle_location_key = 0
 
 " Location window
 nmap <leader>ln :lnext<CR>
