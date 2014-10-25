@@ -229,9 +229,10 @@ set guifont=Inconsolata\ Medium\ 12
 "set guifont=Nimbus Mono L":h12
 
 " clipboard
+" need support +clipboard
 " share vim clipboard and gui clipboard
-" set clipboard=unnamedplus     " for + register
-" set clipboard=unnamed         " for * register
+" set clipboard=unnamedplus     " for + register, +clipboard
+" set clipboard=unnamed         " for * register, +xterm_clipboard
 set clipboard=unnamedplus,unnamed
 
 "" map leader

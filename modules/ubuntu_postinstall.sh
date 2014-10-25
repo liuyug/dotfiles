@@ -14,7 +14,7 @@ deb http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted
 EOF
 apt-get update
 
-normal="vim git curl lynx wget ssh tmux python-pip rsync"
+normal="vim vim-gui-common git curl lynx wget ssh tmux python-pip rsync"
 dev="build-essential cmake"
 
 
