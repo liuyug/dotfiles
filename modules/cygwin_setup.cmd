@@ -7,7 +7,7 @@ set OPT=-q -O -s %CYGWIN_SITE%
 
 rem packages
 rem utils
-set PKGS=unzip,tree,tmux,p7zip
+set PKGS=unzip,tree,tmux,p7zip,ascii
 
 rem devel
 set PKGS=%PKGS%,git,gcc,make,ctags,sqlite3,gdb
@@ -15,7 +15,7 @@ set PKGS=%PKGS%,python,python-openssl,python-setuptools,python-sip
 
 rem network
 set PKGS=%PKGS%,curl,wget,ping,netcat,whois,rsync,lftp
-set PKGS=%PKGS%,openldap-devel
+set PKGS=%PKGS%,openldap,openldap-devel
 set PKGS=%PKGS%,penssh,openssl,openssl-devel
 
 echo on

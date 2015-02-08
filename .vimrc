@@ -16,6 +16,7 @@ if exists('g:bundles')
     " manage other
     " for ReStructedText
     Bundle 'Rykka/riv.vim'
+    Bundle 'Rykka/instantRst'
     " rst table
     Bundle 'vim-scripts/rst-tables--Chao'
     " explorer filesystem
@@ -247,7 +248,7 @@ noremap  <F9> :update<CR>:silent! make<CR>
 noremap! <F9> <ESC>:update<CR>:silent! make<CR>
 
 " vim-airline
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 0
 " switch to next or previous buffer
 " gt or gT to switch next or previous tab
 map <leader>gn :bn<CR>
@@ -279,13 +280,13 @@ map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 " syntastic
 " ==============================================================================
 " wiki: https://github.com/scrooloose/syntastic/wiki/Syntax-Checkers
-" :SyntasticInfo or :SyntasticCheck 
+" :SyntasticInfo or :SyntasticCheck
 " debug and use :message to show result
 " let g:syntastic_debug = 1
 let g:syntastic_always_populate_loc_list=1
 " python: ['flake8', 'pyflakes', 'pylint', 'python']
 let g:syntastic_python_checkers = ['flake8', 'pyflakes', 'python']
-let g:syntastic_python_flake8_args = "--ignore=E128 --max-complexity 10"
+let g:syntastic_python_flake8_args = "--ignore=E128,E501 --max-complexity 20"
 " c/c++
 let g:syntastic_cpp_check_header = 1
 let g:syntastic_cpp_checkers = ['cppcheck', 'gcc']
