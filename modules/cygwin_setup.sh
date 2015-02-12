@@ -7,7 +7,7 @@ CYGWIN_ROOT="C:\\cygwin64"
 OPT="-q -O -s $CYGWIN_SITE"
 
 # download cygwin setup
-wget $CYGWIN_URL -O $CYGWIN_SETUP
+wget -N $CYGWIN_URL
 
 # packages
 # utils
