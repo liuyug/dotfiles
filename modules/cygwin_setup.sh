@@ -25,3 +25,8 @@ PKGS="$PKGS,openldap,openldap-devel"
 PKGS="$PKGS,penssh,openssl,openssl-devel"
 
 $CYGWIN_SETUP $OPT -P $PKGS
+
+wget https://bootstrap.pypa.io/get-pip.py
+python get-pip.py
+python3 get-pip.py
+
