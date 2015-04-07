@@ -4,56 +4,55 @@ set nocompatible
 filetype off
 
 " Install vundle
-" git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-set rtp+=$HOME/.vim/bundle/vundle/
-call vundle#rc()
+" git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+set rtp+=$HOME/.vim/bundle/Vundle.vim/
+call vundle#begin()
 " all bundle
-" Install new bundles :BundleInstall
+" Install plugins :PluginInstall
 " Update current bundles :BundleUpdate
-if exists('g:bundles')
-    " vundle
-    Bundle 'gmarik/vundle'
-    " manage other
-    " for ReStructedText
-    Bundle 'Rykka/riv.vim'
-    Bundle 'Rykka/instantRst'
-    " rst table
-    Bundle 'vim-scripts/rst-tables--Chao'
-    " explorer filesystem
-    Bundle 'scrooloose/nerdtree'
-    " tag bar, like taglist, but more better in C/C++
-    Bundle 'majutsushi/tagbar'
-    " python virtualenv
-    Bundle 'jmcantrell/vim-virtualenv'
-    " display indenting level
-    Bundle 'nathanaelkane/vim-indent-guides'
-    " autocompletion
-    " pip install jedi  firstly
-    Bundle 'davidhalter/jedi-vim'
-    " python
-    " indent
-    Bundle 'hynek/vim-python-pep8-indent'
-    " syntax check
-    " python: pip install pylint pyflakes flake8
-    " c/c++: cppcheck
-    Bundle 'scrooloose/syntastic'
-    " color scheme
-    Bundle 'p8952/vim-colors-wombat'
-    Bundle 'tomasr/molokai'
-    " status bar
-    " Bundle 'edkolev/tmuxline.vim'
-    Bundle 'bling/vim-airline'
-    " git wrapper
-    Bundle 'tpope/vim-fugitive'
-    " draw ascii
-    Bundle 'vim-scripts/DrawIt'
-    " My vim script
-    " metawebblog interface
-    Bundle 'liuyug/vim-metaweblog'
-    " cscope forked
-    "Bundle 'liuyug/cscope.vim'
-endif
+" vundle
+Bundle 'gmarik/Vundle.vim'
+" manage other
+" for ReStructedText
+Bundle 'Rykka/riv.vim'
+Bundle 'Rykka/instantRst'
+" rst table
+Bundle 'vim-scripts/rst-tables--Chao'
+" explorer filesystem
+Bundle 'scrooloose/nerdtree'
+" tag bar, like taglist, but more better in C/C++
+Bundle 'majutsushi/tagbar'
+" python virtualenv
+Bundle 'jmcantrell/vim-virtualenv'
+" display indenting level
+Bundle 'nathanaelkane/vim-indent-guides'
+" autocompletion
+" pip install jedi  firstly
+Bundle 'davidhalter/jedi-vim'
+" python
+" indent
+Bundle 'hynek/vim-python-pep8-indent'
+" syntax check
+" python: pip install pylint pyflakes flake8
+" c/c++: cppcheck
+Bundle 'scrooloose/syntastic'
+" color scheme
+Bundle 'p8952/vim-colors-wombat'
+Bundle 'tomasr/molokai'
+" status bar
+" Bundle 'edkolev/tmuxline.vim'
+Bundle 'bling/vim-airline'
+" git wrapper
+Bundle 'tpope/vim-fugitive'
+" draw ascii
+Bundle 'vim-scripts/DrawIt'
+" My vim script
+" metawebblog interface
+Bundle 'liuyug/vim-metaweblog'
+" cscope forked
+"Bundle 'liuyug/cscope.vim'
 
+call vundle#end()
 
 " Show whitespace
 " MUST be inserted BEFORE the colorscheme command
@@ -286,7 +285,7 @@ map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 let g:syntastic_always_populate_loc_list=1
 " python: ['flake8', 'pyflakes', 'pylint', 'python']
 let g:syntastic_python_checkers = ['flake8', 'pyflakes', 'python']
-let g:syntastic_python_flake8_args = "--ignore=E128,E501 --max-complexity 20"
+let g:syntastic_python_flake8_args = "--ignore=E128,E501 --max-complexity 40"
 " c/c++
 let g:syntastic_cpp_check_header = 1
 let g:syntastic_cpp_checkers = ['cppcheck', 'gcc']

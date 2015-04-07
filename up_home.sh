@@ -3,12 +3,12 @@
 
 function vim_init()
 {
-    if [ -d $HOME/.vim/bundle/vundle ]; then
-        (cd $HOME/.vim/bundle/vundle; git pull)
+    if [ -d $HOME/.vim/bundle/Vundle.vim ]; then
+        (cd $HOME/.vim/bundle/Vundle.vim; git pull)
     else
-        git clone https://github.com/gmarik/vundle.git $HOME/.vim/bundle/vundle
+        git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
     fi
-    vim -c "BundleInstall"
+    vim +PluginInstall +qall
 }
 
 function mono_font()
