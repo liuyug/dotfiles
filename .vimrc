@@ -18,6 +18,8 @@ Bundle 'Rykka/riv.vim'
 Bundle 'Rykka/instantRst'
 " rst table
 Bundle 'vim-scripts/rst-tables--Chao'
+" Jinja2
+Bundle 'Glench/Vim-Jinja2-Syntax'
 " explorer filesystem
 Bundle 'scrooloose/nerdtree'
 " tag bar, like taglist, but more better in C/C++
