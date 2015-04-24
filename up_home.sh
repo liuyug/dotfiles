@@ -29,8 +29,6 @@ function doIt() {
         --exclude "up_home.sh"      \
         -av                         \
         . $HOME
-    mono_font
-    fc-cache -f
     vim_init
 }
 
