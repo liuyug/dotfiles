@@ -194,6 +194,9 @@ autocmd FileType rst setlocal makeprg=rst2html.py\ --cloak-email-addresses\ %\ %
 " txt
 "autocmd FileType txt setlocal wrap
 
+" my customized command
+command Todo noautocmd vimgrep /\ TODO\|\ FIXME\|\ BUG\|\ XXX/j **/*.py **/*.html | cw
+
 " Locale
 " input character is original encoding
 "let &termencoding=&encoding
