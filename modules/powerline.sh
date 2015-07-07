@@ -2,17 +2,14 @@
 
 
 if [ -d "$(pwd)/powerline" ]; then
-    (cd powerline; git pull)
-else
-    git clone https://github.com/Lokaltog/powerline
+    mkdir -p powerline
 fi
-(cd powerline; python setup.py install --user)
 
-# powerline font
-wget https://github.com/Lokaltog/powerline/raw/develop/font/PowerlineSymbols.otf
-wget https://github.com/Lokaltog/powerline/raw/develop/font/10-powerline-symbols.conf
-cp PowerlineSymbols.otf $HOME/.fonts
-cp 10-powerline-symbols.conf $HOME/.fonts.conf.d
+(cd powerline; git clone https://github.com/Lokaltog/powerline)
+(cd powerline/powerline; python setup.py install --user)
+(cd powerline; git clone https://github.com/powerline/fonts)
+(cd powerline/fonts; bash install.sh)
+
 
 # powerline config files
 mkdir -p $HOME/.config/powerline

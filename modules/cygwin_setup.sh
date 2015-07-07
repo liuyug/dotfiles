@@ -15,6 +15,7 @@ PKGS="unzip,tree,tmux,p7zip,ascii"
 
 # devel
 PKGS="$PKGS,git,gcc,make,ctags,sqlite3,gdb"
+PKGS="$PKGS,freetype,png"
 PKGS="$PKGS,python,python-openssl,python-setuptools,python-six,python-pygments,python-numpy,python-beautifulsoup"
 PKGS="$PKGS,python3,python3-openssl,python3-setuptools,python3-six,python3-pygments,python3-numpy,python3-beautifulsoup"
 

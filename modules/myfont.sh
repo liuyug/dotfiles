@@ -7,8 +7,10 @@ else
     git clone https://github.com/liuyug/myfont.git
 fi
 
+mkdir -p myfont/.fonts
+
 # monospace font
-(cd myfonts/.fonts; wget http://www.levien.com/type/myfonts/Inconsolata.otf)
+(cd myfont/.fonts; wget http://www.levien.com/type/myfonts/Inconsolata.otf)
 
 # google noto cjk font
 # https://www.google.com/get/noto/cjk.html
