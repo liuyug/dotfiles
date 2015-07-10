@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 dir=$1
 output=$2

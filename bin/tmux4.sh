@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ "x$1" = "x" ];then
     #rand_str=$(tr -dc "[:digit:]" < /dev/urandom | head -c 4)
