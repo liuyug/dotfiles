@@ -1,7 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 
+set -e
 
-if [ -d "$(pwd)/powerline" ]; then
+if [ ! -d "$(pwd)/powerline" ]; then
     mkdir -p powerline
 fi
 
