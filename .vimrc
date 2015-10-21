@@ -195,7 +195,7 @@ autocmd FileType rst setlocal makeprg=rst2html.py\ --cloak-email-addresses\ %\ %
 "autocmd FileType txt setlocal wrap
 
 " my customized command
-command Todo noautocmd vimgrep /\ TODO\|\ FIXME\|\ BUG\|\ XXX/j **/*.py **/*.html | cw
+command Todo noautocmd vimgrep /\ TODO:\|\ FIXME:\|\ BUG:\|\ XXX:/j **/*.py **/*.html | cw
 
 " Locale
 " input character is original encoding
@@ -315,23 +315,20 @@ nmap <leader>lc :lclose<CR>
 " set wildignore+=*_build/*
 " set wildignore+=*/coverage/*
 
-" rst_table
-" ===================================================================
-" default map:
-" ,,c  ->  Creates a new restructuredText table.
-" ,,f  ->  Fix table columns in a table.
-
 " virtualenv
+" ===================================================================
 let g:virtualenv_directory = '~/.virtualenvs'
 map <leader>vea <ESC>:VirtualEnvActivate<SPACE>
 map <leader>ved <ESC>:VirtualEnvDeactivate<CR>
 map <leader>vel <ESC>:VirtualEnvList<CR>
 
 " tagbar
+" ===================================================================
 " tagbar do not support displaying related header information on cpp file buffer.
 map <leader>tb  <ESC>:TagbarToggle<CR>
 
 " indent-guides
+" ===================================================================
 " default toggle key: <leader>ig :IndentGuidesToggle
 let g:indent_guides_default_mapping = 0
 let g:indent_guides_enable_on_vim_startup = 1
@@ -342,12 +339,28 @@ let g:indent_guides_auto_colors = 0
 hi IndentGuidesOdd ctermbg=236
 hi IndentGuidesEven ctermbg=236
 
+" rst_table
+" ===================================================================
+" default map:
+" ,,c  ->  Creates a new restructuredText table.
+" ,,f  ->  Fix table columns in a table.
+
 " riv.vim
+" ===================================================================
 let g:riv_fold_auto_update = 0
 let g:riv_fold_level = 2
 " Create: Use `<C-E>tc or :RivTableCreate to create table
 " Format: Use <C-E>tf or :RivTableFormat to format table.
 
+" InstantRst
+" ===================================================================
+" preview rst with firefox. the server is at http://localhost:5676
+" :InstantRst[!]
+"     Preview current buffer. Add ! to preview ALL rst buffer.
+" :StopInstantRst[!]
+"     Stop Preview current buffer Add ! to stop preview ALL rst buffer.
+let g:instant_rst_slow = 1
+let g:instant_rst_bind_scroll = 0
 
 " NERDTree
 " ===================================================================
