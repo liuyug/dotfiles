@@ -27,6 +27,8 @@ function doIt() {
         --exclude "modules/"        \
         --exclude "README.rst"      \
         --exclude "up_home.sh"      \
+        --exclude ".bashrc"         \
+        --exclude ".xsessionrc"     \
         -av                         \
         . $HOME
     vim_init
