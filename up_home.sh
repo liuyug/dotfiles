@@ -20,17 +20,12 @@ function mono_font()
 }
 
 function doIt() {
-    rsync --exclude ".git/"         \
-        --exclude ".gitignore"      \
-        --exclude ".DS_Store"       \
-        --exclude "goagent/"        \
-        --exclude "modules/"        \
-        --exclude "README.rst"      \
-        --exclude "up_home.sh"      \
+    rsync \
+        --exclude ".fonts.conf"     \
         --exclude ".bashrc"         \
         --exclude ".xsessionrc"     \
         -av                         \
-        . $HOME
+        home_config/ $HOME
     vim_init
 }
 
@@ -42,6 +37,12 @@ else
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         doIt
     fi
+    read -p "Download mono font to \"\$HOME/.fonts\". Are you sure? (y/n) " -n 1
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        mono_font
+    fi
+
 fi
 source $HOME/.bashrc
 
