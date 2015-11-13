@@ -13,7 +13,3 @@ fi
 # (cd powerline/fonts; bash install.sh)
 
 fc-cache -vf
-
-# powerline config files
-mkdir -p $HOME/.config/powerline
-cp -r powerline/powerline/config_files/* $HOME/.config/powerline/
