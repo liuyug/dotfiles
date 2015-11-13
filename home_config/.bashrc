@@ -1,5 +1,5 @@
-# append my profile to current home profile
-# cat .profile >> $HOME/.profile
+# append to current home .bashrc
+# cat .bashrc >> $HOME/.bashrc
 
 # include bashrc
 # if [ -f /etc/bashrc ];then
