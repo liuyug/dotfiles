@@ -6,7 +6,7 @@
 #     . /etc/bashrc
 # fi
 
-export PATH=/sbin:/usr/sbin:$PATH:$HOME/bin:$HOME/.local/bin:
+export PATH=/sbin:/usr/sbin:$PATH:$HOME/.local/bin:
 
 # in debian, need to run "dpkg-reconfigure locales" and add "zh_CN.UTF-8"
 export LANG=zh_CN.UTF-8
