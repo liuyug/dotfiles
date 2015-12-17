@@ -26,6 +26,7 @@ function doIt() {
         --exclude ".xsessionrc"     \
         -av                         \
         home_config/ $HOME
+    cat home_config/.bashrc >> $HOME/.bashrc
     vim_init
 }
 
