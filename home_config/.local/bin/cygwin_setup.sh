@@ -3,6 +3,7 @@
 # cygwin setup program
 CYGWIN_URL="https://cygwin.com/setup-x86_64.exe"
 CYGWIN_SETUP="D:\\Downloads\\cygwin-setup.exe"
+CYGWIN_CHECK="/usr/bin/cygcheck"
 
 # cygwin packages
 # mirror site
@@ -24,6 +25,9 @@ usage()
     echo "download                          download latest cygwin setup"
     echo "install [package name] [...]      install package"
     echo "remove [package name] [...]       remove package"
+    echo "info [package name]               list files in package"
+    echo "find [file name]                  find package including file"
+    echo "search [package name]             search package in cygwin.com repository"
     exit 0
 }
 
@@ -66,6 +70,24 @@ remove_pkgs()
     cmd /c "$CYGWIN_SETUP $OPT -x $PKGS"
 }
 
+info_pkgs()
+{
+    PKGS=$1
+    $CYGWIN_CHECK -l $PKGS
+}
+
+find_pkgs()
+{
+    FILE=`which $1`
+    $CYGWIN_CHECK -f $FILE
+}
+
+search_pkgs()
+{
+    PKGS=$1
+    $CYGWIN_CHECK -p $PKGS
+}
+
 install_python_pip()
 {
     if [ ! -f get-pip.py ]; then
@@ -83,6 +105,12 @@ elif [ "x"$1 = "xinstall" ]; then
     install_pkgs $2
 elif [ "x"$1 = "xremove" ]; then
     remove_pkgs $2
+elif [ "x"$1 = "xinfo" ]; then
+    info_pkgs $2
+elif [ "x"$1 = "xfind" ]; then
+    find_pkgs $2
+elif [ "x"$1 = "xsearch" ]; then
+    search_pkgs $2
 else
     usage
 fi
