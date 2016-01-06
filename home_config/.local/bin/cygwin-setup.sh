@@ -44,9 +44,12 @@ init_setup()
     PKGS="unzip,tree,tmux,p7zip,ascii"
 
     # devel
-    PKGS="$PKGS,git,gcc,make,ctags,sqlite3,gdb"
-    PKGS="$PKGS,freetype,png"
+    PKGS="$PKGS,git,gcc,make,ctags,sqlite3,gdb,pkg-config"
+    # library
+    PKGS="$PKGS,libfreetype-devel,libpng-devel"
+    # python 2
     PKGS="$PKGS,python,python-openssl,python-setuptools,python-six,python-pygments,python-numpy,python-beautifulsoup"
+    # python 3
     PKGS="$PKGS,python3,python3-openssl,python3-setuptools,python3-six,python3-pygments,python3-numpy,python3-beautifulsoup"
 
 
