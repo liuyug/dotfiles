@@ -1,4 +1,7 @@
 #!/bin/sh
+# ignore this script
+# use apt-cyg
+# https://raw.githubusercontent.com/transcode-open/apt-cyg/master/apt-cyg
 
 # cygwin setup program
 CYGWIN_URL="https://cygwin.com/setup-x86_64.exe"
@@ -15,7 +18,9 @@ CYGWIN_LOCAL_PKGS_DIR="D:\\Downloads"
 CYGWIN_ROOT="C:\\cygwin64"
 
 # cygwin setup runtime parameter
-OPT="-q -R $CYGWIN_ROOT -l $CYGWIN_LOCAL_PKGS_DIR -O -s $CYGWIN_SITE"
+OPT="-q -R $CYGWIN_ROOT -l $CYGWIN_LOCAL_PKGS_DIR"
+OPT_LOCAL="-L"
+OPT_REMOTE="-O -s $CYGWIN_SITE"
 
 usage()
 {
@@ -25,6 +30,7 @@ usage()
     echo "download                          download latest cygwin setup"
     echo "install [package name] [...]      install package"
     echo "remove [package name] [...]       remove package"
+    echo "list [package name]               list packages"
     echo "info [package name]               list files in package"
     echo "find [file name]                  find package including file"
     echo "search [package name]             search package in cygwin.com repository"
@@ -64,13 +70,13 @@ init_setup()
 install_pkgs()
 {
     PKGS=$1
-    cmd /c "$CYGWIN_SETUP $OPT -P $PKGS"
+    cmd /c "$CYGWIN_SETUP $OPT $OPT_REMOTE -P $PKGS"
 }
 
 remove_pkgs()
 {
     PKGS=$1
-    cmd /c "$CYGWIN_SETUP $OPT -x $PKGS"
+    cmd /c "$CYGWIN_SETUP $OPT $OPT_LOCAL -x $PKGS"
 }
 
 info_pkgs()
@@ -81,7 +87,7 @@ info_pkgs()
 
 find_pkgs()
 {
-    FILE=`which $1`
+    FILE=$1
     $CYGWIN_CHECK -f $FILE
 }
 
@@ -89,6 +95,12 @@ search_pkgs()
 {
     PKGS=$1
     $CYGWIN_CHECK -p $PKGS
+}
+
+list_pkgs()
+{
+    PKGS=$1
+    $CYGWIN_CHECK -c -d $PKGS
 }
 
 install_python_pip()
@@ -108,6 +120,8 @@ elif [ "x"$1 = "xinstall" ]; then
     install_pkgs $2
 elif [ "x"$1 = "xremove" ]; then
     remove_pkgs $2
+elif [ "x"$1 = "xlist" ]; then
+    list_pkgs $2
 elif [ "x"$1 = "xinfo" ]; then
     info_pkgs $2
 elif [ "x"$1 = "xfind" ]; then
