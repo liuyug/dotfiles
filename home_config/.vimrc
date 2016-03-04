@@ -43,14 +43,15 @@ Bundle 'p8952/vim-colors-wombat'
 Bundle 'tomasr/molokai'
 " status bar
 " Bundle 'edkolev/tmuxline.vim'
-Bundle 'bling/vim-airline'
+Bundle 'vim-airline/vim-airline'
+Bundle 'vim-airline/vim-airline-themes'
 " git wrapper
 Bundle 'tpope/vim-fugitive'
 " draw ascii
 Bundle 'vim-scripts/DrawIt'
 " My vim script
 " metawebblog interface
-Bundle 'liuyug/vim-metaweblog'
+" Bundle 'liuyug/vim-metaweblog'
 " cscope forked
 "Bundle 'liuyug/cscope.vim'
 
