@@ -13,9 +13,10 @@ function vim_init()
 
 function get_font()
 {
-    fonts=(
+    declare -A fonts=(
         [powerline]=https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
         [inconsolata]=http://www.levien.com/type/myfonts/Inconsolata.otf
+        [consolas]=https://github.com/runsisi/consolas-font-for-powerline/archive/master.zip
     )
 
     url=${fonts[$1]}
@@ -25,17 +26,7 @@ function get_font()
 
     if [ ! -f $HOME/.fonts/$file ]; then
         mkdir -p $HOME/.fonts
-        (cd $HOME/.fonts; wget $url)
-    fi
-}
-
-function powerline_font()
-{
-    url = https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
-    file = `basename $url`
-    if [ ! -f $HOME/.fonts/$file ]; then
-        mkdir -p $HOME/.fonts
-        (cd $HOME/.fonts; wget $url)
+        (cd $HOME/.fonts; wget $url; if [ $file = "master.zip" ]; then unzip -o -j $file; rm -f $file; fi)
     fi
 }
 
@@ -58,9 +49,10 @@ else
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         doIt
     fi
-    read -p "Download Inconsolata and POWERLINE font to \"\$HOME/.fonts\". Are you sure? (y/n) " -n 1
+    read -p "Download font to \"\$HOME/.fonts\". Are you sure? (y/n) " -n 1
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
+        get_font consolas
         get_font inconsolata
         get_font powerline
     fi
