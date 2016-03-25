@@ -51,10 +51,10 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'vim-scripts/DrawIt'
 " My vim script
 " metawebblog interface
-" Bundle 'liuyug/vim-metaweblog'
+Bundle 'liuyug/vim-metaweblog'
 " cscope forked
 "Bundle 'liuyug/cscope.vim'
-
+"
 call vundle#end()
 
 " Show whitespace
@@ -327,6 +327,7 @@ map <leader>vel <ESC>:VirtualEnvList<CR>
 " ===================================================================
 " tagbar do not support displaying related header information on cpp file buffer.
 map <leader>tb  <ESC>:TagbarToggle<CR>
+let g:tagbar_width = 30
 
 " indent-guides
 " ===================================================================
@@ -384,10 +385,8 @@ let NERDTreeShowLineNumbers=0
 " 窗口位置（'left' or 'right'）
 let NERDTreeWinPos='left'
 " 窗口宽度
-let NERDTreeWinSize=31
+let NERDTreeWinSize=30
 " Fix NERDTree mouse bug
 set nomousehide
 " other
 " ===================================================================
-
-
