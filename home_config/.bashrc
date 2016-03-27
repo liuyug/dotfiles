@@ -28,3 +28,8 @@ export EDITOR=vim
 # alias ls='ls --color=auto'
 # alias grep='grep --color=auto'
 
+platform=`uname -o`
+if [ $platform = 'Cygwin' ]; then
+    echo "Find platform: $platform"
+    chcp.com 65001
+fi
