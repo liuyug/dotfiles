@@ -1,0 +1,11 @@
+BoldAsFont=no
+FontHeight=14
+Font=Powerline Consolas
+ClipShortcuts=no
+WindowShortcuts=no
+SwitchShortcuts=no
+ZoomShortcuts=no
+AltFnShortcuts=no
+Term=xterm-256color
+Locale=
+Charset=
