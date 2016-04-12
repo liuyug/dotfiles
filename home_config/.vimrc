@@ -51,7 +51,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'vim-scripts/DrawIt'
 " My vim script
 " metawebblog interface
-Bundle 'liuyug/vim-metaweblog'
+" Bundle 'liuyug/vim-metaweblog'
 " cscope forked
 "Bundle 'liuyug/cscope.vim'
 "
@@ -224,11 +224,12 @@ set guioptions-=b     " disable bottom scrollbar
 "set showtabling=0     " disable tab bar
 
 " fonts
+" Only for gui window. For terminal window need change terminal font
 " 1234567890
 " abcdefghijklmnopqrstuvwxyg
 "set guifont=YaHei\ Consolas\ Hybrid:h12
 "set guifont=Consolas:h11
-set guifont=Inconsolata\ Medium\ 12
+"set guifont=Inconsolata\ Medium\ 12
 "set guifont="Liberation Mono":h12
 "set guifont="DejaVu Sans Mono":h12
 "set guifont="Luxi Mono":h12
@@ -265,6 +266,13 @@ let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#tmuxline#enabled = 0
 let g:airline_powerline_fonts = 1
 
+if has('win32unix')
+    if !exists('g:airline_symbols')
+        let g:airline_symbols = {}
+    endif
+    " Don't show default ✹('\u2739') under Cygwin
+    let g:airline_symbols.whitespace = 'Ξ'
+endif
 
 " jedi-vim
 " ==============================================================================
@@ -386,7 +394,9 @@ let NERDTreeShowLineNumbers=0
 let NERDTreeWinPos='left'
 " 窗口宽度
 let NERDTreeWinSize=30
+" ignore file
+let NERDTreeIgnore = ['\.pyc$', '__pycache__']
 " Fix NERDTree mouse bug
-set nomousehide
+" set nomousehide
 " other
 " ===================================================================

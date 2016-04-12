@@ -1,0 +1,25 @@
+#!/usr/bin/env python
+# -*- encoding:utf-8 -*-
+
+import sys
+import BaseHTTPServer
+from SimpleHTTPServer import SimpleHTTPRequestHandler
+
+
+HandlerClass = SimpleHTTPRequestHandler
+ServerClass = BaseHTTPServer.HTTPServer
+Protocol = "HTTP/1.0"
+
+if sys.argv[1:]:
+    ip, port = sys.argv[1].split(':')
+else:
+    ip = '127.0.0.1'
+    port = 8000
+server_address = ('127.0.0.1', int(port))
+
+HandlerClass.protocol_version = Protocol
+httpd = ServerClass(server_address, HandlerClass)
+
+sa = httpd.socket.getsockname()
+print "Serving HTTP on", sa[0], "port", sa[1], "..."
+httpd.serve_forever()
