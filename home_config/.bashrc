@@ -27,6 +27,7 @@ export EDITOR=vim
 # alias
 # alias ls='ls --color=auto'
 # alias grep='grep --color=auto'
+alias ll='ls -l'
 
 platform=`uname -o`
 if [ $platform = 'Cygwin' ]; then
