@@ -8,9 +8,10 @@ else
     sname=$1
 fi
 
-# split 2 panel 
-tmux new-session -d -s $sname
-tmux split-window -h
+cur_dir=`pwd`
+# split 2 panel
+tmux new-session -d -s $sname -c "$cur_dir"
+tmux split-window -h -c "$cur_dir"
 tmux attach -t $sname
 
 

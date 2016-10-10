@@ -9,11 +9,12 @@ else
 fi
 
 
+cur_dir=`pwd`
 # split 3 panel 
-tmux new-session -d -s $sname
-tmux split-window -h
+tmux new-session -d -s $sname -c "$cur_dir"
+tmux split-window -h -c -c "$cur_dir"
 tmux select-pane -t:0.1
-tmux split-window -v
+tmux split-window -v -c "$cur_dir"
 tmux attach -t $sname
 
 
