@@ -19,9 +19,6 @@ vmware="open-vmware-tools"
 dev="build-essential cmake"
 
 
-for item in `echo $normal $vmware $dev`; do
-    echo "Install $item"
-    apt-get install $item
-done
+apt-get install `echo $normal $vmware $dev`
 
 # vim: ts=4 sw=4 et tw=79

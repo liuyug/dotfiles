@@ -9,52 +9,43 @@ set rtp+=$HOME/.vim/bundle/Vundle.vim/
 call vundle#begin()
 " all bundle
 " Install plugins :PluginInstall
-" Update current bundles :BundleUpdate
-" vundle
-Bundle 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
+
 " manage other
-" for ReStructedText
-Bundle 'Rykka/riv.vim'
-Bundle 'Rykka/instantRst'
+" SuperTab
+Plugin 'ervandew/supertab'
 " rst table
-Bundle 'vim-scripts/rst-tables--Chao'
+Plugin 'vim-scripts/rst-tables--Chao'
 " Jinja2
-Bundle 'Glench/Vim-Jinja2-Syntax'
+Plugin 'Glench/Vim-Jinja2-Syntax'
 " explorer filesystem
-Bundle 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree'
 " tag bar, like taglist, but more better in C/C++
-Bundle 'majutsushi/tagbar'
+Plugin 'majutsushi/tagbar'
 " python virtualenv
-Bundle 'jmcantrell/vim-virtualenv'
+Plugin 'jmcantrell/vim-virtualenv'
 " display indenting level
-Bundle 'nathanaelkane/vim-indent-guides'
+Plugin 'nathanaelkane/vim-indent-guides'
 " autocompletion
 " pip install jedi  firstly
-Bundle 'davidhalter/jedi-vim'
+Plugin 'davidhalter/jedi-vim'
 " python
 " indent
-Bundle 'hynek/vim-python-pep8-indent'
+Plugin 'hynek/vim-python-pep8-indent'
 " syntax check
 " python: pip install pylint pyflakes flake8
 " c/c++: cppcheck
-Bundle 'scrooloose/syntastic'
+Plugin 'scrooloose/syntastic'
 " color scheme
-Bundle 'p8952/vim-colors-wombat'
-Bundle 'tomasr/molokai'
+Plugin 'p8952/vim-colors-wombat'
+Plugin 'tomasr/molokai'
 " status bar
-" Bundle 'edkolev/tmuxline.vim'
-Bundle 'vim-airline/vim-airline'
-Bundle 'vim-airline/vim-airline-themes'
+" Plugin 'edkolev/tmuxline.vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 " git wrapper
-Bundle 'tpope/vim-fugitive'
-" draw ascii
-Bundle 'vim-scripts/DrawIt'
-" My vim script
-" metawebblog interface
-" Bundle 'liuyug/vim-metaweblog'
-" cscope forked
-"Bundle 'liuyug/cscope.vim'
-"
+Plugin 'tpope/vim-fugitive'
+
 call vundle#end()
 
 " Show whitespace
@@ -154,14 +145,15 @@ set smartcase
 set wrapscan          " search from head when reach end
 
 " auto-complete
-set completeopt=longest,menu
-autocmd Filetype python setlocal omnifunc=pythoncomplete#Complete
-autocmd Filetype php    setlocal omnifunc=phpcomplete#CompletePHP
-autocmd Filetype c      setlocal omnifunc=ccomplete#Complete
-autocmd Filetype css    setlocal omnifunc=csscomplete#CompleteCSS
-autocmd Filetype html   setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd Filetype sql    setlocal omnifunc=sqlcomplete#Complete
-autocmd Filetype xml    setlocal omnifunc=xmlcomplete#CompleteTags
+" use jedi-vim
+" set completeopt=longest,menu
+" autocmd Filetype python setlocal omnifunc=pythoncomplete#Complete
+" autocmd Filetype php    setlocal omnifunc=phpcomplete#CompletePHP
+" autocmd Filetype c      setlocal omnifunc=ccomplete#Complete
+" autocmd Filetype css    setlocal omnifunc=csscomplete#CompleteCSS
+" autocmd Filetype html   setlocal omnifunc=htmlcomplete#CompleteTags
+" autocmd Filetype sql    setlocal omnifunc=sqlcomplete#Complete
+" autocmd Filetype xml    setlocal omnifunc=xmlcomplete#CompleteTags
 
 " File
 " ===================================================================
@@ -253,6 +245,9 @@ vnoremap > >gv
 noremap  <F9> :update<CR>:silent! make<CR>
 noremap! <F9> <ESC>:update<CR>:silent! make<CR>
 
+" debug
+map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
+
 " vim-airline
 let g:airline#extensions#tabline#enabled = 0
 " switch to next or previous buffer
@@ -266,6 +261,7 @@ let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#tmuxline#enabled = 0
 let g:airline_powerline_fonts = 1
 
+" for cygwin
 if has('win32unix')
     if !exists('g:airline_symbols')
         let g:airline_symbols = {}
@@ -279,16 +275,12 @@ endif
 " Completion <C-Space>
 " Goto assignments <leader>g (typical goto function)
 " Goto definitions <leader>d (follow identifier as far as possible, includes imports and statements)
-" Show Documentation/Pydoc K (shows a popup with assignments)
+" Show Documentation/Pydoc shitf+k (shows a popup with assignments)
 " Renaming <leader>r
 " Usages <leader>n (shows all the usages of a name)
 " Open module, e.g. :Pyimport os (opens the os module)
-let g:jedi#popup_on_dot = 0
-let g:jedi#popup_select_first = 0
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#completions_command = ""
-let g:jedi#show_call_signatures = 0
-map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
+" let g:jedi#completions_command = "< tab>"
+autocmd FileType python setlocal completeopt-=preview
 
 " syntastic
 " ==============================================================================
@@ -298,15 +290,13 @@ map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 " let g:syntastic_debug = 1
 let g:syntastic_always_populate_loc_list=1
 " python: ['flake8', 'pyflakes', 'pylint', 'python']
+" pip install flake8 pyflakes
 let g:syntastic_python_checkers = ['flake8', 'pyflakes', 'python']
 let g:syntastic_python_flake8_args = "--ignore=E128,E501 --max-complexity 40"
 " c/c++
 let g:syntastic_cpp_check_header = 1
 let g:syntastic_cpp_checkers = ['cppcheck', 'gcc']
 let g:syntastic_cpp_compiler_options = system("pkg-config --cflags QtGui QtWebKit")
-
-" cscope
-"let g:cscope_map_toggle_location_key = 0
 
 " Location window
 nmap <leader>ln :lnext<CR>
@@ -354,24 +344,6 @@ hi IndentGuidesEven ctermbg=236
 " default map:
 " ,,c  ->  Creates a new restructuredText table.
 " ,,f  ->  Fix table columns in a table.
-
-" riv.vim
-" ===================================================================
-" let g:riv_disable_folding = 1
-let g:riv_auto_fold_force = 0
-let g:riv_fold_level = 1
-" Create: Use `<C-E>tc or :RivTableCreate to create table
-" Format: Use <C-E>tf or :RivTableFormat to format table.
-
-" InstantRst
-" ===================================================================
-" preview rst with firefox. the server is at http://localhost:5676
-" :InstantRst[!]
-"     Preview current buffer. Add ! to preview ALL rst buffer.
-" :StopInstantRst[!]
-"     Stop Preview current buffer Add ! to stop preview ALL rst buffer.
-let g:instant_rst_slow = 1
-let g:instant_rst_bind_scroll = 0
 
 " NERDTree
 " ===================================================================
