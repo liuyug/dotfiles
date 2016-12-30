@@ -281,6 +281,8 @@ endif
 " Open module, e.g. :Pyimport os (opens the os module)
 " let g:jedi#completions_command = "< tab>"
 autocmd FileType python setlocal completeopt-=preview
+" show current function arguments
+let g:jedi#show_call_signatures = 2
 
 " syntastic
 " ==============================================================================
