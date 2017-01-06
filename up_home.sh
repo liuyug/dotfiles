@@ -24,15 +24,23 @@ function get_font()
 
     echo "Get font $file from $url"
 
-    if [ ! -f $HOME/.fonts/$file ]; then
-        mkdir -p $HOME/.fonts
-        (cd $HOME/.fonts; wget $url; if [ $file = "master.zip" ]; then unzip -o -j $file; rm -f $file; fi)
+    font_dir=$HOME/.local/share/fonts
+
+    if [ ! -f $font_dir/$file ]; then
+        mkdir -p $font_dir
+        (
+        cd $font_dir
+        wget $url
+        if [ $file = "master.zip" ]; then
+            unzip -o -j $file
+            rm -f $file
+        fi
+        )
     fi
 }
 
 function doIt() {
     rsync \
-        --exclude ".fonts.conf"     \
         --exclude ".bashrc"         \
         --exclude ".xsessionrc"     \
         -av                         \
