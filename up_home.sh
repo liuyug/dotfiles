@@ -57,7 +57,7 @@ else
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         doIt
     fi
-    read -p "Download font to \"\$HOME/.fonts\". Are you sure? (y/n) " -n 1
+    read -p "Download font to \"\$HOME/.local/share/fonts\". Are you sure? (y/n) " -n 1
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         get_font consolas
