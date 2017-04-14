@@ -1,1 +1,0 @@
-C:\cygwin64\bin\bash -l -c "/usr/bin/sslocal -c /etc/shadowsocks.json"
