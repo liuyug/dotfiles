@@ -12,39 +12,51 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " manage other
-" SuperTab
-Plugin 'ervandew/supertab'
+
 " rst table
 Plugin 'vim-scripts/rst-tables--Chao'
+
 " Jinja2
 Plugin 'Glench/Vim-Jinja2-Syntax'
+
 " explorer filesystem
 Plugin 'scrooloose/nerdtree'
+
 " tag bar, like taglist, but more better in C/C++
 Plugin 'majutsushi/tagbar'
+
 " python virtualenv
 Plugin 'jmcantrell/vim-virtualenv'
+
 " display indenting level
 Plugin 'nathanaelkane/vim-indent-guides'
+
 " autocompletion
 " pip install jedi  firstly
 Plugin 'davidhalter/jedi-vim'
+
 " python
 " indent
 Plugin 'hynek/vim-python-pep8-indent'
+
 " syntax check
 " python: pip install pylint pyflakes flake8
 " c/c++: cppcheck
 Plugin 'scrooloose/syntastic'
+
 " color scheme
 Plugin 'p8952/vim-colors-wombat'
 Plugin 'tomasr/molokai'
+
 " status bar
-" Plugin 'edkolev/tmuxline.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+
 " git wrapper
 Plugin 'tpope/vim-fugitive'
+
+" draw ascii chart
+Plugin 'vim-scripts/DrawIt'
 
 call vundle#end()
 
@@ -296,9 +308,9 @@ let g:syntastic_always_populate_loc_list=1
 let g:syntastic_python_checkers = ['flake8', 'pyflakes', 'python']
 let g:syntastic_python_flake8_args = "--ignore=E128,E501 --max-complexity 40"
 " c/c++
-let g:syntastic_cpp_check_header = 1
-let g:syntastic_cpp_checkers = ['cppcheck', 'gcc']
-let g:syntastic_cpp_compiler_options = system("pkg-config --cflags QtGui QtWebKit")
+" let g:syntastic_cpp_check_header = 1
+" let g:syntastic_cpp_checkers = ['cppcheck', 'gcc']
+" let g:syntastic_cpp_compiler_options = system("pkg-config --cflags QtGui QtWebKit")
 
 " Location window
 nmap <leader>ln :lnext<CR>
