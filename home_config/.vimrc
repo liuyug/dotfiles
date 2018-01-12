@@ -25,15 +25,15 @@ Plugin 'scrooloose/nerdtree'
 " tag bar, like taglist, but more better in C/C++
 Plugin 'majutsushi/tagbar'
 
-" python virtualenv
-Plugin 'jmcantrell/vim-virtualenv'
-
 " display indenting level
 Plugin 'nathanaelkane/vim-indent-guides'
 
 " autocompletion
 " pip install jedi  firstly
+" https://github.com/davidhalter/jedi-vim
 Plugin 'davidhalter/jedi-vim'
+" supertab to autocomplete with <Tab> key
+Plugin 'ervandew/supertab'
 
 " python
 " indent
@@ -279,22 +279,28 @@ if has('win32unix')
         let g:airline_symbols = {}
     endif
     " Don't show default ✹('\u2739') under Cygwin
-    let g:airline_symbols.whitespace = 'Ξ'
+    " let g:airline_symbols.whitespace = 'Ξ'
 endif
 
 " jedi-vim
 " ==============================================================================
-" Completion <C-Space>
-" Goto assignments <leader>g (typical goto function)
-" Goto definitions <leader>d (follow identifier as far as possible, includes imports and statements)
-" Show Documentation/Pydoc shitf+k (shows a popup with assignments)
-" Renaming <leader>r
-" Usages <leader>n (shows all the usages of a name)
-" Open module, e.g. :Pyimport os (opens the os module)
-" let g:jedi#completions_command = "< tab>"
+" disable docstring popup
 autocmd FileType python setlocal completeopt-=preview
 " show current function arguments
 let g:jedi#show_call_signatures = 2
+" use python mode vim plugin, disable rope mode for faster autocompletion
+let g:pymode_rope = 0
+" disable autocompletion when input dot
+let g:jedi#popup_on_dot = 0
+
+let g:jedi#goto_command = "<leader>d"
+let g:jedi#goto_assignments_command = "<leader>g"
+let g:jedi#goto_definitions_command = ""
+let g:jedi#documentation_command = "K"
+let g:jedi#usages_command = "<leader>n"
+" let g:jedi#completions_command = "<C-Space>"
+let g:jedi#completions_command = "<tab>"
+let g:jedi#rename_command = "<leader>r"
 
 " syntastic
 " ==============================================================================
@@ -305,7 +311,7 @@ let g:jedi#show_call_signatures = 2
 let g:syntastic_always_populate_loc_list=1
 " python: ['flake8', 'pyflakes', 'pylint', 'python']
 " pip install flake8 pyflakes
-let g:syntastic_python_checkers = ['flake8', 'pyflakes', 'python']
+let g:syntastic_python_checkers = ['flake8', 'pyflakes', 'python3']
 let g:syntastic_python_flake8_args = "--ignore=E128,E501 --max-complexity 40"
 " c/c++
 " let g:syntastic_cpp_check_header = 1
@@ -316,24 +322,6 @@ let g:syntastic_python_flake8_args = "--ignore=E128,E501 --max-complexity 40"
 nmap <leader>ln :lnext<CR>
 nmap <leader>lp :lprev<CR>
 nmap <leader>lc :lclose<CR>
-
-" ctrlp - a finder for VIM
-" ==============================================================================
-" https://github.com/kien/ctrlp.vim
-" cd ~/.vim/bundle; git clone https://github.com/kien/ctrlp.vim.git
-" <C-p> to activate
-" let g:ctrlp_max_height=30
-" set wildignore+=*.pyc
-" set wildignore+=*.so
-" set wildignore+=*_build/*
-" set wildignore+=*/coverage/*
-
-" virtualenv
-" ===================================================================
-let g:virtualenv_directory = '~/.virtualenvs'
-map <leader>vea <ESC>:VirtualEnvActivate<SPACE>
-map <leader>ved <ESC>:VirtualEnvDeactivate<CR>
-map <leader>vel <ESC>:VirtualEnvList<CR>
 
 " tagbar
 " ===================================================================
