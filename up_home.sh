@@ -17,6 +17,7 @@ function get_font()
         [powerline]=https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
         [inconsolata]=http://www.levien.com/type/myfonts/Inconsolata.otf
         [consolas]=https://github.com/runsisi/consolas-font-for-powerline/archive/master.zip
+        [yahei.mono]=https://github.com/Microsoft/BashOnWindows/files/1362006/Microsoft.YaHei.Mono.zip
     )
 
     url=${fonts[$1]}
@@ -31,10 +32,14 @@ function get_font()
         (
         cd $font_dir
         wget $url
-        if [ $file = "master.zip" ]; then
-            unzip -o -j $file
-            rm -f $file
-        fi
+        case "$file" in
+            *.zip)
+                unzip -o -j $file
+                rm -f $file
+                ;;
+            *)
+                ;;
+        esac
         )
     fi
 }
@@ -63,6 +68,7 @@ else
         get_font consolas
         get_font inconsolata
         get_font powerline
+        get_font yahei.mono
     fi
 
 fi
