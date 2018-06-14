@@ -3,6 +3,8 @@
 
 function vim_init()
 {
+    sudo apt install vim vim-gui-common ctags python3-pip
+    pip3 install jedi pyflakes flake8 --user
     if [ -d $HOME/.vim/bundle/Vundle.vim ]; then
         (cd $HOME/.vim/bundle/Vundle.vim; git pull)
     else

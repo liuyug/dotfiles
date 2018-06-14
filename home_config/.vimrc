@@ -55,9 +55,6 @@ Plugin 'vim-airline/vim-airline-themes'
 " git wrapper
 Plugin 'tpope/vim-fugitive'
 
-" draw ascii chart
-Plugin 'vim-scripts/DrawIt'
-
 call vundle#end()
 
 " Show whitespace
