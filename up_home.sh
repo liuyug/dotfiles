@@ -47,6 +47,8 @@ function get_font()
 }
 
 function doIt() {
+    sudo apt install rsync wget unzip
+
     rsync \
         --exclude ".bashrc"         \
         --exclude ".xsessionrc"     \
