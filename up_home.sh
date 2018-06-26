@@ -58,6 +58,13 @@ function doIt() {
     vim_init
 }
 
+if grep -q Microsoft /proc/version; then
+    echo "Find Linux for Microsoft..."
+    if [ "$(umask)" == '0000' ]; then
+        umask 0022
+    fi
+fi
+
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
     doIt
 else
@@ -75,6 +82,18 @@ else
         get_font yahei.mono
     fi
 
+    if grep -q Microsoft /proc/version; then
+        echo "Bash for Microsoft Windows"
+        echo "=========================="
+        echo "1. Install Windows Font..."
+        (cd $HOME/.local/share/fonts
+        fontview.exe Microsoft YaHei Mono.ttf
+        fontview.exe PowerlineSymbols.otf
+        )
+        echo "2. Fix Windows FontLink..."
+        echo '   Run as administrator: reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\FontLink\SystemLink" /v "Microsoft YaHei Mono" /t REG_MULTI_SZ /d "Powerline Consolas.ttf,Powerline Consolas"'
+        echo ""
+    fi
 fi
 source $HOME/.bashrc
 
