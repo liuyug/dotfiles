@@ -47,17 +47,20 @@ function get_font()
 }
 
 function doIt() {
-    sudo apt install rsync wget unzip
-
     rsync \
         --exclude ".bashrc"         \
-        --exclude ".xsessionrc"     \
         -av                         \
         home_config/ $HOME
     cat home_config/.bashrc >> $HOME/.bashrc
     vim_init
 }
 
+# prepare base app
+sudo apt install rsync wget unzip screenfetch
+# fix locale
+sudo locale-gen zh_CN.UTF-8
+
+# fix Windows Bash
 if grep -q Microsoft /proc/version; then
     echo "Find Linux for Microsoft..."
     if [ "$(umask)" == '0000' ]; then
@@ -83,17 +86,25 @@ else
     fi
 
     if grep -q Microsoft /proc/version; then
+        win_user2=`cmd.exe /c "echo %USERNAME%"`
+        win_user=`echo $win_user2 | sed 's/\\r//g'`
+        win_home="/mnt/c/Users/$win_user"
         echo "Bash for Microsoft Windows"
         echo "=========================="
-        echo "1. Install Windows Font..."
-        (cd $HOME/.local/share/fonts
-        fontview.exe Microsoft YaHei Mono.ttf
-        fontview.exe PowerlineSymbols.otf
-        )
-        echo "2. Fix Windows FontLink..."
+        echo "Windows user: $win_user"
+        echo "Windows user home path: $win_home"
+        echo "1. Create links for Windows..."
+        ln -s "$win_home/Desktop/"
+        ln -s "$win_home/Downloads/"
+        ln -s "$win_home/Documents/"
+        echo "2. Copy fonts to Documents folder..."
+        cp -rf $HOME/.local/share/fonts ~/Documents/
+        echo "3. Fix Windows Bash Font..."
+        echo "   Install fonts in Documents"
         echo '   Run as administrator: reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\FontLink\SystemLink" /v "Microsoft YaHei Mono" /t REG_MULTI_SZ /d "Powerline Consolas.ttf,Powerline Consolas"'
         echo ""
     fi
 fi
 source $HOME/.bashrc
+screenfetch
 
