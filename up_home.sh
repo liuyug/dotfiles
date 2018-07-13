@@ -56,7 +56,7 @@ function doIt() {
 }
 
 # prepare base app
-sudo apt install rsync wget unzip screenfetch
+sudo apt install rsync wget unzip locale screenfetch
 # fix locale
 sudo locale-gen zh_CN.UTF-8
 
