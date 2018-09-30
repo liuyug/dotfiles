@@ -93,7 +93,7 @@ else
         mkdir -p $font_dir
     fi
 
-    read -p "Download font to \"\$font_dir\". Are you sure? (y/n) " -n 1
+    read -p "Download font to \"$font_dir\". Are you sure? (y/n) " -n 1
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         get_font consolas $font_dir
