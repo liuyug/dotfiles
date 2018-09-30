@@ -27,10 +27,14 @@ function get_font()
 
     echo "Get font $file from $url"
 
-    font_dir=$HOME/.local/share/fonts
+    if [  "$(uname)" = "Darwin" ] ; then
+        font_dir="$HOME/Library/Fonts"
+    else
+        font_dir=$HOME/.local/share/fonts
+        mkdir -p $font_dir
+    fi
 
     if [ ! -f $font_dir/$file ]; then
-        mkdir -p $font_dir
         (
         cd $font_dir
         wget $url
@@ -44,6 +48,7 @@ function get_font()
         esac
         )
     fi
+    fc-cache -f "$font_dir"
 }
 
 function doIt() {
