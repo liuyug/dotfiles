@@ -14,7 +14,7 @@ Plugin 'VundleVim/Vundle.vim'
 " manage other
 
 " rst table
-Plugin 'vim-scripts/rst-tables--Chao'
+" Plugin 'vim-scripts/rst-tables--Chao'
 
 " Jinja2
 Plugin 'Glench/Vim-Jinja2-Syntax'
