@@ -19,19 +19,21 @@ function get_font()
         [powerline]=https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
         [inconsolata]=http://www.levien.com/type/myfonts/Inconsolata.otf
         [consolas]=https://github.com/runsisi/consolas-font-for-powerline/archive/master.zip
-        [yahei.mono]=https://github.com/Microsoft/BashOnWindows/files/1362006/Microsoft.YaHei.Mono.zip
+        [yahei_mono]=https://github.com/Microsoft/BashOnWindows/files/1362006/Microsoft.YaHei.Mono.zip
     )
 
     url=${fonts[$1]}
     file=`basename $url`
-
     echo "Get font $file from $url"
 
-    if [  "$(uname)" = "Darwin" ] ; then
-        font_dir="$HOME/Library/Fonts"
-    else
-        font_dir=$HOME/.local/share/fonts
-        mkdir -p $font_dir
+    font_dir="$2"
+    if [ "x$2" = "x" ]; then
+        if [  "$(uname)" = "Darwin" ] ; then
+            font_dir="$HOME/Library/Fonts"
+        else
+            font_dir=$HOME/.local/share/fonts
+            mkdir -p $font_dir
+        fi
     fi
 
     if [ ! -f $font_dir/$file ]; then
@@ -60,16 +62,18 @@ function doIt() {
     vim_init
 }
 
-# prepare base app
-sudo apt install rsync wget unzip locale screenfetch
-# fix locale
-sudo locale-gen zh_CN.UTF-8
+if [ "$(uname)" = "Linux" ] ; then
+    # prepare base app
+    sudo apt install rsync wget unzip locale screenfetch
+    # fix locale
+    sudo locale-gen zh_CN.UTF-8
 
-# fix Windows Bash
-if grep -q Microsoft /proc/version; then
-    echo "Find Linux for Microsoft..."
-    if [ "$(umask)" == '0000' ]; then
-        umask 0022
+    # fix Windows Bash
+    if grep -q Microsoft /proc/version; then
+        echo "Find Linux for Microsoft..."
+        if [ "$(umask)" == '0000' ]; then
+            umask 0022
+        fi
     fi
 fi
 
@@ -81,13 +85,21 @@ else
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         doIt
     fi
-    read -p "Download font to \"\$HOME/.local/share/fonts\". Are you sure? (y/n) " -n 1
+
+    if [  "$(uname)" = "Darwin" ] ; then
+        font_dir="$HOME/Library/Fonts"
+    else
+        font_dir=$HOME/.local/share/fonts
+        mkdir -p $font_dir
+    fi
+
+    read -p "Download font to \"\$font_dir\". Are you sure? (y/n) " -n 1
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
-        get_font consolas
-        get_font inconsolata
-        get_font powerline
-        get_font yahei.mono
+        get_font consolas $font_dir
+        get_font inconsolata $font_dir
+        get_font powerline $font_dir
+        get_font yahei_mono $font_dir
     fi
 
     if grep -q Microsoft /proc/version; then
