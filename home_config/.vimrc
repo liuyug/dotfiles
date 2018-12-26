@@ -13,9 +13,6 @@ Plugin 'VundleVim/Vundle.vim'
 
 " manage other
 
-" rst table
-" Plugin 'vim-scripts/rst-tables--Chao'
-
 " Jinja2
 Plugin 'Glench/Vim-Jinja2-Syntax'
 
@@ -29,9 +26,8 @@ Plugin 'majutsushi/tagbar'
 Plugin 'nathanaelkane/vim-indent-guides'
 
 " autocompletion
-" pip install jedi  firstly
-" https://github.com/davidhalter/jedi-vim
-Plugin 'davidhalter/jedi-vim'
+" first run '~/.vim/Plugins/youcompleteme/install.py'
+Plugin 'valloric/youcompleteme'
 " supertab to autocomplete with <Tab> key
 Plugin 'ervandew/supertab'
 
@@ -255,7 +251,7 @@ noremap  <F9> :update<CR>:silent! make<CR>
 noremap! <F9> <ESC>:update<CR>:silent! make<CR>
 
 " debug
-map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
+map <Leader>b Oimport ipdb; ipdb.set_trace()  # BREAKPOINT<C-c>
 
 " vim-airline
 let g:airline#extensions#tabline#enabled = 0
@@ -279,26 +275,6 @@ if has('win32unix')
     " let g:airline_symbols.whitespace = 'Ξ'
 endif
 
-" jedi-vim
-" ==============================================================================
-" disable docstring popup
-autocmd FileType python setlocal completeopt-=preview
-" show current function arguments
-let g:jedi#show_call_signatures = 2
-" use python mode vim plugin, disable rope mode for faster autocompletion
-let g:pymode_rope = 0
-" disable autocompletion when input dot
-let g:jedi#popup_on_dot = 0
-
-let g:jedi#goto_command = "<leader>d"
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_definitions_command = ""
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>n"
-" let g:jedi#completions_command = "<C-Space>"
-let g:jedi#completions_command = "<tab>"
-let g:jedi#rename_command = "<leader>r"
-
 " syntastic
 " ==============================================================================
 " wiki: https://github.com/scrooloose/syntastic/wiki/Syntax-Checkers
@@ -308,8 +284,10 @@ let g:jedi#rename_command = "<leader>r"
 let g:syntastic_always_populate_loc_list=1
 " python: ['flake8', 'pyflakes', 'pylint', 'python']
 " pip install flake8 pyflakes
-let g:syntastic_python_checkers = ['flake8', 'pyflakes', 'python3']
-let g:syntastic_python_flake8_args = "--ignore=E128,E501 --max-complexity 40"
+let g:syntastic_python_checkers = ['flake8', 'python3']
+" http://flake8.pycqa.org/en/latest/index.html
+" https://pycodestyle.readthedocs.io/en/latest/index.html
+let g:syntastic_python_flake8_args = "--ignore=E128,E501,F401 --max-complexity 40"
 " c/c++
 " let g:syntastic_cpp_check_header = 1
 " let g:syntastic_cpp_checkers = ['cppcheck', 'gcc']
@@ -323,6 +301,11 @@ nmap <leader>lc :lclose<CR>
 " tagbar
 " ===================================================================
 " tagbar do not support displaying related header information on cpp file buffer.
+" test with vim
+" vim      # Run `:TagbarDebug`, `:e test.c`, `:TagbarToggle`, `:q`
+" :messages to show error
+" test with cli
+" ctags -f - --format=2 --excmd=pattern --extra= --fields=nksaSmt test.c
 map <leader>tb  <ESC>:TagbarToggle<CR>
 let g:tagbar_width = 30
 
@@ -337,12 +320,6 @@ let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'tagbar']
 let g:indent_guides_auto_colors = 0
 hi IndentGuidesOdd ctermbg=236
 hi IndentGuidesEven ctermbg=236
-
-" rst_table
-" ===================================================================
-" default map:
-" ,,c  ->  Creates a new restructuredText table.
-" ,,f  ->  Fix table columns in a table.
 
 " NERDTree
 " ===================================================================
