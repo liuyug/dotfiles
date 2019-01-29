@@ -38,7 +38,9 @@ def run():
             keyfile=args.key, certfile=args.cert,
             server_side=True)
     try:
+        sa = server.socket.getsockname()
         print('-- %s --' % parser.description)
+        print('-- Listen on %s:%s --' % sa)
         server.serve_forever()
     except KeyboardInterrupt:
         print('\n-- Finished --')
