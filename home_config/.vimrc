@@ -266,14 +266,11 @@ let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#tmuxline#enabled = 0
 let g:airline_powerline_fonts = 1
 
-" for cygwin
-if has('win32unix')
-    if !exists('g:airline_symbols')
-        let g:airline_symbols = {}
-    endif
-    " Don't show default ✹('\u2739') under Cygwin
-    " let g:airline_symbols.whitespace = 'Ξ'
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
 endif
+" wsltty don't show default symbol linenr
+let g:airline_symbols.linenr = '␤'
 
 " syntastic
 " ==============================================================================
@@ -296,7 +293,10 @@ let g:syntastic_python_flake8_args = "--ignore=E128,E501,F401 --max-complexity 4
 " Location window
 nmap <leader>ln :lnext<CR>
 nmap <leader>lp :lprev<CR>
+" close quickfix windows
 nmap <leader>lc :lclose<CR>
+" close preview windows
+nmap <leader>pc :pclose<CR>
 
 " tagbar
 " ===================================================================
