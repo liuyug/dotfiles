@@ -1,25 +1,48 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- encoding:utf-8 -*-
 
-import sys
-import BaseHTTPServer
-from SimpleHTTPServer import SimpleHTTPRequestHandler
+import argparse
+from http.server import HTTPServer, SimpleHTTPRequestHandler
+from socketserver import ThreadingMixIn
+import threading
 
 
-HandlerClass = SimpleHTTPRequestHandler
-ServerClass = BaseHTTPServer.HTTPServer
-Protocol = "HTTP/1.0"
+class Handler(SimpleHTTPRequestHandler):
+    pass
 
-if sys.argv[1:]:
-    ip, port = sys.argv[1].split(':')
-else:
-    ip = '127.0.0.1'
-    port = 8000
-server_address = ('127.0.0.1', int(port))
 
-HandlerClass.protocol_version = Protocol
-httpd = ServerClass(server_address, HandlerClass)
+class ThreadingSimpleServer(ThreadingMixIn, HTTPServer):
+    pass
 
-sa = httpd.socket.getsockname()
-print "Serving HTTP on", sa[0], "port", sa[1], "..."
-httpd.serve_forever()
+
+def run():
+    parser = argparse.ArgumentParser(description='Simple HTTP(s) Server with threading')
+    parser.add_argument('--cert', help='HTTPs cert file')
+    parser.add_argument('--key', help='HTTPs key file')
+    parser.add_argument('listen', nargs='?', default='127.0.0.1:8000',
+                        help='Listen IPAddress and Port. default: 127.0.0.1:8000')
+    args = parser.parse_args()
+
+    if args.listen:
+        ip, _, port = args.listen.partition(':')
+        port = int(port) if port else 8000
+    else:
+        ip = '127.0.0.1'
+        port = 8000
+
+    server = ThreadingSimpleServer((ip, port), Handler)
+    if args.cert and args.key:
+        import ssl
+        server.socket = ssl.wrap_socket(
+            server.socket,
+            keyfile=args.key, certfile=args.cert,
+            server_side=True)
+    try:
+        print('-- %s --' % parser.description)
+        server.serve_forever()
+    except KeyboardInterrupt:
+        print('\n-- Finished --')
+
+
+if __name__ == '__main__':
+    run()
