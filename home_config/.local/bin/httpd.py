@@ -2,9 +2,17 @@
 # -*- encoding:utf-8 -*-
 
 import argparse
+import socket
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from socketserver import ThreadingMixIn
 import threading
+
+
+def get_network_ip():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+    s.connect(('<broadcast>', 0))
+    return s.getsockname()[0]
 
 
 class Handler(SimpleHTTPRequestHandler):
@@ -38,8 +46,11 @@ def run():
             keyfile=args.key, certfile=args.cert,
             server_side=True)
     try:
-        sa = server.socket.getsockname()
         print('-- %s --' % parser.description)
+        if ip == '0.0.0.0':
+            sa = (get_network_ip(), port)
+        else:
+            sa = server.socket.getsockname()
         print('-- Listen on %s:%s --' % sa)
         server.serve_forever()
     except KeyboardInterrupt:
