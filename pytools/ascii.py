@@ -82,7 +82,7 @@ def code_to_ascii(codes):
     print(chars)
 
 
-def main():
+def run():
     parser = argparse.ArgumentParser()
     parser.add_argument('--code', dest='char', help='convert char to HEX code')
     parser.add_argument('--char', dest='code', help='convert HEX code to char')
@@ -97,4 +97,4 @@ def main():
         ascii()
 
 if __name__ == '__main__':
-    main()
+    run()
