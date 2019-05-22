@@ -1,4 +1,5 @@
 
-netsh.exe wlan show interface
+netsh.exe wlan show profile
+echo "Show profile: netsh.exe wlan show profile <name> key=clear"
 
-pause
+netsh.exe wlan show interface
