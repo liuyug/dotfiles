@@ -18,6 +18,8 @@ function get_font()
     declare -A fonts=(
         [powerline]=https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
         [inconsolata]=http://www.levien.com/type/myfonts/Inconsolata.otf
+        [inconsolata_ttf_bold]=https://github.com/googlefonts/Inconsolata/raw/master/fonts/ttf/Inconsolata-Bold.ttf
+        [inconsolata_ttf_regular]=https://github.com/googlefonts/Inconsolata/raw/master/fonts/ttf/Inconsolata-Regular.ttf
         [consolas]=https://github.com/runsisi/consolas-font-for-powerline/archive/master.zip
         [yahei_mono]=https://github.com/Microsoft/BashOnWindows/files/1362006/Microsoft.YaHei.Mono.zip
     )
@@ -98,6 +100,8 @@ else
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         get_font consolas $font_dir
         get_font inconsolata $font_dir
+        get_font inconsolata_ttf_bold $font_dir
+        get_font inconsolata_ttf_regular $font_dir
         get_font powerline $font_dir
         get_font yahei_mono $font_dir
     fi
