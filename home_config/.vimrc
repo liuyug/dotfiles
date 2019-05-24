@@ -270,7 +270,8 @@ if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
 " wsltty don't show default symbol linenr
-let g:airline_symbols.linenr = '␤'
+" airline_symbols.linenr in ['DejaVu Sans']: ☰
+" let g:airline_symbols.linenr = '␤'
 
 " syntastic
 " ==============================================================================
