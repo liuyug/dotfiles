@@ -100,8 +100,8 @@ set shiftround
 
 
 set number            " show line number
-set wrap
-" set nowrap              " don't automatically wrap on load
+" set wrap
+set nowrap              " don't automatically wrap on load
 " set fo-=t               " don't automatically wrap when typing
 
 
@@ -229,6 +229,8 @@ set guioptions-=b     " disable bottom scrollbar
 "set guifont=Inconsolata\ Medium\ 12
 "set guifont="Liberation Mono":h12
 "set guifont="DejaVu Sans Mono":h12
+set guifont="DejaVuSansMono Nerd Font Mono":h12
+
 "set guifont="Luxi Mono":h12
 "set guifont=Nimbus Mono L":h12
 
@@ -255,6 +257,8 @@ map <Leader>b Oimport ipdb; ipdb.set_trace()  # BREAKPOINT<C-c>
 
 " vim-airline
 let g:airline#extensions#tabline#enabled = 0
+" limit line for hang on large file
+let g:airline#extensions#whitespace#max_lines = 1000
 " switch to next or previous buffer
 " gt or gT to switch next or previous tab
 map <leader>gn :bn<CR>
@@ -272,6 +276,24 @@ endif
 " wsltty don't show default symbol linenr
 " airline_symbols.linenr in ['DejaVu Sans']: ☰
 " let g:airline_symbols.linenr = '␤'
+
+" youcompleteme
+let g:ycm_filetype_whitelist = {
+            \'*': 1,
+            \}
+
+let g:ycm_filetype_blacklist = {
+            \ 'tagbar': 1,
+            \ 'notes': 1,
+            \ 'markdown': 1,
+            \ 'netrw': 1,
+            \ 'unite': 1,
+            \ 'text': 1,
+            \ 'vimwiki': 1,
+            \ 'pandoc': 1,
+            \ 'infolog': 1,
+            \ 'mail': 1
+            \}
 
 " syntastic
 " ==============================================================================
