@@ -55,6 +55,47 @@ function get_font()
     fc-cache -f "$font_dir"
 }
 
+function wsl()
+{
+    if grep -q Microsoft /proc/version; then
+        win_user2=`cmd.exe /c "echo %USERNAME%"`
+        win_user=`echo $win_user2 | sed 's/\\r//g'`
+        win_home="/mnt/c/Users/$win_user"
+        echo "Bash for Microsoft Windows"
+        echo "=========================="
+        echo "Windows user: $win_user"
+        echo "Windows user home path: $win_home"
+        echo "1. Create links for Windows..."
+        ln -s "$win_home/Desktop/"
+        ln -s "$win_home/Downloads/"
+        ln -s "$win_home/Documents/"
+        ln -s "$win_home/Music/"
+        ln -s "$win_home/Pictures/"
+        echo "2. Copy fonts to Documents folder..."
+        cp -rf $HOME/.local/share/fonts ~/Documents/
+        echo "3. Fix Windows Bash Font..."
+        echo "   Install fonts in Documents"
+        echo '   Run below as administrator:'
+        echo '   reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\FontLink\SystemLink" /v "Microsoft YaHei Mono" /t REG_MULTI_SZ /d "Powerline Consolas.ttf,Powerline Consolas"'
+        # 拉丁字母及常见ASCII符号（0-9，a-z，A-Z，!@#$%^等）显示字体为【Consolas】
+        # 中文、日语等CJK字符&符号显示字体为【微软雅黑】
+        # Powerline Symbols【Powerline Consolas】
+        # 特殊符号显示字体为【Segoe UI Symbol】
+        echo '   reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\FontLink\SystemLink" /v "Consolas" /t REG_MULTI_SZ /d "MSYH.TTC,Microsoft YaHei,128,96\0MSYH.TTC,Microsoft YaHei\0Powerline Consolas.ttf,Powerline Consolas"'
+        echo '   reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\FontLink\SystemLink" /v "Inconsolata" /t REG_MULTI_SZ /d "MSYH.TTC,Microsoft YaHei,128,96\0MSYH.TTC,Microsoft YaHei\0Powerline Consolas.ttf,Powerline Consolas"'
+        echo ""
+
+        mkdir -p $HOME/.config/fontconfig
+        cat > $HOME/.config/fontconfig/fonts.conf << EOF
+<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+<fontconfig>
+    <dir>/mnt/c/Windows/Fonts</dir>
+</fontconfig>
+EOF
+    fi
+}
+
 function doIt() {
     rsync \
         --exclude ".bashrc"         \
@@ -106,34 +147,7 @@ else
         get_font yahei_mono $font_dir
     fi
 
-    if grep -q Microsoft /proc/version; then
-        win_user2=`cmd.exe /c "echo %USERNAME%"`
-        win_user=`echo $win_user2 | sed 's/\\r//g'`
-        win_home="/mnt/c/Users/$win_user"
-        echo "Bash for Microsoft Windows"
-        echo "=========================="
-        echo "Windows user: $win_user"
-        echo "Windows user home path: $win_home"
-        echo "1. Create links for Windows..."
-        ln -s "$win_home/Desktop/"
-        ln -s "$win_home/Downloads/"
-        ln -s "$win_home/Documents/"
-        ln -s "$win_home/Music/"
-        ln -s "$win_home/Pictures/"
-        echo "2. Copy fonts to Documents folder..."
-        cp -rf $HOME/.local/share/fonts ~/Documents/
-        echo "3. Fix Windows Bash Font..."
-        echo "   Install fonts in Documents"
-        echo '   Run below as administrator:'
-        echo '   reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\FontLink\SystemLink" /v "Microsoft YaHei Mono" /t REG_MULTI_SZ /d "Powerline Consolas.ttf,Powerline Consolas"'
-        # 拉丁字母及常见ASCII符号（0-9，a-z，A-Z，!@#$%^等）显示字体为【Consolas】
-        # 中文、日语等CJK字符&符号显示字体为【微软雅黑】
-        # Powerline Symbols【Powerline Consolas】
-        # 特殊符号显示字体为【Segoe UI Symbol】
-        echo '   reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\FontLink\SystemLink" /v "Consolas" /t REG_MULTI_SZ /d "MSYH.TTC,Microsoft YaHei,128,96\0MSYH.TTC,Microsoft YaHei\0Powerline Consolas.ttf,Powerline Consolas"'
-        echo '   reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\FontLink\SystemLink" /v "Inconsolata" /t REG_MULTI_SZ /d "MSYH.TTC,Microsoft YaHei,128,96\0MSYH.TTC,Microsoft YaHei\0Powerline Consolas.ttf,Powerline Consolas"'
-        echo ""
-    fi
+    wsl
 fi
 source $HOME/.bashrc
 screenfetch
