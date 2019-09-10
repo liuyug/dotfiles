@@ -97,11 +97,16 @@ EOF
 }
 
 function doIt() {
-    rsync \
-        --exclude ".bashrc"         \
-        -av                         \
-        home_config/ $HOME
-    cat home_config/.bashrc >> $HOME/.bashrc
+    cat bashrc >> $HOME/.bashrc
+
+    mkdir -p $HOME/.local/bin
+    cp bin/* $HOME/.local/bin
+    chmod u+x $HOME/.local/bin/*
+
+    cp tmux.conf $HOME/.tmux.conf
+    cp vimrc $HOME/.vimrc
+    cp -r vim $HOME/.vim
+
     vim_init
 }
 
