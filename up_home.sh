@@ -55,7 +55,7 @@ function get_font()
     fc-cache -f "$font_dir"
 }
 
-function wsl()
+function wsl_config()
 {
     if grep -q Microsoft /proc/version; then
         win_user2=`cmd.exe /c "echo %USERNAME%"`
@@ -147,7 +147,7 @@ else
         get_font yahei_mono $font_dir
     fi
 
-    wsl
+    wsl_config
 fi
 source $HOME/.bashrc
 screenfetch
