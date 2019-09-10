@@ -55,7 +55,7 @@ function get_font()
     fc-cache -f "$font_dir"
 }
 
-function wsl_config()
+function init_wsl()
 {
     if grep -q Microsoft /proc/version; then
         win_user2=`cmd.exe /c "echo %USERNAME%"`
@@ -96,7 +96,7 @@ EOF
     fi
 }
 
-function doIt() {
+function init_config() {
     cat bashrc >> $HOME/.bashrc
 
     mkdir -p $HOME/.local/bin
@@ -126,12 +126,12 @@ if [ "$(uname)" = "Linux" ] ; then
 fi
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
-    doIt
+    init_config
 else
     read -p "This may overwrite existing files in your home directory. Are you sure? (y/n) " -n 1
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
-        doIt
+        init_config
     fi
 
     if [  "$(uname)" = "Darwin" ] ; then
@@ -152,7 +152,7 @@ else
         get_font yahei_mono $font_dir
     fi
 
-    wsl_config
+    init_wsl
 fi
 source $HOME/.bashrc
 screenfetch
