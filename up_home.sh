@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-function vim_init()
+function init_vim()
 {
     sudo apt install vim vim-gui-common ctags python3-pip
     pip3 install jedi pyflakes flake8 --user
@@ -55,6 +55,27 @@ function get_font()
     fc-cache -f "$font_dir"
 }
 
+function init_font()
+{
+    if [  "$(uname)" = "Darwin" ] ; then
+        font_dir="$HOME/Library/Fonts"
+    else
+        font_dir=$HOME/.local/share/fonts
+        mkdir -p $font_dir
+    fi
+
+    read -p "Download font to \"$font_dir\". Are you sure? (y/n) " -n 1
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        get_font consolas $font_dir
+        get_font inconsolata $font_dir
+        get_font inconsolata_ttf_bold $font_dir
+        get_font inconsolata_ttf_regular $font_dir
+        get_font powerline $font_dir
+        get_font yahei_mono $font_dir
+    fi
+}
+
 function init_wsl()
 {
     if grep -q Microsoft /proc/version; then
@@ -93,10 +114,17 @@ function init_wsl()
     <dir>/mnt/c/Windows/Fonts</dir>
 </fontconfig>
 EOF
+        # fix Windows Bash
+        if grep -q Microsoft /proc/version; then
+            echo "Find Linux for Microsoft..."
+            if [ "$(umask)" == '0000' ]; then
+                umask 0022
+            fi
+        fi
     fi
 }
 
-function init_config() {
+function init_bash() {
     cat bashrc >> $HOME/.bashrc
 
     mkdir -p $HOME/.local/bin
@@ -110,49 +138,35 @@ function init_config() {
     vim_init
 }
 
-if [ "$(uname)" = "Linux" ] ; then
-    # prepare base app
-    sudo apt install rsync wget unzip locale screenfetch
-    # fix locale
-    sudo locale-gen zh_CN.UTF-8
+function init_base()
+{
+    if [ "$(uname)" = "Linux" ] ; then
+        # prepare base app
+        sudo apt install rsync wget unzip locale screenfetch
+        # fix locale
+        sudo locale-gen zh_CN.UTF-8
 
-    # fix Windows Bash
-    if grep -q Microsoft /proc/version; then
-        echo "Find Linux for Microsoft..."
-        if [ "$(umask)" == '0000' ]; then
-            umask 0022
-        fi
     fi
-fi
+}
 
-if [ "$1" == "--force" -o "$1" == "-f" ]; then
-    init_config
+if [ "$1" == "--base" -o "$1" == "-b" ]; then
+    init_base
+elif [ "$1" == "--bash" ]; then
+    init_bash
+elif [ "$1" == "--vim" ]; then
+    init_vim
+elif [ "$1" == "--font" ]; then
+    init_font
+elif [ "$1" == "--wsl" ]; then
+    init_wsl
 else
+    echo "$0 <--bash | --vim | --font | --wsl>"
+    exit 0
     read -p "This may overwrite existing files in your home directory. Are you sure? (y/n) " -n 1
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         init_config
     fi
-
-    if [  "$(uname)" = "Darwin" ] ; then
-        font_dir="$HOME/Library/Fonts"
-    else
-        font_dir=$HOME/.local/share/fonts
-        mkdir -p $font_dir
-    fi
-
-    read -p "Download font to \"$font_dir\". Are you sure? (y/n) " -n 1
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        get_font consolas $font_dir
-        get_font inconsolata $font_dir
-        get_font inconsolata_ttf_bold $font_dir
-        get_font inconsolata_ttf_regular $font_dir
-        get_font powerline $font_dir
-        get_font yahei_mono $font_dir
-    fi
-
-    init_wsl
 fi
 source $HOME/.bashrc
 screenfetch
