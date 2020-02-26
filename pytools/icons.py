@@ -1,14 +1,32 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import os
 import signal
 import sys
 from types import MethodType
 
 from PyQt5.QtCore import QSignalMapper, Qt, QTimer, QSortFilterProxyModel
-from PyQt5.QtWidgets import QAbstractItemView, QAction, QApplication, QLineEdit, QMainWindow, QTableView, QToolBar
+from PyQt5.QtWidgets import QAbstractItemView, QAction, QApplication, \
+    QLineEdit, QMainWindow, QTableView, QToolBar, QComboBox, QMessageBox
 from PyQt5.QtGui import QIcon, QKeySequence, QStandardItem, QStandardItemModel
 
-from meditor import qrc_icon_theme
+
+standard_icons_dir = [
+    '/usr/share/icons',
+    '/usr/local/share/icons',
+    '%s/.icons' % os.path.expanduser('~'),
+    '%s/.local/share/icons' % os.path.expanduser('~'),
+]
+
+
+def get_themes():
+    themes = {}
+    for prefix in standard_icons_dir:
+        if not os.path.exists(prefix):
+            continue
+        for theme in os.listdir(prefix):
+            themes[theme] = os.path.join(prefix, theme)
+
+    return themes
 
 
 def main(icon_spec):
@@ -33,6 +51,13 @@ def main(icon_spec):
     table_view.setSortingEnabled(True)
     main_window.setCentralWidget(table_view)
 
+    busy_dialog = QMessageBox(main_window)
+    busy_dialog.setText('Updating... please wait')
+    busy_dialog.setIcon(QMessageBox.Information)
+    busy_dialog.setModal(False)
+    busy_dialog.show()
+    app.processEvents()
+
     proxy_model = QSortFilterProxyModel()
     proxy_model.setFilterCaseSensitivity(Qt.CaseInsensitive)
     proxy_model.setFilterKeyColumn(1)
@@ -43,9 +68,56 @@ def main(icon_spec):
     proxy_model.setSourceModel(item_model)
 
     # get all icons and their available sizes
-    # QIcon.setThemeName('Tango')
-    QIcon.setThemeName('embed_qrc')
+    def themeChanged(cur_theme):
+        busy_dialog.show()
+        app.processEvents()
+        QIcon.setThemeName(cur_theme)
+        update_icons(main_window, filter_line_edit, tool_bar, table_view, item_model)
+        busy_dialog.close()
 
+    themes = get_themes()
+    themes_widget = QComboBox()
+    themes_widget.addItems(themes.keys())
+    themes_widget.currentTextChanged.connect(themeChanged)
+    tool_bar.addWidget(themes_widget)
+    cur_theme = themes_widget.currentText()
+
+    QIcon.setThemeName(cur_theme)
+    # QIcon.setThemeName('embed_qrc')
+
+    # input field for filter
+    def filter_changed(value):
+        proxy_model.setFilterRegExp(value)
+        table_view.resizeRowsToContents()
+    filter_line_edit = QLineEdit()
+    filter_line_edit.setMaximumWidth(200)
+    filter_line_edit.setPlaceholderText('Filter name')
+    filter_line_edit.setToolTip('Filter name optionally using regular expressions (' + QKeySequence(QKeySequence.Find).toString() + ')')
+    filter_line_edit.textChanged.connect(filter_changed)
+    tool_bar.addWidget(filter_line_edit)
+
+    # enable copy (ctrl+c) name of icon to clipboard
+    def table_view_keyPressEvent(self, event, old_keyPressEvent=QTableView.keyPressEvent):
+        if event.matches(QKeySequence.Copy):
+            selection_model = self.selectionModel()
+            if selection_model.hasSelection():
+                index = selection_model.selectedRows()[0]
+                source_index = self.model().mapToSource(index)
+                item = self.model().sourceModel().item(source_index.row(), 1)
+                icon_name = item.data(Qt.EditRole)
+                app.clipboard().setText(icon_name.toString())
+                return
+        old_keyPressEvent(self, event)
+    table_view.keyPressEvent = MethodType(table_view_keyPressEvent, table_view)
+
+    update_icons(main_window, filter_line_edit, tool_bar, table_view, item_model)
+    busy_dialog.close()
+    # main_window.showMaximized()
+    main_window.show()
+    return app.exec_()
+
+
+def update_icons(main_window, filter_line_edit, tool_bar, table_view, item_model):
     icons = []
     all_sizes = set([])
     for context, icon_names in icon_spec:
@@ -66,23 +138,17 @@ def main(icon_spec):
     all_sizes = list(all_sizes)
     all_sizes.sort()
 
-    # input field for filter
-    def filter_changed(value):
-        proxy_model.setFilterRegExp(value)
-        table_view.resizeRowsToContents()
-    filter_line_edit = QLineEdit()
-    filter_line_edit.setMaximumWidth(200)
-    filter_line_edit.setPlaceholderText('Filter name')
-    filter_line_edit.setToolTip('Filter name optionally using regular expressions (' + QKeySequence(QKeySequence.Find).toString() + ')')
-    filter_line_edit.textChanged.connect(filter_changed)
-    tool_bar.addWidget(filter_line_edit)
-
     # actions to toggle visibility of available sizes/columns
     def action_toggled(index):
         column = 2 + index
         table_view.setColumnHidden(column, not table_view.isColumnHidden(column))
         table_view.resizeColumnsToContents()
         table_view.resizeRowsToContents()
+    for action in tool_bar.actions():
+        text = action.text()
+        size = text.split('x')
+        if size and len(size) == 2 and size[0] == size[1]:
+            tool_bar.removeAction(action)
     signal_mapper = QSignalMapper()
     for i, size in enumerate(all_sizes):
         action = QAction('%dx%d' % size, tool_bar)
@@ -154,23 +220,6 @@ def main(icon_spec):
                 return
         old_keyPressEvent(self, event)
     main_window.keyPressEvent = MethodType(main_window_keyPressEvent, table_view)
-
-    # enable copy (ctrl+c) name of icon to clipboard
-    def table_view_keyPressEvent(self, event, old_keyPressEvent=QTableView.keyPressEvent):
-        if event.matches(QKeySequence.Copy):
-            selection_model = self.selectionModel()
-            if selection_model.hasSelection():
-                index = selection_model.selectedRows()[0]
-                source_index = self.model().mapToSource(index)
-                item = self.model().sourceModel().item(source_index.row(), 1)
-                icon_name = item.data(Qt.EditRole)
-                app.clipboard().setText(icon_name.toString())
-                return
-        old_keyPressEvent(self, event)
-    table_view.keyPressEvent = MethodType(table_view_keyPressEvent, table_view)
-
-    main_window.showMaximized()
-    return app.exec_()
 
 
 # icon naming specification http://standards.freedesktop.org/icon-naming-spec/icon-naming-spec-latest.html
