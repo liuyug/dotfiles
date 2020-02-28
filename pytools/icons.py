@@ -535,5 +535,10 @@ icon_spec.append(('status', [
     'weather-storm',
 ]))
 
+
+def run():
+    main(icon_spec)
+
+
 if __name__ == '__main__':
-    sys.exit(main(icon_spec))
+    run()
