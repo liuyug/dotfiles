@@ -127,9 +127,14 @@ EOF
 function init_bash() {
     cat bashrc >> $HOME/.bashrc
 
+    # .local
     mkdir -p $HOME/.local/bin
     cp bin/* $HOME/.local/bin
     chmod u+x $HOME/.local/bin/*
+
+    # .config
+    mkdir -p $HOME/.config
+    cp -r youtube-dl $HOME/.config
 
     cp tmux.conf $HOME/.tmux.conf
     cp vimrc $HOME/.vimrc
