@@ -26,6 +26,7 @@ function get_font()
         [inconsolata_ttf_regular]=https://github.com/googlefonts/Inconsolata/raw/master/fonts/ttf/Inconsolata-Regular.ttf
         [consolas]=https://github.com/runsisi/consolas-font-for-powerline/archive/master.zip
         [yahei_mono]=https://github.com/Microsoft/BashOnWindows/files/1362006/Microsoft.YaHei.Mono.zip
+        [cascadia_code]=https://github.com/microsoft/cascadia-code/releases/download/v2005.15/CascadiaCode_2005.15.zip
     )
 
     url=${fonts[$1]}
@@ -72,11 +73,9 @@ function init_font()
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         get_font consolas $font_dir
-        get_font inconsolata $font_dir
-        get_font inconsolata_ttf_bold $font_dir
-        get_font inconsolata_ttf_regular $font_dir
         get_font powerline $font_dir
         get_font yahei_mono $font_dir
+        get_font cascadia_code $font_dir
     fi
 }
 
@@ -118,13 +117,24 @@ function init_wsl()
     <dir>/mnt/c/Windows/Fonts</dir>
 </fontconfig>
 EOF
-        # fix Windows Bash
-        if grep -q Microsoft /proc/version; then
-            echo "Find Linux for Microsoft..."
-            if [ "$(umask)" == '0000' ]; then
-                umask 0022
-            fi
+        cat > ~/wsl.conf << EOF
+[automount]
+options = "metadata,umask=22,fmask=11"
+EOF
+        if [ -f /etc/wsl.conf ]; then
+            echo "current /etc/wsl.conf:"
+            cat /etc/wsl.conf
         fi
+        echo "Manually append below into /etc/wsl.conf:"
+        cat ~/wsl.conf
+        echo "Need reboot!"
+        # fix Windows Bash
+        # if grep -q Microsoft /proc/version; then
+        #     echo "Find Linux for Microsoft..."
+        #     if [ "$(umask)" == '0000' ]; then
+        #         umask 0022
+        #     fi
+        # fi
     fi
 }
 
