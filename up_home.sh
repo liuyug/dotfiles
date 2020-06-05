@@ -3,7 +3,7 @@
 
 function init_vim()
 {
-    sudo apt install vim vim-gui-common ctags python3-pip
+    sudo apt install vim vim-gui-common ctags python3-pip cmake
     pip3 install jedi pyflakes flake8 --user
     if [ -d $HOME/.vim/bundle/Vundle.vim ]; then
         (cd $HOME/.vim/bundle/Vundle.vim; git pull)
@@ -11,6 +11,10 @@ function init_vim()
         git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
     fi
     vim +PluginInstall +qall
+    (
+    cd ~/.vim/bundle/youcompleteme
+    ./install.sh
+    )
 }
 
 function get_font()
@@ -87,11 +91,11 @@ function init_wsl()
         echo "Windows user: $win_user"
         echo "Windows user home path: $win_home"
         echo "1. Create links for Windows..."
-        ln -s "$win_home/Desktop/"
-        ln -s "$win_home/Downloads/"
-        ln -s "$win_home/Documents/"
-        ln -s "$win_home/Music/"
-        ln -s "$win_home/Pictures/"
+        ln -s "$win_home/Desktop/" ~/
+        ln -s "$win_home/Downloads/" ~/
+        ln -s "$win_home/Documents/" ~/
+        ln -s "$win_home/Music/" ~/
+        ln -s "$win_home/Pictures/" ~/
         echo "2. Copy fonts to Documents folder..."
         cp -rf $HOME/.local/share/fonts ~/Documents/
         echo "3. Fix Windows Bash Font..."
@@ -137,17 +141,18 @@ function init_bash() {
     cp -r youtube-dl $HOME/.config
 
     cp tmux.conf $HOME/.tmux.conf
-    cp vimrc $HOME/.vimrc
-    cp -r vim $HOME/.vim
+}
 
-    vim_init
+function init_pytools()
+{
+    python3 setup.py install --user
 }
 
 function init_base()
 {
     if [ "$(uname)" = "Linux" ] ; then
         # prepare base app
-        sudo apt install rsync wget unzip locale screenfetch
+        sudo apt install rsync wget unzip locales screenfetch x11-apps
         # fix locale
         sudo locale-gen zh_CN.UTF-8
 
@@ -157,21 +162,19 @@ function init_base()
 if [ "$1" == "--base" -o "$1" == "-b" ]; then
     init_base
 elif [ "$1" == "--bash" ]; then
+    init_base
     init_bash
 elif [ "$1" == "--vim" ]; then
+    cp vimrc $HOME/.vimrc
+    cp -r vim $HOME/.vim
     init_vim
 elif [ "$1" == "--font" ]; then
     init_font
 elif [ "$1" == "--wsl" ]; then
     init_wsl
 else
-    echo "$0 <--bash | --vim | --font | --wsl>"
+    echo "$0 <--bash | --vim | --font | --wsl | --pytools>"
     exit 0
-    read -p "This may overwrite existing files in your home directory. Are you sure? (y/n) " -n 1
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        init_config
-    fi
 fi
 source $HOME/.bashrc
 screenfetch
