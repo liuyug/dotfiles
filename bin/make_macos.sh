@@ -63,6 +63,8 @@ output="$3"
 IFS=$'\t\n'
 
 if [ "x$cmd" = "x" ] ; then
+    echo "制作之前，请先运行原盘的'Install MacOS app'，确保正确"
+    echo "制作之后，运行启动盘里的'Install MacOS app'，确保正确"
     echo "$0 <usb|iso|dmg> <mac app path> <output path>"
     exit 0
 fi
