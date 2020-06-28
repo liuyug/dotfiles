@@ -72,9 +72,9 @@ function init_font()
     read -p "Download font to \"$font_dir\". Are you sure? (y/n) " -n 1
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
-        get_font consolas $font_dir
+        # get_font consolas $font_dir
         get_font powerline $font_dir
-        get_font yahei_mono $font_dir
+        # get_font yahei_mono $font_dir
         get_font cascadia_code $font_dir
     fi
 }
@@ -95,20 +95,7 @@ function init_wsl()
         ln -s "$win_home/Documents/" ~/
         ln -s "$win_home/Music/" ~/
         ln -s "$win_home/Pictures/" ~/
-        echo "2. Copy fonts to Documents folder..."
-        cp -rf $HOME/.local/share/fonts ~/Documents/
-        echo "3. Fix Windows Bash Font..."
-        echo "   Install fonts in Documents"
-        echo '   Run below as administrator:'
-        echo '   reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\FontLink\SystemLink" /v "Microsoft YaHei Mono" /t REG_MULTI_SZ /d "Powerline Consolas.ttf,Powerline Consolas"'
-        # 拉丁字母及常见ASCII符号（0-9，a-z，A-Z，!@#$%^等）显示字体为【Consolas】
-        # 中文、日语等CJK字符&符号显示字体为【微软雅黑】
-        # Powerline Symbols【Powerline Consolas】
-        # 特殊符号显示字体为【Segoe UI Symbol】
-        echo '   reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\FontLink\SystemLink" /v "Consolas" /t REG_MULTI_SZ /d "MSYH.TTC,Microsoft YaHei,128,96\0MSYH.TTC,Microsoft YaHei\0Powerline Consolas.ttf,Powerline Consolas"'
-        echo '   reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\FontLink\SystemLink" /v "Inconsolata" /t REG_MULTI_SZ /d "MSYH.TTC,Microsoft YaHei,128,96\0MSYH.TTC,Microsoft YaHei\0Powerline Consolas.ttf,Powerline Consolas"'
-        echo ""
-
+        echo "2. add Windows fonts..."
         mkdir -p $HOME/.config/fontconfig
         cat > $HOME/.config/fontconfig/fonts.conf << EOF
 <?xml version="1.0"?>
@@ -117,6 +104,9 @@ function init_wsl()
     <dir>/mnt/c/Windows/Fonts</dir>
 </fontconfig>
 EOF
+        echo "3. fix PyQt5..."
+        sudo strip --remove-section=.note.ABI-tag  /usr/lib/x86_64-linux-gnu/libQt5Core.so.5
+        echo "4. fix file permission..."
         cat > ~/wsl.conf << EOF
 [automount]
 options = "metadata,umask=22,fmask=11"
@@ -128,13 +118,6 @@ EOF
         echo "Manually append below into /etc/wsl.conf:"
         cat ~/wsl.conf
         echo "Need reboot!"
-        # fix Windows Bash
-        # if grep -q Microsoft /proc/version; then
-        #     echo "Find Linux for Microsoft..."
-        #     if [ "$(umask)" == '0000' ]; then
-        #         umask 0022
-        #     fi
-        # fi
     fi
 }
 
@@ -162,7 +145,7 @@ function init_base()
 {
     if [ "$(uname)" = "Linux" ] ; then
         # prepare base app
-        sudo apt install rsync wget unzip locales screenfetch x11-apps
+        sudo apt install rsync wget unzip locales screenfetch x11-apps python3-pyqt5
         # fix locale
         sudo locale-gen zh_CN.UTF-8
 
