@@ -28,8 +28,13 @@ Plugin 'nathanaelkane/vim-indent-guides'
 " autocompletion
 " first run '~/.vim/Plugins/youcompleteme/install.py'
 Plugin 'valloric/youcompleteme'
-" supertab to autocomplete with <Tab> key
-Plugin 'ervandew/supertab'
+
+" javascript
+Plugin 'pangloss/vim-javascript'
+" npm install -g esctags
+Plugin 'hushicai/tagbar-javascript.vim'
+" npm install -g eslint
+" Plugin 'w0rp/ale'
 
 " python
 " indent
@@ -149,17 +154,6 @@ set ignorecase        " search ignore casesensitive
 set smartcase
 set wrapscan          " search from head when reach end
 
-" auto-complete
-" use jedi-vim
-" set completeopt=longest,menu
-" autocmd Filetype python setlocal omnifunc=pythoncomplete#Complete
-" autocmd Filetype php    setlocal omnifunc=phpcomplete#CompletePHP
-" autocmd Filetype c      setlocal omnifunc=ccomplete#Complete
-" autocmd Filetype css    setlocal omnifunc=csscomplete#CompleteCSS
-" autocmd Filetype html   setlocal omnifunc=htmlcomplete#CompleteTags
-" autocmd Filetype sql    setlocal omnifunc=sqlcomplete#Complete
-" autocmd Filetype xml    setlocal omnifunc=xmlcomplete#CompleteTags
-
 " File
 " ===================================================================
 autocmd BufNewFile,BufRead *.txt setlocal filetype=text
@@ -256,18 +250,21 @@ noremap! <F9> <ESC>:update<CR>:silent! make<CR>
 map <Leader>b Oimport ipdb; ipdb.set_trace()  # BREAKPOINT<C-c>
 
 " vim-airline
-let g:airline#extensions#tabline#enabled = 0
-" limit line for hang on large file
-let g:airline#extensions#whitespace#max_lines = 1000
 " switch to next or previous buffer
 " gt or gT to switch next or previous tab
 map <leader>gn :bn<CR>
 map <leader>gp :bp<CR>
+" limit line for hang on large file
+let g:airline#extensions#whitespace#max_lines = 1000
+" other
+let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#virtualenv#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#tmuxline#enabled = 0
+let g:airline#extensions#ale#enabled = 1
+
 let g:airline_powerline_fonts = 1
 
 if !exists('g:airline_symbols')
@@ -301,7 +298,18 @@ let g:ycm_filetype_blacklist = {
 " :SyntasticInfo or :SyntasticCheck
 " debug and use :message to show result
 " let g:syntastic_debug = 1
-let g:syntastic_always_populate_loc_list=1
+"
+" Recommended settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+" let g:syntastic_always_populate_loc_list = 1
+" open at error and close at non-error
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+"
 " python: ['flake8', 'pyflakes', 'pylint', 'python']
 " pip install flake8 pyflakes
 let g:syntastic_python_checkers = ['flake8', 'python3']
@@ -312,6 +320,7 @@ let g:syntastic_python_flake8_args = "--ignore=E128,E501,F401 --max-complexity 4
 " let g:syntastic_cpp_check_header = 1
 " let g:syntastic_cpp_checkers = ['cppcheck', 'gcc']
 " let g:syntastic_cpp_compiler_options = system("pkg-config --cflags QtGui QtWebKit")
+let g:syntastic_javascript_eslint_exec = 'eslint_d'
 
 " Location window
 nmap <leader>ln :lnext<CR>
