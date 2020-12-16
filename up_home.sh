@@ -117,7 +117,9 @@ EOF
         fi
         echo "Manually append below into /etc/wsl.conf:"
         cat ~/wsl.conf
-        echo "Need reboot!"
+        echo "reboot wsl:"
+	echo "net stop LxssManager"
+	echo "net start LxssManager"
     fi
 }
 
