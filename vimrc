@@ -304,6 +304,13 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
+" see :h syntastic-loclist-callback
+function! SyntasticCheckHook(errors)
+    if !empty(a:errors)
+        let g:syntastic_loc_list_height = min([len(a:errors), 5])
+    endif
+endfunction
+
 " let g:syntastic_always_populate_loc_list = 1
 " open at error and close at non-error
 let g:syntastic_auto_loc_list = 1
@@ -315,7 +322,7 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers = ['flake8', 'python3']
 " http://flake8.pycqa.org/en/latest/index.html
 " https://pycodestyle.readthedocs.io/en/latest/index.html
-let g:syntastic_python_flake8_args = "--ignore=E128,E501,F401 --max-complexity 40"
+let g:syntastic_python_flake8_args = "--ignore=E128,E501,F401,C901"
 " c/c++
 " let g:syntastic_cpp_check_header = 1
 " let g:syntastic_cpp_checkers = ['cppcheck', 'gcc']

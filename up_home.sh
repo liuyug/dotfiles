@@ -26,7 +26,7 @@ function get_font()
         [inconsolata_ttf_regular]=https://github.com/googlefonts/Inconsolata/raw/master/fonts/ttf/Inconsolata-Regular.ttf
         [consolas]=https://github.com/runsisi/consolas-font-for-powerline/archive/master.zip
         [yahei_mono]=https://github.com/Microsoft/BashOnWindows/files/1362006/Microsoft.YaHei.Mono.zip
-        [cascadia_code]=https://github.com/microsoft/cascadia-code/releases/download/v2005.15/CascadiaCode_2005.15.zip
+        [cascadia_code]=https://github.com/microsoft/cascadia-code/releases/download/v2009.22/CascadiaCode-2009.22.zip
     )
 
     url=${fonts[$1]}
