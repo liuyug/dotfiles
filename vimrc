@@ -179,7 +179,10 @@ autocmd FileType python setlocal errorformat=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ lin
 autocmd FileType php setlocal makeprg=php\ %
 autocmd FileType php setlocal errorformat=%m\ in\ %f\ on\ line\ %l
 " rest
+autocmd FileType text setlocal wrap
 autocmd FileType rst setlocal wrap
+autocmd FileType markdown setlocal wrap
+
 "autocmd FileType rst setlocal spell spelllang=en_us
 autocmd FileType rst setlocal makeprg=rst2html.py\ --cloak-email-addresses\ %\ %.html;firefox\ %.html
 "autocmd FileType rst setlocal errorformat=%m\ in\ %f\ on\ line\ %l
