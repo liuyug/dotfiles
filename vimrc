@@ -31,10 +31,6 @@ Plugin 'valloric/youcompleteme'
 
 " javascript
 Plugin 'pangloss/vim-javascript'
-" npm install -g esctags
-Plugin 'hushicai/tagbar-javascript.vim'
-" npm install -g eslint
-" Plugin 'w0rp/ale'
 
 " python
 " indent
@@ -330,7 +326,9 @@ let g:syntastic_python_flake8_args = "--ignore=E128,E501,F401,C901"
 " let g:syntastic_cpp_check_header = 1
 " let g:syntastic_cpp_checkers = ['cppcheck', 'gcc']
 " let g:syntastic_cpp_compiler_options = system("pkg-config --cflags QtGui QtWebKit")
-let g:syntastic_javascript_eslint_exec = 'eslint_d'
+" npm install -g eslint
+" eslint --init
+let g:syntastic_javascript_checkers = ['eslint']
 
 " Location window
 nmap <leader>ln :lnext<CR>
