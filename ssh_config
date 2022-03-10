@@ -1,0 +1,2 @@
+# in /etc/ssh/sshd_config file, add "ForwardX11 yes"
+ForwardX11 yes

@@ -126,6 +126,10 @@ EOF
 function init_bash() {
     cat bashrc >> $HOME/.bashrc
 
+    # .ssh/config
+    mkdir -p $HOME/.ssh
+    cat ssh_config >> $HOME/.ssh/config
+
     # .local
     mkdir -p $HOME/.local/bin
     cp bin/* $HOME/.local/bin
