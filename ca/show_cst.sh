@@ -6,4 +6,4 @@ if [ "x$1" = "x" ]; then
 fi
 client_cst=$1
 
-openssl x509 -in certs/$client_cst -text -noout
+openssl x509 -in $client_cst -text -noout
