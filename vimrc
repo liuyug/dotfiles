@@ -246,7 +246,8 @@ noremap  <F9> :update<CR>:silent! make<CR>
 noremap! <F9> <ESC>:update<CR>:silent! make<CR>
 
 " debug
-map <Leader>b Oimport ipdb; ipdb.set_trace()  # BREAKPOINT<C-c>
+map <Leader>b Oimport ipdb; ipdb.set_trace()
+" map <Leader>b Oimport web_pdb; web_pdb.set_trace()
 
 " vim-airline
 " switch to next or previous buffer
@@ -321,11 +322,14 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers = ['flake8', 'python3']
 " http://flake8.pycqa.org/en/latest/index.html
 " https://pycodestyle.readthedocs.io/en/latest/index.html
-let g:syntastic_python_flake8_args = "--ignore=E128,E501,F401,C901"
+let g:syntastic_python_flake8_args = "--ignore=E128,E402,E501,F401,C901"
+" E402: module level import not at top of file
+
 " c/c++
 " let g:syntastic_cpp_check_header = 1
 " let g:syntastic_cpp_checkers = ['cppcheck', 'gcc']
 " let g:syntastic_cpp_compiler_options = system("pkg-config --cflags QtGui QtWebKit")
+" nodejs: https://github.com/nodesource/distributions
 " npm install -g eslint
 " eslint --init
 let g:syntastic_javascript_checkers = ['eslint']

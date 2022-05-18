@@ -26,3 +26,16 @@ if grep -q Microsoft /proc/version; then
         umask 0022
     fi
 fi
+
+# use PulseAudio
+# sudo apt install libpulse0
+# pax11publish
+# export PULSE_SERVER="tcp:127.0.0.1"
+# export PULSE_SERVER="tcp:192.168.100.157"
+# in PulseAudio Server
+# default.pa
+# load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1;192.168.100.0/24
+# daemon.conf
+# exit-idle-time = -1
+
+
