@@ -30,6 +30,9 @@ Plugin 'valloric/youcompleteme'
 
 " javascript
 Plugin 'pangloss/vim-javascript'
+"
+" pip3 install jsbeautifier cssbeautifier
+Plugin 'maksimr/vim-jsbeautify'
 
 " css color
 Plugin 'ap/vim-css-color'
@@ -257,6 +260,9 @@ map <Leader>b Oimport ipdb; ipdb.set_trace()
 " open-browser
 map <leader>bo <Plug>(openbrowser-open)
 " map <leader>bs <Plug>(openbrowser-smart-search)
+
+" vim-jsbeautify
+map <leader>jm :call JsBeautify()<CR>
 
 " vim-airline
 " switch to next or previous buffer
