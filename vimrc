@@ -21,7 +21,6 @@ Plugin 'scrooloose/nerdtree'
 
 " tag bar, like taglist, but more better in C/C++
 Plugin 'majutsushi/tagbar'
-
 " display indenting level
 Plugin 'nathanaelkane/vim-indent-guides'
 
@@ -31,6 +30,12 @@ Plugin 'valloric/youcompleteme'
 
 " javascript
 Plugin 'pangloss/vim-javascript'
+
+" css color
+Plugin 'ap/vim-css-color'
+
+" open browser
+Plugin 'tyru/open-browser.vim'
 
 " python
 " indent
@@ -248,6 +253,10 @@ noremap! <F9> <ESC>:update<CR>:silent! make<CR>
 " debug
 map <Leader>b Oimport ipdb; ipdb.set_trace()
 " map <Leader>b Oimport web_pdb; web_pdb.set_trace()
+
+" open-browser
+map <leader>bo <Plug>(openbrowser-open)
+" map <leader>bs <Plug>(openbrowser-smart-search)
 
 " vim-airline
 " switch to next or previous buffer
