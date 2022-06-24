@@ -97,11 +97,13 @@ function init_wsl()
         ln -s "$win_home/Pictures/" ~/
         echo "2. add Windows fonts..."
         mkdir -p $HOME/.config/fontconfig
+        user = `whoami`
         cat > $HOME/.config/fontconfig/fonts.conf << EOF
 <?xml version="1.0"?>
 <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
 <fontconfig>
     <dir>/mnt/c/Windows/Fonts</dir>
+    <dir>/mnt/c/Users/$user/AppData/Local/Microsoft/Windows/Fonts</dir>
 </fontconfig>
 EOF
         echo "3. fix PyQt5..."

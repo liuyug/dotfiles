@@ -69,12 +69,12 @@ autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 
 " Vim color
 if has("gui_running")
+    colorscheme molokai
 else
     " To use 256 colors
     set t_Co=256
+    colorscheme wombat256mod
 endif
-"colorscheme molokai
-colorscheme wombat256mod
 
 filetype plugin indent on
 " turn on highlight after colorscheme
@@ -160,7 +160,10 @@ set wrapscan          " search from head when reach end
 
 " File
 " ===================================================================
+" 设置文件类型
 autocmd BufNewFile,BufRead *.txt setlocal filetype=text
+autocmd BufNewFile,BufRead *.json setlocal filetype=json
+autocmd BufNewFile,BufRead *.gltf setlocal filetype=json
 autocmd BufNewFile,BufRead *.cmake,CMakeLists.txt setlocal filetype=cmake
 
 " file template
@@ -191,7 +194,6 @@ autocmd FileType markdown setlocal wrap
 autocmd FileType rst setlocal makeprg=rst2html.py\ --cloak-email-addresses\ %\ %.html;firefox\ %.html
 "autocmd FileType rst setlocal errorformat=%m\ in\ %f\ on\ line\ %l
 " txt
-"autocmd FileType txt setlocal wrap
 
 " my customized command
 command Todo noautocmd vimgrep /\ TODO:\|\ FIXME:\|\ BUG:\|\ XXX:/j **/*.py **/*.html | cw
@@ -222,6 +224,7 @@ set guioptions-=b     " disable bottom scrollbar
 "set showtabling=0     " disable tab bar
 
 " fonts
+" :set guifont=* to open window of selecting font
 " Only for gui window. For terminal window need change terminal font
 " 1234567890
 " abcdefghijklmnopqrstuvwxyg
@@ -230,7 +233,15 @@ set guioptions-=b     " disable bottom scrollbar
 "set guifont=Inconsolata\ Medium\ 12
 "set guifont="Liberation Mono":h12
 "set guifont="DejaVu Sans Mono":h12
-set guifont="DejaVuSansMono Nerd Font Mono":h12
+
+if has("gui_gtk2") || has("gui_gtk3")
+    set guifont=Cascadia\ Mono\ PL\ 12
+    set guifontwide=Microsoft\ Yahei\ 12,WenQuanYi\ Zen\ Hei\ 12
+elseif has("gui_mac")
+    set guifont=Cascadia\ Mono\ PL:h12
+elseif has("gui_win32")
+    set guifont=Cascadia\ Mono\ PL:h12
+endif
 
 "set guifont="Luxi Mono":h12
 "set guifont=Nimbus Mono L":h12
