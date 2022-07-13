@@ -28,10 +28,16 @@ class App():
 
         args = parser.parse_args()
         level = logging.INFO - args.verbose * 10
-        logging.basicConfig(
-            level=level,
-            format='%(message)s',
-        )
+        if level == logging.DEBUG:
+            logging.basicConfig(
+                level=level,
+                format='%(levelname)s:%(name)s:%(message)s',
+            )
+        else:
+            logging.basicConfig(
+                level=level,
+                format='%(levelname)s:%(message)s',
+            )
 
         if args.hello:
             print('hello %s' % args.hello)
