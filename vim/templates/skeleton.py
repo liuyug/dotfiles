@@ -7,33 +7,37 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def main():
-    name = 'app'
-    version = '1.0.0'
-    description = 'Application Description'
-    about = f'{name} v{version} {description}'
-    parser = argparse.ArgumentParser(description=description)
-    parser.add_argument('--version', action='version', version=about,
-                        help='show version')
-    parser.add_argument('-v', '--verbose', action='count',
-                        default=0, help='verbose output')
+class App():
+    name = 'Hello'
+    description = 'Hello'
+    version = '1.0'
+    url = ''
+    author_email = 'author@gmail.com'
+    license = 'MIT'
 
-    group = parser.add_argument_group('group')
-    group.add_argument('--hello', action='store_true', help='hello')
+    @classmethod
+    def run(cls):
+        about = f'{App.name} v{App.version} {App.description}'
+        parser = argparse.ArgumentParser(description=App.description)
+        parser.add_argument('--version', action='version', version=about,
+                            help='show version')
+        parser.add_argument('-v', '--verbose', action='count',
+                            default=0, help='verbose output')
 
-    args = parser.parse_args()
-    # log to stdout in cli mode
-    level = logging.INFO - args.verbose * 10
-    logging.basicConfig(
-        level=level,
-        format='%(message)s',
-    )
+        parser.add_argument('--hello', help='hello')
 
-    if args.hello:
-        logger.info(f'Hello {name}')
-    else:
-        parser.print_help()
+        args = parser.parse_args()
+        level = logging.INFO - args.verbose * 10
+        logging.basicConfig(
+            level=level,
+            format='%(message)s',
+        )
+
+        if args.hello:
+            print('hello %s' % args.hello)
+        else:
+            parser.print_help()
 
 
 if __name__ == '__main__':
-    main()
+    App.run()
