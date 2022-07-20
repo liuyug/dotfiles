@@ -8,10 +8,9 @@ filetype off
 set rtp+=$HOME/.vim/bundle/Vundle.vim/
 call vundle#begin()
 " all bundle
+" proxychains vim -c "PluginInstall"
 " Install plugins :PluginInstall
 Plugin 'VundleVim/Vundle.vim'
-
-" manage other
 
 " Jinja2
 Plugin 'Glench/Vim-Jinja2-Syntax'
@@ -20,7 +19,9 @@ Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'scrooloose/nerdtree'
 
 " tag bar, like taglist, but more better in C/C++
-Plugin 'majutsushi/tagbar'
+" sudo apt install universal-ctags
+Plugin 'preservim/tagbar'
+
 " display indenting level
 Plugin 'nathanaelkane/vim-indent-guides'
 
@@ -33,6 +34,11 @@ Plugin 'pangloss/vim-javascript'
 "
 " pip3 install jsbeautifier cssbeautifier
 Plugin 'maksimr/vim-jsbeautify'
+
+" for markdown
+" need nodejs and yarn
+" needto call ":call mkdp#util#install()"
+Plugin 'iamcco/markdown-preview.nvim'
 
 " css color
 Plugin 'ap/vim-css-color'
@@ -266,8 +272,10 @@ map <Leader>b Oimport ipdb; ipdb.set_trace()
 " map <Leader>b Oimport web_pdb; web_pdb.set_trace()
 
 " open-browser
-map <leader>bo <Plug>(openbrowser-open)
-" map <leader>bs <Plug>(openbrowser-smart-search)
+map <leader>ob <Plug>(openbrowser-open)
+
+" markdown preview
+map <leader>mp <Plug>MarkdownPreview
 
 " vim-jsbeautify
 " unminify...
