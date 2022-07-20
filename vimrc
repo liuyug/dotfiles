@@ -231,8 +231,8 @@ set guioptions-=b     " disable bottom scrollbar
 "set guifont=YaHei\ Consolas\ Hybrid:h12
 "set guifont=Consolas:h11
 "set guifont=Inconsolata\ Medium\ 12
-"set guifont="Liberation Mono":h12
-"set guifont="DejaVu Sans Mono":h12
+"set guifont=Liberation\ Mono:h12
+"set guifont=DejaVu\ Sans\ Mono:h12
 
 if has("gui_gtk2") || has("gui_gtk3")
     set guifont=Cascadia\ Mono\ PL\ 12
@@ -242,9 +242,6 @@ elseif has("gui_mac")
 elseif has("gui_win32")
     set guifont=Cascadia\ Mono\ PL:h12
 endif
-
-"set guifont="Luxi Mono":h12
-"set guifont=Nimbus Mono L":h12
 
 " clipboard
 " need support +clipboard
@@ -273,13 +270,16 @@ map <leader>bo <Plug>(openbrowser-open)
 " map <leader>bs <Plug>(openbrowser-smart-search)
 
 " vim-jsbeautify
+" unminify...
 map <leader>jm :call JsBeautify()<CR>
 
-" vim-airline
 " switch to next or previous buffer
 " gt or gT to switch next or previous tab
 map <leader>gn :bn<CR>
 map <leader>gp :bp<CR>
+
+
+" vim-airline
 " limit line for hang on large file
 let g:airline#extensions#whitespace#max_lines = 1000
 " other
@@ -301,22 +301,27 @@ endif
 " let g:airline_symbols.linenr = '␤'
 
 " youcompleteme
+set completeopt=menu,menuone,popup
+let g:ycm_add_preview_to_completeopt = 0
+
+let g:ycm_semantic_triggers =  {
+            \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{3}'],
+            \ 'cs,lua,javascript': ['re!\w{3}'],
+            \ }
+
 let g:ycm_filetype_whitelist = {
-            \'*': 1,
+            \'c': 1,
+            \'cpp': 1,
+            \'python': 1,
+            \'javascript': 1,
+            \'html': 1,
+            \'sh': 1,
+            \'dosbatch': 1,
+            \'vim': 1,
             \}
 
-let g:ycm_filetype_blacklist = {
-            \ 'tagbar': 1,
-            \ 'notes': 1,
-            \ 'markdown': 1,
-            \ 'netrw': 1,
-            \ 'unite': 1,
-            \ 'text': 1,
-            \ 'vimwiki': 1,
-            \ 'pandoc': 1,
-            \ 'infolog': 1,
-            \ 'mail': 1
-            \}
+" map <f3> <plug>(YCMHover)
+let g:ycm_auto_hover = ''
 
 " syntastic
 " ==============================================================================
@@ -340,7 +345,7 @@ endfunction
 " let g:syntastic_always_populate_loc_list = 1
 " open at error and close at non-error
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 "
 " python: ['flake8', 'pyflakes', 'pylint', 'python']
