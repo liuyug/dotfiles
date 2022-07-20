@@ -36,6 +36,9 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'maksimr/vim-jsbeautify'
 
 " for markdown
+" table
+Plugin 'dhruvasagar/vim-table-mode'
+
 " need nodejs and yarn
 " needto call ":call mkdp#util#install()"
 Plugin 'iamcco/markdown-preview.nvim'
@@ -276,6 +279,8 @@ map <leader>ob <Plug>(openbrowser-open)
 
 " markdown preview
 map <leader>mp <Plug>MarkdownPreview
+" default
+" map <leader>tm :TableModeToggle
 
 " vim-jsbeautify
 " unminify...
