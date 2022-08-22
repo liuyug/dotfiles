@@ -1,75 +1,94 @@
 " General
 " Use Vim settings, rather than Vi settings (much better!).
 set nocompatible
-filetype off
+set encoding=utf-8
+filetype indent off
+syntax off
 
-" Install vundle
-" git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-set rtp+=$HOME/.vim/bundle/Vundle.vim/
-call vundle#begin()
-" all bundle
-" proxychains vim -c "PluginInstall"
-" Install plugins :PluginInstall
-Plugin 'VundleVim/Vundle.vim'
+" install vim-plug
+"curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+"proxychains vim -c "PlugInstall"
+" Install plug :PlugInstall
+"
+call plug#begin()
+" The default plugin directory will be as follows:
+"   - Vim (Linux/macOS): '~/.vim/plugged'
+"   - Vim (Windows): '~/vimfiles/plugged'
+"   - Neovim (Linux/macOS/Windows): stdpath('data') . '/plugged'
+" You can specify a custom plugin directory by passing it as the argument
+"   - e.g. `call plug#begin('~/.vim/plugged')`
+"   - Avoid using standard Vim directory names like 'plugin'
+
+" Make sure you use single quotes!!!
 
 " Jinja2
-Plugin 'Glench/Vim-Jinja2-Syntax'
+Plug 'Glench/Vim-Jinja2-Syntax'
 
 " explorer filesystem
-Plugin 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 
 " tag bar, like taglist, but more better in C/C++
 " sudo apt install universal-ctags
-Plugin 'preservim/tagbar'
+Plug 'preservim/tagbar'
 
 " display indenting level
-Plugin 'nathanaelkane/vim-indent-guides'
+Plug 'nathanaelkane/vim-indent-guides'
 
 " autocompletion
-" first run '~/.vim/Plugins/youcompleteme/install.py'
-Plugin 'valloric/youcompleteme'
+" nodejs >= 12.12
+" git clone -b release https://git::@github.com/neoclide/coc.nvim.git
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" install coc extension or configure language servers for LSP support.
+" :verbose imap
+":CocInstall coc-json coc-tsserver
+":CocInstall coc-css coc-html
+":CocInstall coc-pyright
+":CocInstall coc-sh
+":CocInstall coc-sql
+":CocInstall coc-clangd coc-cmake
+":CocInstall coc-markdownlint
 
 " javascript
-Plugin 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript'
 "
 " pip3 install jsbeautifier cssbeautifier
-Plugin 'maksimr/vim-jsbeautify'
+Plug 'maksimr/vim-jsbeautify'
 
 " for markdown
 " table
-Plugin 'dhruvasagar/vim-table-mode'
+Plug 'dhruvasagar/vim-table-mode'
 
 " need nodejs and yarn
 " needto call ":call mkdp#util#install()"
-Plugin 'iamcco/markdown-preview.nvim'
+Plug 'iamcco/markdown-preview.nvim'
 
 " css color
-Plugin 'ap/vim-css-color'
+Plug 'ap/vim-css-color'
 
 " open browser
-Plugin 'tyru/open-browser.vim'
+Plug 'tyru/open-browser.vim'
 
 " python
 " indent
-Plugin 'hynek/vim-python-pep8-indent'
+Plug 'hynek/vim-python-pep8-indent'
 
 " syntax check
 " python: pip install pylint pyflakes flake8
 " c/c++: cppcheck
-Plugin 'scrooloose/syntastic'
+" Plug 'scrooloose/syntastic'
 
 " color scheme
-Plugin 'p8952/vim-colors-wombat'
-Plugin 'tomasr/molokai'
+Plug 'p8952/vim-colors-wombat'
+Plug 'tomasr/molokai'
 
 " status bar
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " git wrapper
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 
-call vundle#end()
+call plug#end()
 
 " Show whitespace
 " MUST be inserted BEFORE the colorscheme command
@@ -85,7 +104,7 @@ else
     colorscheme wombat256mod
 endif
 
-filetype plugin indent on
+filetype indent on
 " turn on highlight after colorscheme
 syntax on
 
@@ -155,10 +174,6 @@ set laststatus=2      " always show status bar
 set showcmd           " display commands in status line
 " set cmdheight=2       " status line height, to display <Leader> key
 " set mousehide         " Hide the mouse when typing text
-
-" show information at status bar
-" Use powerline
-" set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ [%{(&fenc==\"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}]\ %c:%l/%L%)
 
 " Search
 set hlsearch          " search pattern highlight
@@ -267,8 +282,8 @@ vnoremap < <gv
 vnoremap > >gv
 
 " compile
-noremap  <F9> :update<CR>:silent! make<CR>
-noremap! <F9> <ESC>:update<CR>:silent! make<CR>
+"noremap  <F9> :update<CR>:silent! make<CR>
+"noremap! <F9> <ESC>:update<CR>:silent! make<CR>
 
 " debug
 map <Leader>b Oimport ipdb; ipdb.set_trace()
@@ -279,18 +294,15 @@ map <leader>ob <Plug>(openbrowser-open)
 
 " markdown preview
 map <leader>mp <Plug>MarkdownPreview
+
 " default
+" input: || to add sepater
+" default map
 " map <leader>tm :TableModeToggle
 
 " vim-jsbeautify
 " unminify...
 map <leader>jm :call JsBeautify()<CR>
-
-" switch to next or previous buffer
-" gt or gT to switch next or previous tab
-map <leader>gn :bn<CR>
-map <leader>gp :bp<CR>
-
 
 " vim-airline
 " limit line for hang on large file
@@ -309,32 +321,6 @@ let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
-" wsltty don't show default symbol linenr
-" airline_symbols.linenr in ['DejaVu Sans']: ☰
-" let g:airline_symbols.linenr = '␤'
-
-" youcompleteme
-set completeopt=menu,menuone,popup
-let g:ycm_add_preview_to_completeopt = 0
-
-let g:ycm_semantic_triggers =  {
-            \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{3}'],
-            \ 'cs,lua,javascript': ['re!\w{3}'],
-            \ }
-
-let g:ycm_filetype_whitelist = {
-            \'c': 1,
-            \'cpp': 1,
-            \'python': 1,
-            \'javascript': 1,
-            \'html': 1,
-            \'sh': 1,
-            \'dosbatch': 1,
-            \'vim': 1,
-            \}
-
-" map <f3> <plug>(YCMHover)
-let g:ycm_auto_hover = ''
 
 " syntastic
 " ==============================================================================
@@ -344,39 +330,40 @@ let g:ycm_auto_hover = ''
 " let g:syntastic_debug = 1
 "
 " Recommended settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 
 " see :h syntastic-loclist-callback
-function! SyntasticCheckHook(errors)
-    if !empty(a:errors)
-        let g:syntastic_loc_list_height = min([len(a:errors), 5])
-    endif
-endfunction
+" function! SyntasticCheckHook(errors)
+"     if !empty(a:errors)
+"         let g:syntastic_loc_list_height = min([len(a:errors), 5])
+"     endif
+" endfunction
 
 " let g:syntastic_always_populate_loc_list = 1
 " open at error and close at non-error
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 0
+" let g:syntastic_check_on_wq = 0
 "
 " python: ['flake8', 'pyflakes', 'pylint', 'python']
 " pip install flake8 pyflakes
-let g:syntastic_python_checkers = ['flake8', 'python3']
+"let g:syntastic_python_checkers = ['flake8', 'python3']
 " http://flake8.pycqa.org/en/latest/index.html
 " https://pycodestyle.readthedocs.io/en/latest/index.html
-let g:syntastic_python_flake8_args = "--ignore=E128,E402,E501,F401,C901"
+"let g:syntastic_python_flake8_args = "--ignore=E128,E402,E501,F401,C901"
 " E402: module level import not at top of file
 
 " c/c++
 " let g:syntastic_cpp_check_header = 1
 " let g:syntastic_cpp_checkers = ['cppcheck', 'gcc']
 " let g:syntastic_cpp_compiler_options = system("pkg-config --cflags QtGui QtWebKit")
+
 " nodejs: https://github.com/nodesource/distributions
 " npm install -g eslint
 " eslint --init
-let g:syntastic_javascript_checkers = ['eslint']
+" let g:syntastic_javascript_checkers = ['eslint']
 
 " Location window
 nmap <leader>ln :lnext<CR>
@@ -385,6 +372,16 @@ nmap <leader>lp :lprev<CR>
 nmap <leader>lc :lclose<CR>
 " close preview windows
 nmap <leader>pc :pclose<CR>
+
+" 在中文和英文字符之间加一个空格, add space
+nmap <leader>sp :s/\([\u4e00-\u9fa5]\)\([0-9a-zA-Z]\)/\1 \2/g<CR>
+" #在英文和中文字符之间加一个空格
+nmap <leader>sn :s/\([0-9a-zA-Z]\)\([\u4e00-\u9fa5]\)/\1 \2/g<CR>
+
+" markdown-preview
+" 0: auto refresh as edit or move the cursor
+" 1: refresh when save or leave from insert mode
+let g:mkdp_refresh_slow = 1
 
 " tagbar
 " ===================================================================
