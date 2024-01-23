@@ -48,6 +48,9 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 ":CocInstall coc-clangd coc-cmake
 ":CocInstall coc-markdownlint
 
+" glsl
+Plug 'tikhomirov/vim-glsl'
+
 " javascript
 Plug 'pangloss/vim-javascript'
 "
