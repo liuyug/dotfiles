@@ -20,13 +20,16 @@ function init_vim()
 function get_font()
 {
     declare -A fonts=(
-        [powerline]=https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
-        [inconsolata]=http://www.levien.com/type/myfonts/Inconsolata.otf
-        [inconsolata_ttf_bold]=https://github.com/googlefonts/Inconsolata/raw/master/fonts/ttf/Inconsolata-Bold.ttf
-        [inconsolata_ttf_regular]=https://github.com/googlefonts/Inconsolata/raw/master/fonts/ttf/Inconsolata-Regular.ttf
-        [consolas]=https://github.com/runsisi/consolas-font-for-powerline/archive/master.zip
-        [yahei_mono]=https://github.com/Microsoft/BashOnWindows/files/1362006/Microsoft.YaHei.Mono.zip
-        [cascadia_code]=https://github.com/microsoft/cascadia-code/releases/download/v2009.22/CascadiaCode-2009.22.zip
+        # [powerline]=https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
+        # [inconsolata]=http://www.levien.com/type/myfonts/Inconsolata.otf
+        # [inconsolata_ttf_bold]=https://github.com/googlefonts/Inconsolata/raw/master/fonts/ttf/Inconsolata-Bold.ttf
+        # [inconsolata_ttf_regular]=https://github.com/googlefonts/Inconsolata/raw/master/fonts/ttf/Inconsolata-Regular.ttf
+        # [consolas]=https://github.com/runsisi/consolas-font-for-powerline/archive/master.zip
+        # [yahei_mono]=https://github.com/Microsoft/BashOnWindows/files/1362006/Microsoft.YaHei.Mono.zip
+        # [cascadia_code]=https://github.com/microsoft/cascadia-code/releases/download/v2009.22/CascadiaCode-2009.22.zip
+        [dejavusans_nerdfont]=https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/DejaVuSansMono.zip
+        [firacode_nerdfont]=https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/FiraCode.zip
+        [caskaydiacove_nerdfont]=https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/CascadiaCode.zip
     )
 
     url=${fonts[$1]}
@@ -73,9 +76,12 @@ function init_font()
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         # get_font consolas $font_dir
-        get_font powerline $font_dir
+        # get_font powerline $font_dir
         # get_font yahei_mono $font_dir
-        get_font cascadia_code $font_dir
+        # get_font cascadia_code $font_dir
+        get_font dejavusans_nerdfont $font_dir
+        get_font firacode_nerdfont $font_dir
+        get_font caskaydiacove_nerdfont $font_dir
     fi
 }
 
