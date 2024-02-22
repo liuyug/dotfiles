@@ -5,16 +5,11 @@ function init_vim()
 {
     sudo apt install vim vim-gui-common ctags python3-pip cmake
     pip3 install jedi pyflakes flake8 --user
-    if [ -d $HOME/.vim/bundle/Vundle.vim ]; then
-        (cd $HOME/.vim/bundle/Vundle.vim; git pull)
-    else
-        git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
-    fi
-    vim +PluginInstall +qall
-    (
-    cd ~/.vim/bundle/youcompleteme
-    ./install.sh
-    )
+
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+    vim +PlugInstall
 }
 
 function get_font()
@@ -146,6 +141,7 @@ function init_bash() {
     # .config
     mkdir -p $HOME/.config
     cp -r youtube-dl $HOME/.config
+    cp -r nvim $HOME/.config
 
     cp tmux.conf $HOME/.tmux.conf
 }
