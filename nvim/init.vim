@@ -1,4 +1,6 @@
 " General
+" C:\Users\liuyug\AppData\Local\nvim\init.vim
+" ~/.config/nvim/init.vim
 " Use Vim settings, rather than Vi settings (much better!).
 set nocompatible
 set encoding=utf-8
@@ -10,7 +12,7 @@ syntax off
 "proxychains vim -c "PlugInstall"
 " Install plug :PlugInstall
 "
-call plug#begin('~/.vim/plugged')
+silent! call plug#begin('C:\Users\liuyug\vimfiles\plugged')
 " The default plugin directory will be as follows:
 "   - Vim (Linux/macOS): '~/.vim/plugged'
 "   - Vim (Windows): '~/vimfiles/plugged'
@@ -22,7 +24,7 @@ call plug#begin('~/.vim/plugged')
 " Make sure you use single quotes!!!
 
 " Jinja2
-Plug 'Glench/Vim-Jinja2-Syntax'
+" Plug 'Glench/Vim-Jinja2-Syntax'
 
 " explorer filesystem
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
@@ -37,7 +39,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 " autocompletion
 " nodejs >= 12.12
 " git clone -b release https://git::@github.com/neoclide/coc.nvim.git
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " install coc extension or configure language servers for LSP support.
 " :verbose imap
 ":CocInstall coc-json coc-tsserver
@@ -59,17 +61,17 @@ Plug 'maksimr/vim-jsbeautify'
 
 " for markdown
 " table
-Plug 'dhruvasagar/vim-table-mode'
+" Plug 'dhruvasagar/vim-table-mode'
 
 " need nodejs and yarn
 " needto call ":call mkdp#util#install()"
-Plug 'iamcco/markdown-preview.nvim'
+" Plug 'iamcco/markdown-preview.nvim'
 
 " css color
 Plug 'ap/vim-css-color'
 
 " open browser
-Plug 'tyru/open-browser.vim'
+" Plug 'tyru/open-browser.vim'
 
 " python
 " indent
@@ -89,7 +91,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " git wrapper
-Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
