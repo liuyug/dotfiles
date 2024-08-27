@@ -155,7 +155,7 @@ function init_base()
 {
     if [ "$(uname)" = "Linux" ] ; then
         # prepare base app
-        sudo apt install rsync wget unzip locales screenfetch x11-apps python3-pyqt5
+        sudo apt install rsync wget unzip locales screenfetch x11-apps nodejs
         # fix locale
         sudo locale-gen zh_CN.UTF-8
 

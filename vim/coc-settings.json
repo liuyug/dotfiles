@@ -1,0 +1,10 @@
+{
+    "diagnostic.enable": true,
+    "python.pythonPath": "python3",
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Args": [
+        "--max-line-length=120",
+        "--ignore=E501,E712,W504"
+    ],
+    "pyright.disableDiagnostics": true
+}
