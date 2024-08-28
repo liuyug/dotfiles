@@ -35,11 +35,15 @@ Plug 'preservim/tagbar'
 Plug 'nathanaelkane/vim-indent-guides'
 
 " autocompletion
+" Install node 16
+" curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+" sudo apt-get install -y nodejs
 " nodejs >= 12.12
-" git clone -b release https://git::@github.com/neoclide/coc.nvim.git
+" git clone -b release https://git::github.com/neoclide/coc.nvim.git
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " install coc extension or configure language servers for LSP support.
 " :verbose imap
+"镜像：npm config set registry https://registry.npmmirror.com
 ":CocInstall coc-json coc-tsserver
 ":CocInstall coc-css coc-html
 ":CocInstall coc-pyright
@@ -47,6 +51,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 ":CocInstall coc-sql
 ":CocInstall coc-clangd coc-cmake
 ":CocInstall coc-markdownlint
+"配置
+":CocConfig
 
 " glsl
 Plug 'tikhomirov/vim-glsl'
