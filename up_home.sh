@@ -107,9 +107,9 @@ function init_wsl()
     <dir>/mnt/c/Users/$user/AppData/Local/Microsoft/Windows/Fonts</dir>
 </fontconfig>
 EOF
-        echo "3. fix PyQt5..."
-        sudo strip --remove-section=.note.ABI-tag  /usr/lib/x86_64-linux-gnu/libQt5Core.so.5
-        echo "4. fix file permission..."
+        # echo "3. fix PyQt5..."
+        # sudo strip --remove-section=.note.ABI-tag  /usr/lib/x86_64-linux-gnu/libQt5Core.so.5
+        echo "4. fix folder and file permission..."
         cat > ~/wsl.conf << EOF
 [automount]
 options = "metadata,umask=22,fmask=11"
@@ -121,8 +121,9 @@ EOF
         echo "Manually append below into /etc/wsl.conf:"
         cat ~/wsl.conf
         echo "reboot wsl:"
-	echo "net stop LxssManager"
-	echo "net start LxssManager"
+    echo "wsl --shutdown"
+	# echo "net stop LxssManager"
+	# echo "net start LxssManager"
     fi
 }
 
