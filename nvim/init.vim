@@ -3,6 +3,13 @@
 " windows - C:\Users\USERNAME\AppData\Local\nvim\init.vim
 " windows - %localappdata%\nvim\init.vim
 "
+" Git
+" It access remote server through SSH
+" disable external SSH and use internal windows ssh
+" set GIT_SSH=
+" set SVN_SSH=
+" ssh config: ~/.ssh
+"
 " :checkhealth
 "
 " curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
