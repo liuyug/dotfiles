@@ -1,3 +1,4 @@
-wmic csproduct get Vendor,Version,Name,IdentifyingNumber
+
+powershell get-computerinfo
 
 pause

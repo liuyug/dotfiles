@@ -2,6 +2,36 @@
 My DotFiles
 ===========
 
+wsl
+-----
+::
+
+    wsl --update
+    wsl --set-default-version 1
+
+/etc/wsl.conf::
+
+    # enable extra metadata options by default
+    [automount]
+    options = "metadata,umask=22,fmask=11"
+
+OpenGL
+------
+
+# Windows with hardware OpenGL
+VcXsrv -wgl
+
+# Windows with software OpenGL
+VcXsrv -nowgl
+
+create ssh key
+---------------
+::
+
+    # ~/.ssh/
+    ssh-keygen
+
+
 Install modules
 =====================
 1. modules shell

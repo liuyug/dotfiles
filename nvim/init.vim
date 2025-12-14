@@ -1,11 +1,19 @@
+" Note:
+" disable windows terminal shortcut: ctrl+c, ctrl+v
 " windows - C:\Users\USERNAME\AppData\Local\nvim\init.vim
+" windows - %localappdata%\nvim\init.vim
+"
 " :checkhealth
+"
 " curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
 "    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-" for Window
-" silent! call plug#begin('~/AppData/Local/nvim/plugged')
-" for Linux
-call plug#begin('~/.config/nvim/plugged')
+if has("win32")
+    " for Window
+    silent! call plug#begin('~/AppData/Local/nvim/plugged')
+else
+    " for Linux
+    call plug#begin('~/.config/nvim/plugged')
+endif
 
 " Example plugin
 Plug 'preservim/nerdtree'        " File explorer
@@ -18,21 +26,27 @@ Plug 'chentoast/marks.nvim'
 Plug 'tpope/vim-fugitive'        " Git integration
 Plug 'vim-airline/vim-airline'   " Status bar
 Plug 'vim-airline/vim-airline-themes' " Themes for vim-airline
+" Coc 需要 nodejs, ubuntu在 wsl1 下的nodejs 有问题，需要手动安装
+" # https://deb.nodesource.com/
+" curl -fsSL https://deb.nodesource.com/setup_22.x | sudo bash -
+" sudo apt-get install -y nodejs
 " git clone https://github.com/neoclide/coc.nvim --branch release
-Plug 'neoclide/coc.nvim', {'branch': 'release'} " Intellisense engine
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Intellisense engine
 " install coc extensions or configure language servers for LSP support.
 " ~/.config/coc/extensions/node_modules
 " :CocConfig
-" :CocInstall coc-pyright
-" coc-json
-" coc-html
-" coc-css
-" coc-sh
-" coc-sql
+" :CocInstall coc-pyright coc-json coc-html coc-css coc-sh coc-sql
 " sudo apt install clangd
 " coc-clangd
 " coc-cmake
 "
+" Telescope
+" winget install BurntSushi.ripgrep.MSVC
+" sudo apt install ripgrep
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': 'v0.2.0' }
+
 Plug 'numToStr/FTerm.nvim'
 
 Plug 'sakhnik/nvim-gdb'
@@ -68,7 +82,7 @@ filetype indent on
 syntax on
 
 set colorcolumn=80
-highlight colorcolumn ctermbg=239 guibg=lightgrey
+highlight colorcolumn ctermbg=239 guibg=grey
 
 " Enable line numbers
 set number
@@ -122,6 +136,17 @@ set shortmess+=c
 " autocmd FileType markdown setlocal wrap
 autocmd FileType rst setlocal makeprg=rst2html\ --cloak-email-addresses\ %\ %.html
 autocmd FileType cpp setlocal makeprg=cd build & mingw32-make
+
+if has("win32")
+    silent! call plug#begin('~/AppData/Local/nvim/plugged')
+    autocmd BufNewFile *.py   0read ~/AppData/Local/nvim/templates/skeleton.py
+    autocmd BufNewFile *.html 0read ~/AppData/Local/nvim/templates/skeleton.html
+    autocmd BufNewFile *.sh   0read ~/AppData/Local/nvim/templates/skeleton.sh
+else
+    autocmd BufNewFile *.py   0read ~/.vim/templates/skeleton.py
+    autocmd BufNewFile *.html 0read ~/.vim/templates/skeleton.html
+    autocmd BufNewFile *.sh   0read ~/.vim/templates/skeleton.sh
+endif
 
 command Todo noautocmd vimgrep /\ TODO:\|\ FIXME:\|\ BUG:\|\ XXX:/j **/*.py **/*.html | cw
 
@@ -185,9 +210,9 @@ let g:nvimgdb_disable_start_keymaps = 0
 " <f9>                   NORMAL: Evaluate word under cursor (`:GdbEvalWord`)
 "                        VISUAL: Evaluate the range         (`:GdbEvalRange`)
 
-map <Leader>dd :GdbStart gdb -q 
+map <Leader>dd :GdbStart gdb -q
 
-map <Leader>dp :GdbStartPDB python -m pdb 
+map <Leader>dp :GdbStartPDB python -m pdb
 map <Leader>db Oimport ipdb; ipdb.set_trace()
 
 " Enable airline
