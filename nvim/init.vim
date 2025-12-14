@@ -2,8 +2,14 @@
 " disable windows terminal shortcut: ctrl+c, ctrl+v
 " windows - C:\Users\USERNAME\AppData\Local\nvim\init.vim
 " windows - %localappdata%\nvim\init.vim
+" :edit ~/AppData/Local/nvim/init.vim
+" :edit ~/AppData/Local/nvim/lua/init.lua
 "
-" Git
+" Fonts:
+" CaskaydiaCove Nerd Font - from CascadiaCode Nerd Font
+" https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/CascadiaCode.zip
+"
+" Git:
 " It access remote server through SSH
 " disable external SSH and use internal windows ssh
 " set GIT_SSH=
@@ -54,6 +60,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': 'v0.2.0' }
 
+" Do not support Windows11?
 Plug 'numToStr/FTerm.nvim'
 
 Plug 'sakhnik/nvim-gdb'
@@ -252,7 +259,12 @@ inoremap <silent><expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 " Show documentation
 nnoremap <silent> K :call CocActionAsync('doHover')<CR>
 
+" shell
+nmap <leader>sh <ESC>:lua require("FTerm").toggle()<CR>
+" or
+" enter terminal and insert mode
+" let shell=powershell
+" nmap <leader>sh <ESC>:terminal<CR>i
+
 " load lua config
 lua require('init')
-" lua keymap
-nmap <leader>sh <ESC>:lua require("FTerm").toggle()<CR>
