@@ -34,9 +34,10 @@ Plug 'preservim/nerdtree'        " File explorer
 " sudo apt install universal-ctags
 Plug 'preservim/tagbar'
 " mark
-" Plug '2KAbhishek/markit.nvim'
 Plug 'chentoast/marks.nvim'
+
 Plug 'tpope/vim-fugitive'        " Git integration
+
 Plug 'vim-airline/vim-airline'   " Status bar
 Plug 'vim-airline/vim-airline-themes' " Themes for vim-airline
 " Coc 需要 nodejs, ubuntu在 wsl1 下的nodejs 有问题，需要手动安装
