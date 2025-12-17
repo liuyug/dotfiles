@@ -28,8 +28,9 @@ else
     call plug#begin('~/.config/nvim/plugged')
 endif
 
-" Example plugin
-Plug 'preservim/nerdtree'        " File explorer
+Plug 'preservim/nerdtree'
+" create .nerdtreeignore in project
+Plug 'dsimidzija/vim-nerdtree-ignore'
 
 " sudo apt install universal-ctags
 Plug 'preservim/tagbar'
@@ -61,10 +62,9 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': 'v0.2.0' }
 
-" Do not support Windows11?
 Plug 'numToStr/FTerm.nvim'
 
-Plug 'sakhnik/nvim-gdb'
+" Plug 'sakhnik/nvim-gdb'
 " dap
 " Plug 'mfussenegger/nvim-dap'
 " Plug 'nvim-neotest/nvim-nio'
@@ -153,7 +153,6 @@ autocmd FileType rst setlocal makeprg=rst2html\ --cloak-email-addresses\ %\ %.ht
 autocmd FileType cpp setlocal makeprg=cd build & mingw32-make
 
 if has("win32")
-    silent! call plug#begin('~/AppData/Local/nvim/plugged')
     autocmd BufNewFile *.py   0read ~/AppData/Local/nvim/templates/skeleton.py
     autocmd BufNewFile *.html 0read ~/AppData/Local/nvim/templates/skeleton.html
     autocmd BufNewFile *.sh   0read ~/AppData/Local/nvim/templates/skeleton.sh
@@ -196,7 +195,7 @@ let NERDTreeShowBookmarks=1
 " 是否默认显示文件
 let NERDTreeShowFiles=1
 " 是否默认显示隐藏文件
-let NERDTreeShowHidden=1
+let NERDTreeShowHidden=0
 " 是否默认显示行号
 let NERDTreeShowLineNumbers=0
 " 窗口位置（'left', 'right', top, bottom）
