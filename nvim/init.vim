@@ -51,7 +51,9 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " install coc extensions or configure language servers for LSP support.
 " ~/.config/coc/extensions/node_modules
 " :CocConfig
-" :CocInstall coc-pyright coc-json coc-html coc-css coc-sh coc-sql
+" pip install pylint flake8
+" :CocInstall coc-pyright
+" :CocInstall coc-json coc-html coc-css coc-sh coc-sql
 " sudo apt install clangd
 " coc-clangd
 " coc-cmake
@@ -242,8 +244,8 @@ let g:indent_guides_guide_size = 1
 let g:indent_guides_start_level = 2
 let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'tagbar']
 let g:indent_guides_auto_colors = 0
-hi IndentGuidesOdd ctermbg=236
-hi IndentGuidesEven ctermbg=236
+hi IndentGuidesOdd ctermbg=236 guibg=grey
+hi IndentGuidesEven ctermbg=236 guibg=grey
 
 " Some lsp servers have issues with backup files, see #649
 set nobackup

@@ -1,6 +1,7 @@
 {
     "diagnostic.enable": true,
-    "python.pythonPath": "python3",
+    "python.pythonPath": "python",
+    "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,
     "python.linting.flake8Args": [
         "--max-line-length=120",
