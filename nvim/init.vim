@@ -29,7 +29,7 @@ else
 endif
 
 Plug 'preservim/nerdtree'
-" create .nerdtreeignore in project
+" project/.nerdtreeignore
 Plug 'dsimidzija/vim-nerdtree-ignore'
 
 " sudo apt install universal-ctags
@@ -37,26 +37,30 @@ Plug 'preservim/tagbar'
 " mark
 Plug 'chentoast/marks.nvim'
 
-Plug 'tpope/vim-fugitive'        " Git integration
+" Git integration
+Plug 'tpope/vim-fugitive'
 
-Plug 'vim-airline/vim-airline'   " Status bar
-Plug 'vim-airline/vim-airline-themes' " Themes for vim-airline
+" Status bar
+Plug 'vim-airline/vim-airline'
+" Themes for vim-airline
+Plug 'vim-airline/vim-airline-themes'
+
 " Coc 需要 nodejs, ubuntu在 wsl1 下的nodejs 有问题，需要手动安装
 " # https://deb.nodesource.com/
 " curl -fsSL https://deb.nodesource.com/setup_22.x | sudo bash -
 " sudo apt-get install -y nodejs
 " git clone https://github.com/neoclide/coc.nvim --branch release
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Intellisense engine
-" install coc extensions or configure language servers for LSP support.
+" global settings. ~/.nvim/coc-settings.json
 " ~/.config/coc/extensions/node_modules
 " :CocConfig
+" Project settings. project/.nvim/coc-settings.json
+" :CocLocalConfig
 " pip install pylint flake8
 " :CocInstall coc-pyright
 " :CocInstall coc-json coc-html coc-css coc-sh coc-sql
 " sudo apt install clangd
-" coc-clangd
-" coc-cmake
+" coc-clangd coc-cmake
 "
 " Telescope
 " winget install BurntSushi.ripgrep.MSVC
