@@ -137,6 +137,7 @@ set hlsearch
 set ignorecase        " search ignore casesensitive
 set smartcase
 set wrapscan          " search from head when reach end
+set cursorline
 
 " Set the default encoding to UTF-8
 set encoding=utf-8
