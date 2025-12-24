@@ -10,6 +10,7 @@ require("FTerm").setup({
     cmd='cmd',
     border='double',
 })
+vim.keymap.set('n', '<leader>sh', require("FTerm").toggle, { desc = 'FTerm Shell' })
 
 require'marks'.setup {
   -- whether to map keybinds or not. default true

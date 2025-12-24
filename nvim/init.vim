@@ -265,12 +265,5 @@ inoremap <silent><expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 " Show documentation
 nnoremap <silent> K :call CocActionAsync('doHover')<CR>
 
-" shell
-nmap <leader>sh <ESC>:lua require("FTerm").toggle()<CR>
-" or
-" enter terminal and insert mode
-" let shell=powershell
-" nmap <leader>sh <ESC>:terminal<CR>i
-
 " load lua config
 lua require('init')
