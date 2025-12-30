@@ -12,6 +12,7 @@ winget install ^
 --proxy %proxy% ^
 BurntSushi.ripgrep.MSVC ^
 neovim.neovim ^
-equalsraf.neovim-qt
-
+equalsraf.neovim-qt ^
+Microsoft.Microsoft3DViewer ^
+-e
 endlocal
