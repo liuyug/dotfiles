@@ -80,8 +80,9 @@ Plug 'p8952/vim-colors-wombat'
 
 " python indent
 Plug 'hynek/vim-python-pep8-indent'
+
 " display indenting level
-Plug 'nathanaelkane/vim-indent-guides'
+Plug 'Yggdroot/indentLine'
 
 Plug 'ap/vim-css-color'
 " Plug 'tikhomirov/vim-glsl'
@@ -242,16 +243,6 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#whitespace#max_lines = 1000
 let g:airline_powerline_fonts = 1
 
-" vim-indent-guids
-let g:indent_guides_default_mapping = 0
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_guide_size = 1
-let g:indent_guides_start_level = 2
-let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'tagbar']
-let g:indent_guides_auto_colors = 0
-hi IndentGuidesOdd ctermbg=236 guibg=grey
-hi IndentGuidesEven ctermbg=236 guibg=grey
-
 " Some lsp servers have issues with backup files, see #649
 set nobackup
 set nowritebackup
@@ -265,6 +256,12 @@ inoremap <silent><expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 " Show documentation
 nnoremap <silent> K :call CocActionAsync('doHover')<CR>
+
+" indentLine
+let g:indentLine_enabled = 1
+let g:indentLine_char = '▏'
+" let g:indentLine_char = '┆'
+" let g:indentLine_color_gui = '#A4E57E'
 
 " load lua config
 lua require('init')
