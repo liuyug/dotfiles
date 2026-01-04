@@ -189,8 +189,11 @@ noremap <Leader>bp :bprevious<CR>
 noremap <Leader>bn :bnext<CR>
 
 " NERDTree configuration
-" nmap <C-n> :NERDTreeToggle<CR>
+" open current working directory
 nmap <Leader>nt :NERDTreeToggle<CR>
+" open current file's directory
+nmap <leader>nf :NERDTree %:p:h<CR>
+
 let NERDTreeWinSize=31
 let NERDTreeIgnore = ['\.pyc$', '__pycache__']
 let NERDChristmasTree=1
