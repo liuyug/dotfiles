@@ -154,13 +154,8 @@ set completeopt=menuone,noselect
 set shortmess+=c
 
 
-" autocmd FileType text setlocal wrap
-" autocmd FileType rst setlocal wrap
-" autocmd FileType markdown setlocal wrap
-autocmd FileType rst setlocal makeprg=rst2html\ --cloak-email-addresses\ %\ %.html
-autocmd FileType cpp setlocal makeprg=cd build & mingw32-make
-
 if has("win32")
+    set shellpipe=>
     autocmd BufNewFile *.py   0read ~/AppData/Local/nvim/templates/skeleton.py
     autocmd BufNewFile *.html 0read ~/AppData/Local/nvim/templates/skeleton.html
     autocmd BufNewFile *.sh   0read ~/AppData/Local/nvim/templates/skeleton.sh
@@ -169,6 +164,12 @@ else
     autocmd BufNewFile *.html 0read ~/.vim/templates/skeleton.html
     autocmd BufNewFile *.sh   0read ~/.vim/templates/skeleton.sh
 endif
+
+" autocmd FileType text setlocal wrap
+" autocmd FileType rst setlocal wrap
+" autocmd FileType markdown setlocal wrap
+autocmd FileType rst setlocal makeprg=rst2html\ --cloak-email-addresses\ %\ %.html
+autocmd FileType cpp setlocal makeprg=cd build & mingw32-make
 
 command Todo noautocmd vimgrep /\ TODO:\|\ FIXME:\|\ BUG:\|\ XXX:/j **/*.py **/*.html | cw
 
