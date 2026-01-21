@@ -239,7 +239,7 @@ let g:nvimgdb_disable_start_keymaps = 0
 map <Leader>dd :GdbStart gdb -q
 
 map <Leader>dp :GdbStartPDB python -m pdb
-map <Leader>db Oimport ipdb; ipdb.set_trace()
+map <Leader>db Oimport ipdb; ipdb.set_trace()<ESC>
 
 " Enable airline
 let g:airline#extensions#tabline#enabled = 1
