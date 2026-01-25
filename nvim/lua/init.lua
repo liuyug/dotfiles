@@ -3,6 +3,21 @@ local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
+require('telescope').setup({
+  defaults = {
+    mappings = {
+      i = {
+        -- Map <Esc> to the close action in insert mode
+        ['<esc>'] = require('telescope.actions').close,
+        -- You can also map other keys for actions, e.g., <C-c>
+        -- ['<C-c>'] = actions.close,
+      },
+      n = {
+        -- In normal mode, <Esc> already closes by default
+      }
+    },
+  },
+})
 -- vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
 -- usage:
 -- <tab> -- select some items, <shift + tab> to toggle item
