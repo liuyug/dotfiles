@@ -1,6 +1,9 @@
 " Enable Mouse
 set mouse=a
 
+" shift+insert to paste
+map! <S-Insert> <C-R>+
+
 " Set Editor Font
 if exists(':GuiFont')
     " Use GuiFont! to ignore font errors
