@@ -1,7 +1,7 @@
 " Note:
 " disable windows terminal shortcut: ctrl+c, ctrl+v
 " windows - C:\Users\USERNAME\AppData\Local\nvim\init.vim
-" windows - %localappdata%\nvim\init.vim
+" windows - %LOCALAPPDATA%\nvim\init.vim
 " :edit ~/AppData/Local/nvim/init.vim
 " :edit ~/AppData/Local/nvim/lua/init.lua
 "
@@ -18,13 +18,15 @@
 "
 " :checkhealth
 "
-" curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
-"    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 if has("win32")
     " for Window
+    " curl -fLo %LOCALAPPDATA%/nvim/autoload/plug.vim --create-dirs ^
+    "    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     silent! call plug#begin('~/AppData/Local/nvim/plugged')
 else
     " for Linux
+    " curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
+    "    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     call plug#begin('~/.config/nvim/plugged')
 endif
 
@@ -32,6 +34,8 @@ Plug 'preservim/nerdtree'
 " project/.nerdtreeignore
 Plug 'dsimidzija/vim-nerdtree-ignore'
 
+" Install:
+" winget install UniversalCtags.Ctags
 " sudo apt install universal-ctags
 Plug 'preservim/tagbar'
 " mark
@@ -45,6 +49,7 @@ Plug 'vim-airline/vim-airline'
 " Themes for vim-airline
 Plug 'vim-airline/vim-airline-themes'
 
+" Install:
 " Coc 需要 nodejs, ubuntu在 wsl1 下的nodejs 有问题，需要手动安装
 " # https://deb.nodesource.com/
 " curl -fsSL https://deb.nodesource.com/setup_22.x | sudo bash -
@@ -56,6 +61,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " :CocConfig
 " Project settings. project/.nvim/coc-settings.json
 " :CocLocalConfig
+" Install:
 " pip install pylint flake8
 " :CocInstall coc-pyright
 " :CocInstall coc-json coc-html coc-css coc-sh coc-sql
@@ -63,6 +69,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " coc-clangd coc-cmake
 "
 " Telescope
+" Install:
 " winget install BurntSushi.ripgrep.MSVC
 " sudo apt install ripgrep
 Plug 'nvim-lua/plenary.nvim'

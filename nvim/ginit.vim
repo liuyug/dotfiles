@@ -5,7 +5,8 @@ set mouse=a
 if exists(':GuiFont')
     " Use GuiFont! to ignore font errors
     " GuiFont {font_name}:h{size}
-    GuiFont CaskaydiaCove\ NFM:h10
+    " set guifont=*  to select font
+    GuiFont CaskaydiaCove\ NFM:h9
 endif
 
 " Disable GUI Tabline
