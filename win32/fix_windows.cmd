@@ -22,7 +22,8 @@ if x%1 == xlink (
     mklink /j Dictionary %home%\Dictionary
     mklink /j stock_data %home%\股票\stock_build
     popd
-
+) else if x%1 == xinfo (
+    systeminfo
 ) else if x%1 == xssh (
     echo fix ssh key permission for git permission error
     icacls id_ed25519 /inheritance:r
@@ -53,6 +54,7 @@ if x%1 == xlink (
     reg add "HKEY_CLASSES_ROOT\*\shell\Open with Nvim-Qt\command" /ve /t REG_SZ /d "\"C:\Program Files\neovim-qt 0.2.19\bin\nvim-qt.exe\" \"%1\"" /f
 
 ) else (
+echo info   : System info
 echo link   : 做目录链接
 echo ssh    : 修复ssh key权限
 echo mas    : 激活
