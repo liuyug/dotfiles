@@ -16,6 +16,7 @@ if x%1 == xlink (
     pushd %HOMEPATH%
     mklink /j MyDocs %home%\PersonalDoc\mydocs
     mklink /j Projects %home%\Projects
+    mklink /j Scripts %home%\Scripts
     mklink /j .ssh %home%\ssh
     popd
     pushd %HOMEPATH%\Documents
