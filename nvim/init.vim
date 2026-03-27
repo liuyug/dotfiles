@@ -1,9 +1,11 @@
-" Note:
+" Windows:
 " disable windows terminal shortcut: ctrl+c, ctrl+v
 " windows - C:\Users\USERNAME\AppData\Local\nvim\init.vim
 " windows - %LOCALAPPDATA%\nvim\init.vim
 " :edit ~/AppData/Local/nvim/init.vim
 " :edit ~/AppData/Local/nvim/lua/init.lua
+" Linux:
+" :edit ~/.config/nvim/init.vim
 "
 " Fonts:
 " CaskaydiaCove Nerd Font - from CascadiaCode Nerd Font
@@ -20,13 +22,11 @@
 "
 if has("win32")
     " for Window
-    " curl -fLo %LOCALAPPDATA%/nvim/autoload/plug.vim --create-dirs ^
-    "    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    " curl -fLo %LOCALAPPDATA%/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     silent! call plug#begin('~/AppData/Local/nvim/plugged')
 else
     " for Linux
-    " curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
-    "    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    " curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     call plug#begin('~/.config/nvim/plugged')
 endif
 
@@ -63,6 +63,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " :CocLocalConfig
 " Install:
 " pip install pylint flake8
+" sudo apt install pylint python3-flake8
 " :CocInstall coc-pyright
 " :CocInstall coc-json coc-html coc-css coc-sh coc-sql
 " sudo apt install clangd
@@ -73,7 +74,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " winget install BurntSushi.ripgrep.MSVC
 " sudo apt install ripgrep
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': 'v0.2.0' }
+Plug 'nvim-telescope/telescope.nvim', { 'tag': 'v0.2.1' }
 
 Plug 'numToStr/FTerm.nvim'
 
