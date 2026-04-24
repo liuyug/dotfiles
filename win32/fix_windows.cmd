@@ -63,6 +63,9 @@ echo menu   : 右键显示更多选项
 echo smb    : 匿名访问samba
 echo web    : 起始菜单禁用web搜索
 echo nvim   : 右键用 nvim-qt 打开
+echo tip:
+echo cmd: ctrl+home  delete to line begin
+echo cmd: ctrl+end   delete to line end
 )
 
 endlocal
