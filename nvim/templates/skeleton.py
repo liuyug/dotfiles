@@ -20,23 +20,36 @@ class ColorLogFormatter(logging.Formatter):
     bold_red = '\x1b[1;38;5;9m'
     reset = '\x1b[0m'
 
-    def __init__(self, fmt):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(args, kwargs)
         # only for old cmd window
         # colorama.just_fix_windows_console()
 
-        self.fmt = fmt
         self.FORMATS = {
-            logging.DEBUG: self.green + self.fmt + self.reset,
-            logging.INFO: self.grey + self.fmt + self.reset,
-            logging.WARNING: self.yellow + self.fmt + self.reset,
-            logging.ERROR: self.red + self.fmt + self.reset,
-            logging.CRITICAL: self.bold_red + self.fmt + self.reset
+            logging.DEBUG: logging.Formatter('{}{}{}'.format(
+                self.green,
+                '[%(asctime)s %(filename)s->%(funcName)s():%(lineno)s]%(levelname)s: %(message)s',
+                self.reset)),
+            logging.INFO: logging.Formatter('{}{}{}'.format(
+                self.grey,
+                '%(message)s',
+                self.reset)),
+            logging.WARNING: logging.Formatter('{}{}{}'.format(
+                self.yellow,
+                '%(levelname)s: %(message)s',
+                self.reset)),
+            logging.ERROR: logging.Formatter('{}{}{}'.format(
+                self.red,
+                '%(levelname)s: %(message)s',
+                self.reset)),
+            logging.CRITICAL: logging.Formatter('{}{}{}'.format(
+                self.bold_red,
+                '%(levelname)s: %(message)s',
+                self.reset)),
         }
 
     def format(self, record):
-        log_fmt = self.FORMATS.get(record.levelno)
-        formatter = logging.Formatter(log_fmt)
+        formatter = self.FORMATS.get(record.levelno)
         return formatter.format(record)
 
 
@@ -63,7 +76,6 @@ class App(object):
         handlers = []
         if args.verbose > 1:
             level = logging.INFO - args.verbose * 10
-            fmt = "[%(asctime)s %(filename)s->%(funcName)s():%(lineno)s]%(levelname)s: %(message)s"
         else:
             # log_handler = RotatingFileHandler(
             #     filename='app.log',
@@ -73,10 +85,9 @@ class App(object):
             # )
             # handlers.append(log_handler)
             level = logging.INFO
-            fmt = '%(levelname)s:%(message)s'
 
         color_handler = logging.StreamHandler()
-        color_handler.setFormatter(ColorLogFormatter(fmt))
+        color_handler.setFormatter(ColorLogFormatter())
         handlers.append(color_handler)
 
         logging.basicConfig(
